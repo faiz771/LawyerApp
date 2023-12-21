@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class DoctorViewTemplate extends StatelessWidget {
+class DoctorGridViewTemplate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -11,7 +11,7 @@ class DoctorViewTemplate extends StatelessWidget {
           // shrinkWrap: true,
           gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
-          itemCount: 5,
+          itemCount: 10,
           itemBuilder: (context, index) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 5.h),

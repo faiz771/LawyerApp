@@ -129,10 +129,5 @@ class _FilterDropDownButtonState extends State<FilterDropDownButton> {
             ),
           ],
         ));
-
-    ElevatedButton(
-      onPressed: () {},
-      child: Text('Select Lawyer Category'),
-    );
   }
 }
