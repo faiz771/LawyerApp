@@ -6,6 +6,7 @@ import 'package:lawyerapp/auth_screens/forget_password.dart';
 import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/fill_profile_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -60,7 +61,11 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                RoundedButton(text: 'Sign In', onPressed: () {}),
+                RoundedButton(
+                    text: 'Sign In',
+                    onPressed: () {
+                      Get.to(ClientHomepage());
+                    }),
                 Padding(
                   padding: EdgeInsets.only(top: 30.h),
                   child: InkWell(

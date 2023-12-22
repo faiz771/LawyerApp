@@ -15,11 +15,11 @@ class PromotionSliderViewTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       options: CarouselOptions(
-        autoPlay: true,
-        aspectRatio: 12 / 7,
-        enableInfiniteScroll: false,
-        enlargeCenterPage: true,
-      ),
+          autoPlay: true,
+          aspectRatio: 12 / 7,
+          enableInfiniteScroll: false,
+          enlargeCenterPage: true,
+          initialPage: 2),
       itemCount: 6,
       itemBuilder: (context, index, _) {
         return ClipRRect(

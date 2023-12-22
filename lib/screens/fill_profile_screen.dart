@@ -35,17 +35,18 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                   height: 20.h,
                 ),
                 Stack(
+                  alignment: Alignment.bottomRight,
                   children: [
                     CircleAvatar(
-                      radius: 80,
+                      radius: 75,
                       backgroundColor: Colors.white,
                       backgroundImage: AssetImage(
                         'assets/images/person.png',
                       ),
                     ),
                     Positioned(
-                      top: 100.h,
-                      left: 115.w,
+                      bottom: 15.h,
+                      // left: MediaQuery.of(context).size.height * 0.15,
                       child: Container(
                           decoration: BoxDecoration(
                               color: Colors.black,

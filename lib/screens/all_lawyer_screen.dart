@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lawyerapp/components/doctor_grid_view_template.dart';
+import 'package:lawyerapp/components/lawyer_grid_view_template.dart';
 import 'package:lawyerapp/components/filter_dropdown_button.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 
@@ -27,7 +27,7 @@ class _AllLawyerScreenState extends State<AllLawyerScreen> {
               height: 10.h,
             ),
             FilterDropDownButton(),
-            DoctorGridViewTemplate()
+            LawyerGridViewTemplate()
           ],
         ),
       ),
