@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/screens/confirm_appointment_screen.dart';
 
 class LawyerDetailScreen extends StatelessWidget {
   const LawyerDetailScreen({super.key});
@@ -20,63 +23,75 @@ class LawyerDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 height: 120,
-                child: Card(
+                decoration: BoxDecoration(
                   color: Colors.white,
-                  child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 50,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                        'assets/images/onboard3.jpg',
-                                      )))),
-                        ),
-                        SizedBox(
-                          width: 12.h,
-                        ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Mr.John Doe William',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Divider(
-                                thickness: 1,
-                                color: Colors.grey,
-                              ),
-                              Text(
-                                'Criminal Lawyer',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Text(
-                                'Fee 3000',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
                     ),
+                  ],
+                ),
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 50,
+                        child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      'assets/images/onboard3.jpg',
+                                    )))),
+                      ),
+                      SizedBox(
+                        width: 12.h,
+                      ),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Mr.John Doe William',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Divider(
+                              thickness: 1,
+                              color: Colors.grey,
+                            ),
+                            Text(
+                              'Criminal Lawyer',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              'Fee 3000',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -140,7 +155,11 @@ class LawyerDetailScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              RoundedButton(text: 'Book Appointment', onPressed: () {}),
+              RoundedButton(
+                  text: 'Book Appointment',
+                  onPressed: () {
+                    Get.to(ConfirmAppointmentScreen());
+                  }),
               SizedBox(
                 height: 20.h,
               ),

@@ -7,6 +7,7 @@ import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
+import 'package:lawyerapp/screens/select_user_type.dart';
 
 class FillProfileScreen extends StatefulWidget {
   const FillProfileScreen({super.key});
@@ -148,7 +149,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                 RoundedButton(
                     text: 'Save',
                     onPressed: () {
-                      Get.offAll(ClientHomepage());
+                      Get.to(ClientHomepage());
                     }),
                 SizedBox(
                   height: 10.h,

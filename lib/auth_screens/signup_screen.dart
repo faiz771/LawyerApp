@@ -7,6 +7,7 @@ import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/fill_profile_screen.dart';
+import 'package:lawyerapp/screens/select_user_type.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -70,46 +71,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 MyTextField(
                     hinttext: 'Full Name', icon: Icons.person_2_outlined),
-                Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 3.h),
-                    child: DropDownTextField(
-                      textFieldDecoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(color: Colors.white),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  color: Color.fromRGBO(17, 25, 40, 1)),
-                              borderRadius: BorderRadius.circular(24)),
-                          hintText: 'Select Role',
-                          fillColor: Colors.grey[200],
-                          filled: true),
-                      clearOption: true,
-                      controller: _rolecontroller,
-                      validator: (value) {
-                        if (value == null) {
-                          return "Required field";
-                        } else {
-                          return null;
-                        }
-                      },
-                      dropDownItemCount: 2,
-                      dropDownList: const [
-                        DropDownValueModel(name: 'Lawyer', value: "value1"),
-                        DropDownValueModel(name: 'Client', value: "value2"),
-                      ],
-                      onChanged: (val) {},
-                    )),
+                // Padding(
+                //     padding: EdgeInsets.symmetric(horizontal: 3.h),
+                //     child: DropDownTextField(
+                //       textFieldDecoration: InputDecoration(
+                //           enabledBorder: OutlineInputBorder(
+                //             borderSide: const BorderSide(color: Colors.white),
+                //             borderRadius: BorderRadius.circular(24),
+                //           ),
+                //           focusedBorder: OutlineInputBorder(
+                //               borderSide: const BorderSide(
+                //                   color: Color.fromRGBO(17, 25, 40, 1)),
+                //               borderRadius: BorderRadius.circular(24)),
+                //           hintText: 'Select Role',
+                //           fillColor: Colors.grey[200],
+                //           filled: true),
+                //       clearOption: true,
+                //       controller: _rolecontroller,
+                //       validator: (value) {
+                //         if (value == null) {
+                //           return "Required field";
+                //         } else {
+                //           return null;
+                //         }
+                //       },
+                //       dropDownItemCount: 2,
+                //       dropDownList: const [
+                //         DropDownValueModel(name: 'Lawyer', value: "value1"),
+                //         DropDownValueModel(name: 'Client', value: "value2"),
+                //       ],
+                //       onChanged: (val) {},
+                //     )),
                 MyTextField(hinttext: 'Email', icon: Icons.email_outlined),
                 MyTextField(hinttext: 'Password', icon: Icons.lock_outline),
+                MyTextField(
+                    hinttext: 'Confirm Password', icon: Icons.lock_outline),
                 SizedBox(
                   height: 15.h,
                 ),
                 RoundedButton(
                     text: 'Create Account',
                     onPressed: () {
-                      Get.to(FillProfileScreen());
+                      Get.to(SelectUserTypeScreen());
                     }),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 30.h),

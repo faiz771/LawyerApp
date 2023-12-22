@@ -10,7 +10,8 @@ import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/promotion_slider_view_template.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/all_lawyer_screen.dart';
-import 'package:lawyerapp/screens/appointments_history_screen.dart';
+import 'package:lawyerapp/screens/client_dashboard_screen.dart';
+import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
 
 class ClientHomepage extends StatefulWidget {
@@ -88,11 +89,16 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       SizedBox(
                         width: 10.w,
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12.w),
-                        child: CircleAvatar(
-                            backgroundColor: Colors.grey[300],
-                            child: Icon(Icons.notifications)),
+                      InkWell(
+                        onTap: () {
+                          Get.to(Notificationscreen());
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: CircleAvatar(
+                              backgroundColor: Colors.grey[300],
+                              child: Icon(Icons.notifications)),
+                        ),
                       ),
                     ],
                   ),
@@ -136,7 +142,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
               ),
             ),
           ),
-          AppointmentHistoryScreen(),
+          ClientDashboardScreen(),
           ProfileSettingScreen(),
         ],
       ),

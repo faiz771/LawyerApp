@@ -8,31 +8,31 @@ import 'package:lawyerapp/screens/lawyer_detail_screen.dart';
 class LawyerSliderViewTemplate extends StatelessWidget {
   final List<Map<String, dynamic>> dummyData = [
     {
-      'name': 'Dr.Syed Muhammad Talha',
+      'name': 'Mr.Syed Muhammad Talha',
       'specialization': 'Criminal Lawyer',
       'availability': 'Available',
       'price': 'Fee 30000',
     },
     {
-      'name': 'Dr.Syed Muhammad Talha',
+      'name': 'Mr.Syed Muhammad Talha',
       'specialization': 'Criminal Lawyer',
       'availability': 'Available',
       'price': 'Fee 30000',
     },
     {
-      'name': 'Dr.Syed Muhammad Talha',
+      'name': 'Mr.Syed Muhammad Talha',
       'specialization': 'Criminal Lawyer',
       'availability': 'Available',
       'price': 'Fee. 30000',
     },
     {
-      'name': 'Dr.Syed Muhammad Talha',
+      'name': 'Mr.Syed Muhammad Talha',
       'specialization': 'Criminal Lawyer',
       'availability': 'Available',
       'price': 'Fee 30000',
     },
     {
-      'name': 'Dr.Syed Muhammad Talha',
+      'name': 'Mr.Syed Muhammad Talha',
       'specialization': 'Criminal Lawyer',
       'availability': 'Available',
       'price': 'Fee 30000',

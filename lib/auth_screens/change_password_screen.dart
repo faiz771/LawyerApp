@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/auth_screens/verify_otp_screen.dart';
+import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 
-class ForgetPasswordScreen extends StatelessWidget {
-  const ForgetPasswordScreen({super.key});
+class ChangePasswordScreen extends StatelessWidget {
+  const ChangePasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   ),
                   Center(
                     child: Text(
-                      'Forget Password?',
+                      'Create New Password',
                       style: TextStyle(
                           fontSize: 20.sp, fontWeight: FontWeight.bold),
                     ),
@@ -50,21 +52,26 @@ class ForgetPasswordScreen extends StatelessWidget {
                     padding: EdgeInsets.only(top: 20.h, bottom: 20.h),
                     child: Center(
                       child: Text(
-                        'Enter your Email, we will send you a verification code.',
+                        'Your new password must be different form previously used password',
                         style: TextStyle(fontSize: 14.sp),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
+                  MyTextField(hinttext: 'Password', icon: Icons.email_outlined),
                   MyTextField(
-                      hinttext: 'Your Email', icon: Icons.email_outlined),
+                      hinttext: 'Confirm Password', icon: Icons.email_outlined),
                   SizedBox(
                     height: 15.h,
                   ),
                   RoundedButton(
-                      text: 'Send Code',
+                      text: 'Reset Password',
                       onPressed: () {
-                        Get.to(VerifyOtpScreen());
+                        Get.dialog(CustomDialog(
+                          heading: 'Congratulations',
+                          text: 'Your password is successfuly changed',
+                          buttontext: 'Login',
+                        ));
                       }),
                   SizedBox(
                     height: 15.h,
