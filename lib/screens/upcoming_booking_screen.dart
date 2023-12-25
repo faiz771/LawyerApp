@@ -3,8 +3,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 
 class UpcomingBookingScreen extends StatelessWidget {
-  const UpcomingBookingScreen({super.key});
-
+  UpcomingBookingScreen(
+      {super.key,
+      required this.button1,
+      required this.button2,
+      required this.onPressed1,
+      required this.onPressed2,
+      required this.button1title,
+      required this.button2title});
+  bool button1 = false;
+  bool button2 = false;
+  String button1title = '';
+  String button2title = '';
+  final VoidCallback onPressed1;
+  final VoidCallback onPressed2;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +27,7 @@ class UpcomingBookingScreen extends StatelessWidget {
             height: 10,
           ),
           Container(
-            height: 230,
+            height: 240,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
@@ -94,39 +106,50 @@ class UpcomingBookingScreen extends StatelessWidget {
                     ],
                   ),
                   Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStatePropertyAll(Colors.grey[300])),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Text(
-                              'Cancel',
-                              style: TextStyle(
-                                  color: Color.fromRGBO(17, 25, 40, 1),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  Color.fromRGBO(17, 25, 40, 1))),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Text(
-                              'Reschedule',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )),
-                    ],
-                  ),
+                  button1 & button2
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            button1
+                                ? ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                Colors.grey[300])),
+                                    onPressed: onPressed1,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w),
+                                      child: Text(
+                                        button1title,
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(17, 25, 40, 1),
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ))
+                                : SizedBox(),
+                            button2
+                                ? ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                Color.fromRGBO(17, 25, 40, 1))),
+                                    onPressed: onPressed2,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w),
+                                      child: Text(
+                                        button2title,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ))
+                                : SizedBox.shrink()
+                          ],
+                        )
+                      : RoundedButton(text: button2title, onPressed: onPressed2)
                 ],
               ),
             ),

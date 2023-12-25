@@ -12,6 +12,7 @@ class ClientDashboardScreen extends StatelessWidget {
       length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           centerTitle: true,
           title: Text(
             'My Bookings',
@@ -37,9 +38,30 @@ class ClientDashboardScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  UpcomingBookingScreen(),
-                  UpcomingBookingScreen(),
-                  UpcomingBookingScreen(),
+                  UpcomingBookingScreen(
+                    button1: true,
+                    button2: true,
+                    onPressed1: () {},
+                    onPressed2: () {},
+                    button1title: 'Cancel',
+                    button2title: 'Reschedule',
+                  ),
+                  UpcomingBookingScreen(
+                    button1: true,
+                    button2: true,
+                    onPressed1: () {},
+                    onPressed2: () {},
+                    button1title: 'Cancel',
+                    button2title: 'Reschedule',
+                  ),
+                  UpcomingBookingScreen(
+                    button1: true,
+                    button2: true,
+                    onPressed1: () {},
+                    onPressed2: () {},
+                    button1title: 'Cancel',
+                    button2title: 'Reschedule',
+                  ),
                   SizedBox(
                     height: 10,
                   )
@@ -50,9 +72,15 @@ class ClientDashboardScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  CompletedBookingScreen(),
-                  CompletedBookingScreen(),
-                  CompletedBookingScreen(),
+                  CompletedBookingScreen(
+                    showbutton: true,
+                  ),
+                  CompletedBookingScreen(
+                    showbutton: true,
+                  ),
+                  CompletedBookingScreen(
+                    showbutton: true,
+                  ),
                   SizedBox(
                     height: 10,
                   )
@@ -66,9 +94,15 @@ class ClientDashboardScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  CancelledBookingScreen(),
-                  CancelledBookingScreen(),
-                  CancelledBookingScreen(),
+                  CancelledBookingScreen(
+                    showbutton: true,
+                  ),
+                  CancelledBookingScreen(
+                    showbutton: true,
+                  ),
+                  CancelledBookingScreen(
+                    showbutton: true,
+                  ),
                   SizedBox(
                     height: 10,
                   )

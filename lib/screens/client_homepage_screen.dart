@@ -163,8 +163,8 @@ class _ClientHomepageState extends State<ClientHomepage> {
             activeColor: Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.history),
-            title: Text('History'),
+            icon: Icon(Icons.event),
+            title: Text('Bookings'),
             activeColor: Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(

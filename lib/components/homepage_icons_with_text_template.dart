@@ -23,7 +23,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.info_outline,
+                    Icons.account_circle,
                     color: Colors.white,
                   ),
                   SizedBox(
@@ -78,7 +78,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.info_outline,
+                    Icons.build,
                     color: Colors.white,
                   ),
                   SizedBox(

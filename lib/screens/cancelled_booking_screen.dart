@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 
 class CancelledBookingScreen extends StatelessWidget {
-  const CancelledBookingScreen({super.key});
-
+  CancelledBookingScreen({super.key, required this.showbutton});
+  bool showbutton = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +15,7 @@ class CancelledBookingScreen extends StatelessWidget {
             height: 10,
           ),
           Container(
-            height: 230,
+            height: showbutton ? 230 : 200,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
@@ -94,39 +94,43 @@ class CancelledBookingScreen extends StatelessWidget {
                     ],
                   ),
                   Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStatePropertyAll(Colors.red)),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Text(
-                              'Cancelled',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )),
-                      ElevatedButton(
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(
-                                  Color.fromRGBO(17, 25, 40, 1))),
-                          onPressed: () {},
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.w),
-                            child: Text(
-                              'Re-book',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          )),
-                    ],
-                  ),
+                  showbutton
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStatePropertyAll(Colors.red)),
+                                onPressed: () {},
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Text(
+                                    'Cancelled',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )),
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        Color.fromRGBO(17, 25, 40, 1))),
+                                onPressed: () {},
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Text(
+                                    'Re-book',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                )),
+                          ],
+                        )
+                      : SizedBox.shrink()
                 ],
               ),
             ),

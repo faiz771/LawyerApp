@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 
 class CompletedBookingScreen extends StatelessWidget {
-  const CompletedBookingScreen({super.key});
-
+  CompletedBookingScreen({super.key, required this.showbutton});
+  bool showbutton = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,7 +15,7 @@ class CompletedBookingScreen extends StatelessWidget {
             height: 10,
           ),
           Container(
-            height: 230,
+            height: showbutton ? 240 : 200,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
@@ -94,7 +94,9 @@ class CompletedBookingScreen extends StatelessWidget {
                     ],
                   ),
                   Divider(),
-                  RoundedButton(text: 'Re-book', onPressed: () {})
+                  showbutton
+                      ? RoundedButton(text: 'Re-book', onPressed: () {})
+                      : SizedBox.shrink()
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   //   children: [

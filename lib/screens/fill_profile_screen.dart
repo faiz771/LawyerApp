@@ -7,6 +7,7 @@ import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
+import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/screens/select_user_type.dart';
 
 class FillProfileScreen extends StatefulWidget {
@@ -46,7 +47,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                       ),
                     ),
                     Positioned(
-                      bottom: 15.h,
+                      bottom: 18.h,
                       // left: MediaQuery.of(context).size.height * 0.15,
                       child: Container(
                           decoration: BoxDecoration(
@@ -149,7 +150,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                 RoundedButton(
                     text: 'Save',
                     onPressed: () {
-                      Get.to(ClientHomepage());
+                      Get.to(LawyerHomepage());
                     }),
                 SizedBox(
                   height: 10.h,
