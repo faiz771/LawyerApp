@@ -7,7 +7,6 @@ import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
-import 'package:lawyerapp/screens/fill_profile_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

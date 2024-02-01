@@ -1,12 +1,12 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
-import 'package:lawyerapp/screens/fill_profile_screen.dart';
+import 'package:lawyerapp/controllers/signupcontroller.dart';
 import 'package:lawyerapp/screens/select_user_type.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -17,7 +17,10 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final SignUpController controller = Get.put(SignUpController());
+
   late SingleValueDropDownController _rolecontroller;
+  String selectedValue = 'Option 1';
   @override
   void initState() {
     _rolecontroller = SingleValueDropDownController();
@@ -70,7 +73,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 MyTextField(
-                    hinttext: 'Full Name', icon: Icons.person_2_outlined),
+                    controller: controller.nameController,
+                    hinttext: 'Full Name',
+                    icon: Icons.person_2_outlined),
                 // Padding(
                 //     padding: EdgeInsets.symmetric(horizontal: 3.h),
                 //     child: DropDownTextField(
@@ -102,13 +107,100 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 //       ],
                 //       onChanged: (val) {},
                 //     )),
-                MyTextField(hinttext: 'Email', icon: Icons.email_outlined),
-                MyTextField(hinttext: 'Password', icon: Icons.lock_outline),
+                SizedBox(
+                  height: 10.h,
+                ),
+                IntlPhoneField(
+                    disableLengthCheck: true,
+                    controller: controller.phoneController,
+                    keyboardType: TextInputType.phone,
+                    //focusNode: FocusNode(),
+                    dropdownIcon: Icon(
+                      Icons.arrow_drop_down,
+                      size: 28,
+                    ),
+                    decoration: InputDecoration(
+                        // enabledBorder: InputBorder.none,
+
+                        // disabledBorder: InputBorder.none,
+                        // // enabledBorder: InputBorder.none,
+                        // focusedBorder: InputBorder.none,
+                        fillColor: Colors.grey[200],
+                        filled: true,
+                        labelText: "Phone Number",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            borderSide: BorderSide()))),
+
+                // DropDownTextField(dropDownList: const [
+                //   DropDownValueModel(
+                //     name: "company",
+                //     value: 0,
+                //   ),
+                //   DropDownValueModel(name: "personal", value: "company"),
+                // ]),
+                // DropdownButton<String>(
+                //   value: selectedValue,
+                //   onChanged: (String? newValue) {
+                //     setState(() {
+                //       selectedValue = newValue!;
+                //       print('Selected value: $selectedValue');
+                //     });
+                //   },
+                //   items: <String>['Option 1', 'Option 2']
+                //       .map<DropdownMenuItem<String>>((String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   }).toList(),
+                // ),
+
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: DropDownTextField(
+                    controller: controller.accounttype,
+                    textFieldDecoration: InputDecoration(
+                      hintText: "Select Account ",
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                    ),
+                    dropDownList: const [
+                      DropDownValueModel(
+                        name: "company",
+                        value: 0,
+                      ),
+                      DropDownValueModel(name: "Personal", value: 1),
+                    ],
+                    onChanged: (selectedValue) {
+                      print("$selectedValue");
+                    },
+                    dropDownItemCount: 2,
+                  ),
+                ),
                 MyTextField(
-                    hinttext: 'Confirm Password', icon: Icons.lock_outline),
+                    controller: controller.emailController,
+                    hinttext: 'Email',
+                    icon: Icons.email_outlined),
+                MyTextField(
+                    controller: controller.passwordController,
+                    hinttext: 'Password',
+                    icon: Icons.lock_outline),
+
+                MyTextField(
+                    controller: controller.confirmPasswordController,
+                    hinttext: 'Confirm Password',
+                    icon: Icons.lock_outline),
                 SizedBox(
                   height: 15.h,
                 ),
+                // SizedBox(
+                //  height: 15.h,
+                // ),
+
                 RoundedButton(
                     text: 'Create Account',
                     onPressed: () {
