@@ -17,6 +17,7 @@ class MyTextField extends StatelessWidget {
         maxLines: 4,
         controller: controller,
         decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(horizontal: 2, vertical: 10.h),
             prefixIcon: Icon(icon),
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.white),

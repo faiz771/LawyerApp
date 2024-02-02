@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
@@ -108,29 +109,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 //       onChanged: (val) {},
                 //     )),
                 SizedBox(
-                  height: 10.h,
+                  height: 5.h,
                 ),
                 IntlPhoneField(
-                    disableLengthCheck: true,
-                    controller: controller.phoneController,
-                    keyboardType: TextInputType.phone,
-                    //focusNode: FocusNode(),
-                    dropdownIcon: Icon(
-                      Icons.arrow_drop_down,
-                      size: 28,
+                  disableLengthCheck: true,
+                  controller: controller.phoneController,
+                  keyboardType: TextInputType.phone,
+                  dropdownIcon: Icon(
+                    Icons.arrow_drop_down,
+                    size: 28,
+                  ),
+                  decoration: InputDecoration(
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                    hintText: 'Phone',
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 15, vertical: 10.h),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey.shade200),
+                      borderRadius: BorderRadius.circular(24),
                     ),
-                    decoration: InputDecoration(
-                        // enabledBorder: InputBorder.none,
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(17, 25, 40, 1)),
+                        borderRadius: BorderRadius.circular(24)),
+                  ),
+                  onSaved: (phone) {
+                    // This callback is triggered when the user enters or selects a phone number
+                    // You can use it to update the controller
 
-                        // disabledBorder: InputBorder.none,
-                        // // enabledBorder: InputBorder.none,
-                        // focusedBorder: InputBorder.none,
-                        fillColor: Colors.grey[200],
-                        filled: true,
-                        labelText: "Phone Number",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide()))),
+                    controller.phoneController.text = phone!.completeNumber;
+                  },
+                ),
 
                 // DropDownTextField(dropDownList: const [
                 //   DropDownValueModel(
@@ -155,22 +165,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 //     );
                 //   }).toList(),
                 // ),
-
+                SizedBox(
+                  height: 7,
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(bottom: 3),
                   child: DropDownTextField(
                     controller: controller.accounttype,
                     textFieldDecoration: InputDecoration(
-                      hintText: "Select Account ",
                       fillColor: Colors.grey[200],
                       filled: true,
+                      hintText: 'Account Type',
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 10.h),
                       enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey.shade200),
                         borderRadius: BorderRadius.circular(24),
                       ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromRGBO(17, 25, 40, 1)),
+                          borderRadius: BorderRadius.circular(24)),
                     ),
                     dropDownList: const [
                       DropDownValueModel(
-                        name: "company",
+                        name: "Company",
                         value: 0,
                       ),
                       DropDownValueModel(name: "Personal", value: 1),
@@ -204,6 +223,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 RoundedButton(
                     text: 'Create Account',
                     onPressed: () {
+                      print(controller.phoneController.text);
+                      // print(object)
                       Get.to(SelectUserTypeScreen());
                     }),
                 Padding(
