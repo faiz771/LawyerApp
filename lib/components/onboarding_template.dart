@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class OnboardingTemplate extends StatelessWidget {
   const OnboardingTemplate({
@@ -35,7 +36,7 @@ class OnboardingTemplate extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(17, 25, 40, 1)),
+                        color: AppColor.teelColor),
                   ),
                 ),
                 Text(
@@ -50,6 +51,7 @@ class OnboardingTemplate extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: Center(
                     child: RoundedButton(
+                      Color: AppColor.teelColor,
                       text: 'Next',
                       onPressed: onPressed
                       // _controller.nextPage(

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class CustomDialog extends StatelessWidget {
   CustomDialog({
@@ -49,6 +50,7 @@ class CustomDialog extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 RoundedButton(
+                  Color: AppColor.teelColor,
                   text: buttontext,
                   onPressed: () {
                     Get.back();

@@ -73,18 +73,24 @@ class OnboardingScreen extends StatelessWidget {
                       count: 3,
                     ),
                     SizedBox(height: 10.h),
-                    TextButton(
-                      onPressed: () {
+                    GestureDetector(
+                      onTap: () {
                         Get.to(SignUpScreen());
                       },
-                      child: Text(
-                        'Skip',
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Color.fromRGBO(107, 114, 128, 1),
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Skip'),
+                          SizedBox(
+                              width:
+                                  8), // Adjust spacing between label and icon
+                          Icon(
+                            Icons.arrow_forward,
+                            color: Color.fromRGBO(17, 25, 40, 1),
+                          )
+                        ],
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),

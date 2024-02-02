@@ -59,22 +59,22 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.white,
           body: Stack(
             children: [
-              ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(
-                      0.7), // Adjust the opacity value (0.0 to 1.0)
-                  BlendMode.dstATop,
-                ),
-                child: Container(
-                    width: double.infinity,
-                    child: Image.asset(
-                      'assets/images/splash.jpg',
-                      fit: BoxFit.cover,
-                    )),
-              ),
+              // ColorFiltered(
+              //   colorFilter: ColorFilter.mode(
+              //     Colors.black.withOpacity(
+              //         0.7), // Adjust the opacity value (0.0 to 1.0)
+              //     BlendMode.dstATop,
+              //   ),
+              //   child: Container(
+              //       width: double.infinity,
+              //       child: Image.asset(
+              //         'assets/images/splash.jpg',
+              //         fit: BoxFit.cover,
+              //       )),
+              // ),
               FadeTransition(
                 opacity: _opacity,
                 child: Center(
@@ -82,8 +82,8 @@ class _SplashScreenState extends State<SplashScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "assets/images/splogo.png",
-                        scale: 4,
+                        "assets/images/lawyerlogo.jpg",
+                        scale: 5,
                       ),
                       SizedBox(height: 10.h),
                       Text(

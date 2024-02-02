@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class RoundedButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final Color;
 
   const RoundedButton({
     required this.text,
     required this.onPressed,
+    required this.Color,
   });
 
   @override
@@ -18,7 +20,7 @@ class RoundedButton extends StatelessWidget {
         width: double.infinity,
         padding: EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: Color.fromRGBO(17, 25, 40, 1), // Button background color
+          color: Color, // Button background color
           borderRadius: BorderRadius.circular(20.0), // Rounded corners
         ),
         child: Center(

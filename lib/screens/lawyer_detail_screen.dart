@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/confirm_appointment_screen.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class LawyerDetailScreen extends StatelessWidget {
   const LawyerDetailScreen({super.key});
@@ -156,6 +157,7 @@ class LawyerDetailScreen extends StatelessWidget {
                 height: 20.h,
               ),
               RoundedButton(
+                  Color: AppColor.teelColor,
                   text: 'Book Appointment',
                   onPressed: () {
                     Get.to(ConfirmAppointmentScreen());

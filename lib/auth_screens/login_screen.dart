@@ -7,6 +7,7 @@ import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -61,6 +62,7 @@ class LoginScreen extends StatelessWidget {
                   height: 15.h,
                 ),
                 RoundedButton(
+                    Color: AppColor.teelColor,
                     text: 'Sign In',
                     onPressed: () {
                       Get.to(ClientHomepage());

@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class ProfileSettingScreen extends StatefulWidget {
   const ProfileSettingScreen({super.key});
@@ -204,6 +205,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                             //   onPressed: () {},
                             // ),
                             RoundedButton(
+                              Color: AppColor.teelColor,
                               text: 'Logout',
                               onPressed: () {
                                 Get.offAll(LoginScreen());

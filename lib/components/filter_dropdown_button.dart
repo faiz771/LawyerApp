@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class FilterDropDownButton extends StatefulWidget {
   @override
@@ -90,6 +91,7 @@ class _FilterDropDownButtonState extends State<FilterDropDownButton> {
                         ),
                         SizedBox(height: 16),
                         RoundedButton(
+                          Color: AppColor.teelColor,
                           text: 'Select',
                           onPressed: () {
                             // Process the selected categories, e.g., filter a list

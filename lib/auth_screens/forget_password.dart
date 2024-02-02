@@ -6,6 +6,7 @@ import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/auth_screens/verify_otp_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
@@ -62,6 +63,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                     height: 15.h,
                   ),
                   RoundedButton(
+                      Color: AppColor.teelColor,
                       text: 'Send Code',
                       onPressed: () {
                         Get.to(VerifyOtpScreen());

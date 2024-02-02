@@ -5,6 +5,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/calendar_template.dart';
 import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:lightweight_calendar/global_utils.dart';
 import 'package:lightweight_calendar/lightweight_calendar_app.dart';
 
@@ -91,6 +92,7 @@ class _ConfirmAppointmentScreenState extends State<ConfirmAppointmentScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
                 child: RoundedButton(
+                    Color: AppColor.teelColor,
                     text: 'Confirm',
                     onPressed: () {
                       Get.dialog(CustomDialog(

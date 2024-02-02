@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class CompletedBookingScreen extends StatelessWidget {
   CompletedBookingScreen({super.key, required this.showbutton});
@@ -95,7 +96,10 @@ class CompletedBookingScreen extends StatelessWidget {
                   ),
                   Divider(),
                   showbutton
-                      ? RoundedButton(text: 'Re-book', onPressed: () {})
+                      ? RoundedButton(
+                          Color: AppColor.teelColor,
+                          text: 'Re-book',
+                          onPressed: () {})
                       : SizedBox.shrink()
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

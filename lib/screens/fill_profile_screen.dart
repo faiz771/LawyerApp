@@ -9,6 +9,7 @@ import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/screens/select_user_type.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class FillProfileScreen extends StatefulWidget {
   const FillProfileScreen({super.key});
@@ -148,6 +149,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                   height: 15.h,
                 ),
                 RoundedButton(
+                    Color: AppColor.teelColor,
                     text: 'Save',
                     onPressed: () {
                       Get.to(LawyerHomepage());

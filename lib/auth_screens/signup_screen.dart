@@ -9,6 +9,7 @@ import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/signupcontroller.dart';
 import 'package:lawyerapp/screens/select_user_type.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class SignUpScreen extends StatefulWidget {
   SignUpScreen({super.key});
@@ -21,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final SignUpController controller = Get.put(SignUpController());
 
   late SingleValueDropDownController _rolecontroller;
+
   String selectedValue = 'Option 1';
   @override
   void initState() {
@@ -134,11 +136,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: Color.fromRGBO(17, 25, 40, 1)),
                         borderRadius: BorderRadius.circular(24)),
                   ),
-                  onSaved: (phone) {
-                    // This callback is triggered when the user enters or selects a phone number
-                    // You can use it to update the controller
-
-                    controller.phoneController.text = phone!.completeNumber;
+                  onChanged: (phone) {
+                    //    print(phone.completeNumber);
+                    controller.phoneController.text = phone.completeNumber;
+                    print(controller.phoneController.text);
                   },
                 ),
 
@@ -219,14 +220,62 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 // SizedBox(
                 //  height: 15.h,
                 // ),
-
-                RoundedButton(
-                    text: 'Create Account',
-                    onPressed: () {
-                      print(controller.phoneController.text);
-                      // print(object)
-                      Get.to(SelectUserTypeScreen());
-                    }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          controller.agreed.value = !controller.agreed.value;
+                        },
+                        child: Obx(
+                          () => Container(
+                            width: 20,
+                            height: 20,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: controller.agreed.value
+                                  ? AppColor.teelColor
+                                  : Colors.white,
+                              border: Border.all(
+                                color: AppColor.teelColor,
+                                width: 2.0,
+                              ),
+                            ),
+                            child: Center(
+                              child: controller.agreed.value
+                                  ? Icon(
+                                      Icons.check,
+                                      color: Colors.white,
+                                      size: 12,
+                                    )
+                                  : null,
+                            ),
+                          ),
+                        )),
+                    SizedBox(width: 10),
+                    Text(
+                      'Agree to Terms & Conditions',
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Obx(
+                  () => RoundedButton(
+                      Color: controller.agreed.value
+                          ? AppColor.teelColor
+                          : AppColor.greyColor,
+                      text: 'Create Account',
+                      onPressed: controller.agreed.value
+                          ? () {
+                              print(controller.phoneController.text);
+                              // print(object)
+                              Get.to(SelectUserTypeScreen());
+                            }
+                          : () {}),
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 30.h),
                   child: Row(

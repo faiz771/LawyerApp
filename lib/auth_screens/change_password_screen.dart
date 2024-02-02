@@ -8,6 +8,7 @@ import 'package:lawyerapp/auth_screens/verify_otp_screen.dart';
 import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
@@ -65,6 +66,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     height: 15.h,
                   ),
                   RoundedButton(
+                      Color: AppColor.teelColor,
                       text: 'Reset Password',
                       onPressed: () {
                         Get.dialog(CustomDialog(
