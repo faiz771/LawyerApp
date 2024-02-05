@@ -22,7 +22,7 @@ class OnboardingScreen extends StatelessWidget {
                 controller: _controller,
                 children: [
                   OnboardingTemplate(
-                    onBoardingImage: 'assets/images/onboard1.jpg',
+                    onBoardingImage: 'assets/images/onboarding1.jpg',
                     heading: 'Secure Consultation',
                     decsription:
                         'Embark on a hassle-free legal journey with (Appname). Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters with confidence',
@@ -34,7 +34,7 @@ class OnboardingScreen extends StatelessWidget {
                     },
                   ),
                   OnboardingTemplate(
-                    onBoardingImage: 'assets/images/onboard2.jpg',
+                    onBoardingImage: 'assets/images/onboarding2.jpg',
                     heading: 'Transparent Pricing',
                     decsription:
                         'No surprises, just clarity. Explore transparent pricing models before booking appointments, and rest assured that (Appname) ensures you have a clear understanding of costs, making your legal journey straightforward, predictable, and budget-friendly',
@@ -46,7 +46,7 @@ class OnboardingScreen extends StatelessWidget {
                     },
                   ),
                   OnboardingTemplate(
-                    onBoardingImage: 'assets/images/onboard3.jpg',
+                    onBoardingImage: 'assets/images/onboarding3.jpg',
                     heading: 'Appointment Reminders',
                     decsription:
                         'Stay on top of your legal agenda effortlessly. Receive timely reminders for upcoming appointments, ensuring you never miss a crucial consultation. LegalConnect is designed to keep you informed and in control, making your legal journey a seamless experience.',

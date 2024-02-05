@@ -6,7 +6,9 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/screens/analytics_screen.dart';
 import 'package:lawyerapp/screens/appointment_detail_screen.dart';
+import 'package:lawyerapp/screens/blog_screen.dart';
 import 'package:lawyerapp/screens/cancelled_booking_screen.dart';
+import 'package:lawyerapp/screens/chat_bot_screen.dart';
 import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
@@ -219,6 +221,8 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
           const AnalyticsScreen(),
           //ClientDashboardScreen(),
           const ProfileSettingScreen(),
+          const BlogScreen(),
+          const ChatBotScreen()
         ],
       ),
 
@@ -245,6 +249,22 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
           BottomNavyBarItem(
             icon: const Icon(Icons.person),
             title: const Text('Profile'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+          ),
+          BottomNavyBarItem(
+            icon: Image.asset(
+              'assets/images/blog-3.png',
+              scale: 22,
+            ),
+            title: const Text('Blogs'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+          ),
+          BottomNavyBarItem(
+            icon: Image.asset(
+              'assets/images/chatbot.png',
+              scale: 20,
+            ),
+            title: const Text('Ai Chat'),
             activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
         ],

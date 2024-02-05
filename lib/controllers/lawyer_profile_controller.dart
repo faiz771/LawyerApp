@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:lawyerapp/auth_screens/login_screen.dart';
+import 'package:lawyerapp/controllers/signup_controller.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class LawyerProfileController extends GetxController {
   TextEditingController lawyerEducationController = TextEditingController();
@@ -35,11 +37,39 @@ class LawyerProfileController extends GetxController {
         // Profile creation successful
         print('Lawyer profile created successfully');
         print('Message: ${responseData['message']}');
+        Get.snackbar(
+          '',
+          responseData['message'], // Message
+          snackPosition:
+              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
+          backgroundColor: AppColor.teelColor, // Background color
+          colorText: Colors.white, // Text color
+          borderRadius: 10,
+          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
+          margin: EdgeInsets
+              .zero, // Remove margin to redu // BorderRadius for the snackbar
+          duration: Duration(
+              seconds: 3), // Duration for which the snackbar will be visible
+        );
         Get.offAll(LoginScreen());
       } else {
         // Profile creation failed
         print('Lawyer profile creation failed');
         print('Message: ${responseData['message']}');
+        Get.snackbar(
+          '',
+          responseData['message'], // Message
+          snackPosition:
+              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
+          backgroundColor: AppColor.teelColor, // Background color
+          colorText: Colors.white, // Text color
+          borderRadius: 10,
+          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
+          margin: EdgeInsets
+              .zero, // Remove margin to redu // BorderRadius for the snackbar
+          duration: Duration(
+              seconds: 3), // Duration for which the snackbar will be visible
+        );
       }
     } catch (error) {
       print('Error during lawyer profile creation: $error');

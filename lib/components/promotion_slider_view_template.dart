@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:lawyerapp/screens/blog_screen.dart';
 
 class PromotionSliderViewTemplate extends StatelessWidget {
   final List<Map<String, dynamic>> sliderimages = [
@@ -16,21 +17,15 @@ class PromotionSliderViewTemplate extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider.builder(
       options: CarouselOptions(
+          height: 400,
           autoPlay: true,
-          aspectRatio: 12 / 7,
           enableInfiniteScroll: false,
           enlargeCenterPage: true,
-          initialPage: 2),
+          initialPage: 2,
+          viewportFraction: 1),
       itemCount: 6,
       itemBuilder: (context, index, _) {
-        return ClipRRect(
-          borderRadius:
-              BorderRadius.circular(12.0), // Set your desired border radius
-          child: Image.asset(
-            sliderimages[index]['image'],
-            fit: BoxFit.cover,
-          ),
-        );
+        return BlogPostContainer();
       },
     );
   }

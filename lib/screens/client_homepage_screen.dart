@@ -15,6 +15,7 @@ import 'package:lawyerapp/screens/client_dashboard_screen.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class ClientHomepage extends StatefulWidget {
   const ClientHomepage({super.key});
@@ -116,6 +117,39 @@ class _ClientHomepageState extends State<ClientHomepage> {
                   SizedBox(
                     height: 10.h,
                   ),
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Image.asset(
+                          'assets/images/book_consultaion.png',
+                          scale: 10,
+                        ),
+                        Text(
+                          'Book Consultation Now',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
                   Text(
                     "Upcoming Appointnments",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -124,7 +158,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const SizedBox(
-                        height: 20,
+                        height: 10,
                       ),
                       // const HomepageIconsWithTextTemplate(),
                       CarouselSlider(
@@ -150,16 +184,16 @@ class _ClientHomepageState extends State<ClientHomepage> {
                         ],
                       ),
 
-                      Padding(
-                        padding:
-                            EdgeInsets.only(right: 10.w, top: 5.h, bottom: 2.h),
-                        child: InkWell(
-                            onTap: () {
-                              Get.to(const AllLawyerScreen());
-                            },
-                            child: const Text('See All')),
-                      ),
-                      LawyerSliderViewTemplate(),
+                      // Padding(
+                      //   padding:
+                      //       EdgeInsets.only(right: 10.w, top: 5.h, bottom: 2.h),
+                      //   child: InkWell(
+                      //       onTap: () {
+                      //         Get.to(const AllLawyerScreen());
+                      //       },
+                      //       child: const Text('See All')),
+                      // ),
+                      // LawyerSliderViewTemplate(),
                       // RoundedButton(
                       //     text: 'Top Rated Lawyers',
                       //     onPressed: () {
