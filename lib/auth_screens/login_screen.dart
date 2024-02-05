@@ -65,13 +65,13 @@ class LoginScreen extends StatelessWidget {
                     Color: AppColor.teelColor,
                     text: 'Sign In',
                     onPressed: () {
-                      Get.to(ClientHomepage());
+                      Get.to(const ClientHomepage());
                     }),
                 Padding(
                   padding: EdgeInsets.only(top: 30.h),
                   child: InkWell(
                     onTap: () {
-                      Get.to(ForgetPasswordScreen());
+                      Get.to(const ForgetPasswordScreen());
                     },
                     child: Text(
                       'Forget password?',
@@ -91,13 +91,13 @@ class LoginScreen extends StatelessWidget {
                         'Don\'t have an account yet? ',
                         style: TextStyle(
                           fontSize: 14.sp,
-                          color: Color.fromRGBO(107, 114, 128, 1),
+                          color: const Color.fromRGBO(107, 114, 128, 1),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(SignUpScreen());
+                          Get.to(const SignUpScreen());
                         },
                         child: Text(
                           'Sign Up',

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lawyerapp/components/rounded_button.dart';
 
 class CancelledBookingScreen extends StatelessWidget {
   CancelledBookingScreen({super.key, required this.showbutton});
@@ -11,7 +10,7 @@ class CancelledBookingScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Container(
@@ -24,7 +23,7 @@ class CancelledBookingScreen extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
@@ -34,13 +33,13 @@ class CancelledBookingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'May 22, 2023 - 10.00 AM',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
                   Row(
                     children: [
                       CircleAvatar(
@@ -48,7 +47,7 @@ class CancelledBookingScreen extends StatelessWidget {
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
                                       'assets/images/onboard3.jpg',
@@ -61,7 +60,7 @@ class CancelledBookingScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Mr.John Doe William',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -71,7 +70,7 @@ class CancelledBookingScreen extends StatelessWidget {
                             SizedBox(
                               height: 10.h,
                             ),
-                            Text(
+                            const Text(
                               'Criminal Lawyer',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -81,7 +80,7 @@ class CancelledBookingScreen extends StatelessWidget {
                             SizedBox(
                               height: 10.h,
                             ),
-                            Text(
+                            const Text(
                               'Fee 3000',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -93,20 +92,20 @@ class CancelledBookingScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   showbutton
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             ElevatedButton(
-                                style: ButtonStyle(
+                                style: const ButtonStyle(
                                     backgroundColor:
                                         MaterialStatePropertyAll(Colors.red)),
                                 onPressed: () {},
                                 child: Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10.w),
-                                  child: Text(
+                                  child: const Text(
                                     'Cancelled',
                                     style: TextStyle(
                                         color: Colors.white,
@@ -114,14 +113,14 @@ class CancelledBookingScreen extends StatelessWidget {
                                   ),
                                 )),
                             ElevatedButton(
-                                style: ButtonStyle(
+                                style: const ButtonStyle(
                                     backgroundColor: MaterialStatePropertyAll(
                                         Color.fromRGBO(17, 25, 40, 1))),
                                 onPressed: () {},
                                 child: Padding(
                                   padding:
                                       EdgeInsets.symmetric(horizontal: 10.w),
-                                  child: Text(
+                                  child: const Text(
                                     'Re-book',
                                     style: TextStyle(
                                         color: Colors.white,
@@ -130,7 +129,7 @@ class CancelledBookingScreen extends StatelessWidget {
                                 )),
                           ],
                         )
-                      : SizedBox.shrink()
+                      : const SizedBox.shrink()
                 ],
               ),
             ),

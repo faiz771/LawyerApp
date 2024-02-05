@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/auth_screens/verify_otp_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
@@ -66,7 +65,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       Color: AppColor.teelColor,
                       text: 'Send Code',
                       onPressed: () {
-                        Get.to(VerifyOtpScreen());
+                        Get.to(const VerifyOtpScreen());
                       }),
                   SizedBox(
                     height: 15.h,

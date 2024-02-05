@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:lawyerapp/screens/onboarding_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/screens/splash_screen.dart';
 
@@ -20,10 +19,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Inter',
         colorScheme:
-            ColorScheme.fromSeed(seedColor: Color.fromRGBO(17, 25, 40, 1)),
+            ColorScheme.fromSeed(seedColor: const Color.fromRGBO(17, 25, 40, 1)),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
   );
   }
 }

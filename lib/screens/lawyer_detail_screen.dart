@@ -13,7 +13,7 @@ class LawyerDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Lawyer Details',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -24,7 +24,7 @@ class LawyerDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -37,7 +37,7 @@ class LawyerDetailScreen extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -51,7 +51,7 @@ class LawyerDetailScreen extends StatelessWidget {
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
                                       'assets/images/onboard3.jpg',
@@ -60,7 +60,7 @@ class LawyerDetailScreen extends StatelessWidget {
                       SizedBox(
                         width: 12.h,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -104,7 +104,7 @@ class LawyerDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text(
+              const Text(
                   'I am a dedicated and experienced lawyer committed to providing exceptional legal services. With a passion for justice and a deep understanding of the law, I strive to advocate for my clients\' rights and navigate them through legal challenges.'),
               SizedBox(
                 height: 10.h,
@@ -114,7 +114,7 @@ class LawyerDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text(
+              const Text(
                   'Juris Doctor (JD) from [Law School Name], [Year]\nBachelor of Laws (LLB) from [University Name], [Year]'),
               SizedBox(
                 height: 10.h,
@@ -124,7 +124,7 @@ class LawyerDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text(
+              const Text(
                   '123 Legal Street Suite 456 Justice City, JD 54321 Legaland'),
               SizedBox(
                 height: 10.h,
@@ -134,7 +134,7 @@ class LawyerDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text('Monday-Friday 8:00 AM to 9:00 PM'),
+              const Text('Monday-Friday 8:00 AM to 9:00 PM'),
               SizedBox(
                 height: 10.h,
               ),
@@ -143,7 +143,7 @@ class LawyerDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text('2 Years at Justice Advocates LLP'),
+              const Text('2 Years at Justice Advocates LLP'),
               SizedBox(
                 height: 10.h,
               ),
@@ -152,7 +152,7 @@ class LawyerDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text('213124141'),
+              const Text('213124141'),
               SizedBox(
                 height: 20.h,
               ),
@@ -160,7 +160,7 @@ class LawyerDetailScreen extends StatelessWidget {
                   Color: AppColor.teelColor,
                   text: 'Book Appointment',
                   onPressed: () {
-                    Get.to(ConfirmAppointmentScreen());
+                    Get.to(const ConfirmAppointmentScreen());
                   }),
               SizedBox(
                 height: 20.h,

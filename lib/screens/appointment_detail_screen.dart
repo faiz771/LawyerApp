@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:lawyerapp/components/rounded_button.dart';
-import 'package:lawyerapp/screens/confirm_appointment_screen.dart';
 
 class AppointmentDetailScreen extends StatelessWidget {
   const AppointmentDetailScreen({super.key});
@@ -12,7 +8,7 @@ class AppointmentDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Appointment Details',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -23,7 +19,7 @@ class AppointmentDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Container(
@@ -36,7 +32,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 5,
                       blurRadius: 7,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -50,7 +46,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
                                       'assets/images/onboard3.jpg',
@@ -59,7 +55,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                       SizedBox(
                         width: 12.h,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -103,7 +99,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text(
+              const Text(
                   'I am a dedicated and experienced lawyer committed to providing exceptional legal services. With a passion for justice and a deep understanding of the law, I strive to advocate for my clients\' rights and navigate them through legal challenges.'),
               SizedBox(
                 height: 10.h,
@@ -113,7 +109,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text('2:00 PM to 3:00 PM'),
+              const Text('2:00 PM to 3:00 PM'),
               SizedBox(
                 height: 10.h,
               ),
@@ -122,7 +118,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text('May 22, 2023'),
+              const Text('May 22, 2023'),
               SizedBox(
                 height: 10.h,
               ),
@@ -149,7 +145,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),
                 overflow: TextOverflow.ellipsis,
               ),
-              Text('213124141'),
+              const Text('213124141'),
               SizedBox(
                 height: 20.h,
               ),
@@ -164,7 +160,7 @@ class AppointmentDetailScreen extends StatelessWidget {
                       onPressed: () {},
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Text(
+                        child: const Text(
                           'Reject',
                           style: TextStyle(
                               color: Color.fromRGBO(17, 25, 40, 1),
@@ -172,13 +168,13 @@ class AppointmentDetailScreen extends StatelessWidget {
                         ),
                       )),
                   ElevatedButton(
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
                               Color.fromRGBO(17, 25, 40, 1))),
                       onPressed: () {},
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Text(
+                        child: const Text(
                           'Accept',
                           style: TextStyle(
                               color: Colors.white, fontWeight: FontWeight.bold),

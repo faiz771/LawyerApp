@@ -10,7 +10,7 @@ class Notificationscreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Notifications',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -19,10 +19,10 @@ class Notificationscreen extends StatelessWidget {
             padding: EdgeInsets.only(right: 10.w),
             child: Container(
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(17, 25, 40, 1),
+                  color: const Color.fromRGBO(17, 25, 40, 1),
                   borderRadius: BorderRadius.circular(6)),
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
+              child: const Padding(
+                padding: EdgeInsets.all(5.0),
                 child: Text(
                   '1 New',
                   style: TextStyle(
@@ -43,7 +43,7 @@ class Notificationscreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(

@@ -6,19 +6,21 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/screens/lawyer_detail_screen.dart';
 
 class LawyerGridViewTemplate extends StatelessWidget {
+  const LawyerGridViewTemplate({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: MasonryGridView.builder(
           // physics: const NeverScrollableScrollPhysics(),
           // shrinkWrap: true,
-          gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
           itemCount: 10,
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                Get.to(LawyerDetailScreen());
+                Get.to(const LawyerDetailScreen());
               },
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 1.h, vertical: 5.h),
@@ -42,7 +44,7 @@ class LawyerGridViewTemplate extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 50.h,
                             child: Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                       fit: BoxFit.cover,

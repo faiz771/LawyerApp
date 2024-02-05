@@ -4,11 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/Lawyer_slider_view_template.dart';
-import 'package:lawyerapp/components/filter_dropdown_button.dart';
 import 'package:lawyerapp/components/homepage_icons_with_text_template.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/promotion_slider_view_template.dart';
-import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/screens/all_lawyer_screen.dart';
 import 'package:lawyerapp/screens/client_dashboard_screen.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
@@ -23,7 +21,7 @@ class ClientHomepage extends StatefulWidget {
 
 class _ClientHomepageState extends State<ClientHomepage> {
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +55,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                         child: CircleAvatar(
                           radius: 30,
                           child: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
@@ -70,7 +68,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 10.w),
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -91,13 +89,13 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(Notificationscreen());
+                          Get.to(const Notificationscreen());
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: CircleAvatar(
                               backgroundColor: Colors.grey[300],
-                              child: Icon(Icons.notifications)),
+                              child: const Icon(Icons.notifications)),
                         ),
                       ),
                     ],
@@ -113,18 +111,18 @@ class _ClientHomepageState extends State<ClientHomepage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      HomepageIconsWithTextTemplate(),
+                      const HomepageIconsWithTextTemplate(),
                       Padding(
                         padding: EdgeInsets.only(
                             right: 10.w, top: 10.h, bottom: 2.h),
                         child: InkWell(
                             onTap: () {
-                              Get.to(AllLawyerScreen());
+                              Get.to(const AllLawyerScreen());
                             },
-                            child: Text('See All')),
+                            child: const Text('See All')),
                       ),
                       LawyerSliderViewTemplate(),
                       // RoundedButton(
@@ -135,15 +133,15 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       //LawyerSliderViewTemplate()
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   )
                 ],
               ),
             ),
           ),
-          ClientDashboardScreen(),
-          ProfileSettingScreen(),
+          const ClientDashboardScreen(),
+          const ProfileSettingScreen(),
         ],
       ),
 
@@ -158,19 +156,19 @@ class _ClientHomepageState extends State<ClientHomepage> {
         },
         items: [
           BottomNavyBarItem(
-            icon: Icon(Icons.home_filled),
-            title: Text('Home'),
-            activeColor: Color.fromRGBO(17, 25, 40, 1),
+            icon: const Icon(Icons.home_filled),
+            title: const Text('Home'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.event),
-            title: Text('Bookings'),
-            activeColor: Color.fromRGBO(17, 25, 40, 1),
+            icon: const Icon(Icons.event),
+            title: const Text('Bookings'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile'),
-            activeColor: Color.fromRGBO(17, 25, 40, 1),
+            icon: const Icon(Icons.person),
+            title: const Text('Profile'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
         ],
       ),

@@ -7,7 +7,7 @@ class TwoRoundedButton extends StatelessWidget {
   final String text2;
   final VoidCallback onPressed2;
 
-  const TwoRoundedButton({
+  const TwoRoundedButton({super.key, 
     required this.text,
     required this.onPressed,
     required this.text2,
@@ -22,9 +22,9 @@ class TwoRoundedButton extends StatelessWidget {
         InkWell(
           onTap: onPressed,
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(17, 25, 40, 1), // Button background color
+              color: const Color.fromRGBO(17, 25, 40, 1), // Button background color
               borderRadius: BorderRadius.circular(20.0), // Rounded corners
             ),
             child: Center(
@@ -46,9 +46,9 @@ class TwoRoundedButton extends StatelessWidget {
           onTap: onPressed2,
           child: Container(
             // width: double.infinity,
-            padding: EdgeInsets.symmetric(vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(17, 25, 40, 1), // Button background color
+              color: const Color.fromRGBO(17, 25, 40, 1), // Button background color
               borderRadius: BorderRadius.circular(20.0), // Rounded corners
             ),
             child: Center(

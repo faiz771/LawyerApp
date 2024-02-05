@@ -44,7 +44,7 @@ class OnboardingTemplate extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 14.sp,
                       fontFamily: 'inter',
-                      color: Color.fromRGBO(107, 114, 128, 1)),
+                      color: const Color.fromRGBO(107, 114, 128, 1)),
                   textAlign: TextAlign.center,
                 ),
                 Padding(

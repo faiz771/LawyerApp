@@ -18,7 +18,7 @@ class NotificationTemplate extends StatelessWidget {
         children: [
           Text(
             heading,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold),
           ),
           Text(
             '1h',

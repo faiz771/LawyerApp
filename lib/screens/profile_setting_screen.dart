@@ -44,7 +44,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
             child: Stack(
               alignment: Alignment.bottomRight,
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 75,
                   backgroundColor: Colors.white,
                   backgroundImage: AssetImage(
@@ -58,8 +58,8 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                       decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(6)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(4.0),
                         child: Icon(
                           Icons.edit,
                           color: Colors.white,
@@ -71,13 +71,13 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.h),
-            child: Text(
+            child: const Text(
               'Joe Doe William',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           ListTile(
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios_sharp,
               size: 20,
             ),
@@ -85,14 +85,14 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               'Edit Profile',
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.edit_outlined,
               color: Color.fromRGBO(17, 25, 40, 1),
             ),
             onTap: () {},
           ),
           ListTile(
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios_sharp,
               size: 20,
             ),
@@ -100,14 +100,14 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               'Favorite',
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.favorite_outline,
               color: Color.fromRGBO(17, 25, 40, 1),
             ),
             onTap: () {},
           ),
           ListTile(
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios_sharp,
               size: 20,
             ),
@@ -115,14 +115,14 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               'Settings',
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.settings_outlined,
               color: Color.fromRGBO(17, 25, 40, 1),
             ),
             onTap: () {},
           ),
           ListTile(
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios_sharp,
               size: 20,
             ),
@@ -130,14 +130,14 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               'Notifications',
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.notifications_outlined,
               color: Color.fromRGBO(17, 25, 40, 1),
             ),
             onTap: () {},
           ),
           ListTile(
-            trailing: Icon(
+            trailing: const Icon(
               Icons.arrow_forward_ios_sharp,
               size: 20,
             ),
@@ -145,7 +145,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               'Help and Support',
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.live_help_outlined,
               color: Color.fromRGBO(17, 25, 40, 1),
             ),
@@ -171,7 +171,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               'Logout',
               style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
             ),
-            leading: Icon(
+            leading: const Icon(
               Icons.logout_outlined,
               color: Color.fromRGBO(17, 25, 40, 1),
             ),
@@ -182,21 +182,21 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     return StatefulBuilder(
                         builder: (BuildContext context, StateSetter setState) {
                       return Container(
-                        padding: EdgeInsets.all(16),
+                        padding: const EdgeInsets.all(16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
+                            const Text(
                               'Logout',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
-                            SizedBox(height: 16),
-                            Center(
+                            const SizedBox(height: 16),
+                            const Center(
                                 child: Text('Are you sure you want to logout')),
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             // Row(
                             //   mainAxisSize: MainAxisSize.min,
                             //   children: [
@@ -208,7 +208,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                               Color: AppColor.teelColor,
                               text: 'Logout',
                               onPressed: () {
-                                Get.offAll(LoginScreen());
+                                Get.offAll(const LoginScreen());
                               },
                             )
                             //   ],

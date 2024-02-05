@@ -40,11 +40,13 @@ class LawyerSliderViewTemplate extends StatelessWidget {
     // Add more dummy data entries as needed
   ];
 
+  LawyerSliderViewTemplate({super.key});
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(LawyerDetailScreen());
+        Get.to(const LawyerDetailScreen());
       },
       child: CarouselSlider.builder(
         options: CarouselOptions(
@@ -74,7 +76,7 @@ class LawyerSliderViewTemplate extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 40.h,
                         child: Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                   fit: BoxFit.cover,

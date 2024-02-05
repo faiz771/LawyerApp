@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class PromotionSliderViewTemplate extends StatelessWidget {
@@ -11,6 +10,8 @@ class PromotionSliderViewTemplate extends StatelessWidget {
     {"image": 'assets/images/slider2.jpg'},
     {"image": 'assets/images/slider3.jpg'}
   ];
+
+  PromotionSliderViewTemplate({super.key});
   @override
   Widget build(BuildContext context) {
     return CarouselSlider.builder(

@@ -4,8 +4,6 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/auth_screens/change_password_screen.dart';
 import 'package:lawyerapp/auth_screens/forget_password.dart';
-import 'package:lawyerapp/auth_screens/signup_screen.dart';
-import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
@@ -84,7 +82,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                           },
                           decoration: InputDecoration(
                             counterText: '',
-                            contentPadding: EdgeInsets.all(12),
+                            contentPadding: const EdgeInsets.all(12),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
                                     color: Color.fromRGBO(17, 25, 40, 1)),
@@ -104,7 +102,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       Color: AppColor.teelColor,
                       text: 'Verify',
                       onPressed: () {
-                        Get.to(ChangePasswordScreen());
+                        Get.to(const ChangePasswordScreen());
                       }),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),
@@ -115,13 +113,13 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                           'Didn\'t get the Code? ',
                           style: TextStyle(
                             fontSize: 14.sp,
-                            color: Color.fromRGBO(107, 114, 128, 1),
+                            color: const Color.fromRGBO(107, 114, 128, 1),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         InkWell(
                           onTap: () {
-                            Get.to(ForgetPasswordScreen());
+                            Get.to(const ForgetPasswordScreen());
                           },
                           child: Text(
                             'Resend',

@@ -1,12 +1,12 @@
-import 'package:dropdown_textfield/dropdown_textfield.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter/material.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class FilterDropDownButton extends StatefulWidget {
+  const FilterDropDownButton({super.key});
+
   @override
   _FilterDropDownButtonState createState() => _FilterDropDownButtonState();
 }
@@ -48,18 +48,18 @@ class _FilterDropDownButtonState extends State<FilterDropDownButton> {
               return StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
                   return Container(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        const Text(
                           'Select Lawyer Category',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Expanded(
                           child: ConstrainedBox(
                             constraints: BoxConstraints(
@@ -89,7 +89,7 @@ class _FilterDropDownButtonState extends State<FilterDropDownButton> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         RoundedButton(
                           Color: AppColor.teelColor,
                           text: 'Select',
@@ -125,7 +125,7 @@ class _FilterDropDownButtonState extends State<FilterDropDownButton> {
             SizedBox(
               width: 4.w,
             ),
-            Icon(Icons.filter_list),
+            const Icon(Icons.filter_list),
             SizedBox(
               width: 4.w,
             ),

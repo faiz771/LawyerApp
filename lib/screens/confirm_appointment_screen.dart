@@ -6,10 +6,10 @@ import 'package:lawyerapp/components/calendar_template.dart';
 import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
-import 'package:lightweight_calendar/global_utils.dart';
-import 'package:lightweight_calendar/lightweight_calendar_app.dart';
 
 class ConfirmAppointmentScreen extends StatefulWidget {
+  const ConfirmAppointmentScreen({super.key});
+
   @override
   _ConfirmAppointmentScreenState createState() =>
       _ConfirmAppointmentScreenState();
@@ -21,7 +21,7 @@ class _ConfirmAppointmentScreenState extends State<ConfirmAppointmentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Book Appointment',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -44,7 +44,7 @@ class _ConfirmAppointmentScreenState extends State<ConfirmAppointmentScreen> {
               SizedBox(
                 height: 10.h,
               ),
-              CalendarTemplate(),
+              const CalendarTemplate(),
               SizedBox(
                 height: 10.h,
               ),
@@ -126,7 +126,7 @@ class _ConfirmAppointmentScreenState extends State<ConfirmAppointmentScreen> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             color:
-                isSelected ? Color.fromRGBO(17, 25, 40, 1) : Colors.grey[300]),
+                isSelected ? const Color.fromRGBO(17, 25, 40, 1) : Colors.grey[300]),
         child: Center(
           child: Text(
             buttonText,

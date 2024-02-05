@@ -11,7 +11,7 @@ class AnalyticsScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Analytics',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),

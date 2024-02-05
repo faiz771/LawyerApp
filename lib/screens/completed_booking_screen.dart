@@ -12,7 +12,7 @@ class CompletedBookingScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Container(
@@ -25,7 +25,7 @@ class CompletedBookingScreen extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.5),
                   spreadRadius: 5,
                   blurRadius: 7,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
@@ -35,13 +35,13 @@ class CompletedBookingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'May 22, 2023 - 10.00 AM',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
                   Row(
                     children: [
                       CircleAvatar(
@@ -49,7 +49,7 @@ class CompletedBookingScreen extends StatelessWidget {
                         child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
                                       'assets/images/onboard3.jpg',
@@ -62,7 +62,7 @@ class CompletedBookingScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Mr.John Doe William',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class CompletedBookingScreen extends StatelessWidget {
                             SizedBox(
                               height: 10.h,
                             ),
-                            Text(
+                            const Text(
                               'Criminal Lawyer',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -82,7 +82,7 @@ class CompletedBookingScreen extends StatelessWidget {
                             SizedBox(
                               height: 10.h,
                             ),
-                            Text(
+                            const Text(
                               'Fee 3000',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -94,13 +94,13 @@ class CompletedBookingScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   showbutton
                       ? RoundedButton(
                           Color: AppColor.teelColor,
                           text: 'Re-book',
                           onPressed: () {})
-                      : SizedBox.shrink()
+                      : const SizedBox.shrink()
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   //   children: [

@@ -8,7 +8,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 final _controller = PageController();
 
 class OnboardingScreen extends StatelessWidget {
-  OnboardingScreen({super.key});
+  const OnboardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class OnboardingScreen extends StatelessWidget {
                     decsription:
                         'Stay on top of your legal agenda effortlessly. Receive timely reminders for upcoming appointments, ensuring you never miss a crucial consultation. LegalConnect is designed to keep you informed and in control, making your legal journey a seamless experience.',
                     onPressed: () {
-                      Get.to(SignUpScreen());
+                      Get.to(const SignUpScreen());
                     },
                   ),
                 ],
@@ -66,7 +66,7 @@ class OnboardingScreen extends StatelessWidget {
                       height: 10.h,
                     ),
                     SmoothPageIndicator(
-                      effect: ExpandingDotsEffect(
+                      effect: const ExpandingDotsEffect(
                         activeDotColor: Color.fromRGBO(17, 25, 40, 1),
                       ),
                       controller: _controller,
@@ -75,9 +75,9 @@ class OnboardingScreen extends StatelessWidget {
                     SizedBox(height: 10.h),
                     GestureDetector(
                       onTap: () {
-                        Get.to(SignUpScreen());
+                        Get.to(const SignUpScreen());
                       },
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('Skip'),

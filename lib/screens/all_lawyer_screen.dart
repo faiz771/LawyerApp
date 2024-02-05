@@ -16,7 +16,7 @@ class _AllLawyerScreenState extends State<AllLawyerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Lawyers'),
+        title: const Text('All Lawyers'),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -26,8 +26,8 @@ class _AllLawyerScreenState extends State<AllLawyerScreen> {
             SizedBox(
               height: 10.h,
             ),
-            FilterDropDownButton(),
-            LawyerGridViewTemplate()
+            const FilterDropDownButton(),
+            const LawyerGridViewTemplate()
           ],
         ),
       ),

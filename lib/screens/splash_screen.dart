@@ -1,10 +1,5 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/screens/onboarding_screen.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
@@ -24,20 +19,20 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2), // Adjust the duration as needed
+      duration: const Duration(seconds: 2), // Adjust the duration as needed
     );
 
     _opacity = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
 
     // Start the animation
     _controller.forward();
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () {
       // Navigate to the next screen after the delay
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              OnboardingScreen(),
+              const OnboardingScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(1.0, 0.0);
             const end = Offset.zero;

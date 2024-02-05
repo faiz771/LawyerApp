@@ -35,20 +35,20 @@ class CustomDialog extends StatelessWidget {
                   "assets/images/dialog.png",
                   scale: 3,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   heading,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   text,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 RoundedButton(
                   Color: AppColor.teelColor,
                   text: buttontext,
@@ -57,9 +57,9 @@ class CustomDialog extends StatelessWidget {
                   },
                   //Get.bac{k();
                 ),
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 TextButton(
-                    onPressed: () {}, child: Text('Edit your appointment'))
+                    onPressed: () {}, child: const Text('Edit your appointment'))
               ],
             ),
           ),

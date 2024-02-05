@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
-import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
-import 'package:lawyerapp/screens/select_user_type.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class FillProfileScreen extends StatefulWidget {
@@ -24,7 +21,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Fill Your Profile',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -40,7 +37,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                 Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 75,
                       backgroundColor: Colors.white,
                       backgroundImage: AssetImage(
@@ -54,8 +51,8 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                           decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(6)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(4.0),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
@@ -94,7 +91,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                         }
                       },
                       dropDownItemCount: 4,
-                      dropDownList: [
+                      dropDownList: const [
                         DropDownValueModel(
                             name: 'Corporate Lawyer', value: "value1"),
                         DropDownValueModel(
@@ -152,7 +149,7 @@ class _FillProfileScreenState extends State<FillProfileScreen> {
                     Color: AppColor.teelColor,
                     text: 'Save',
                     onPressed: () {
-                      Get.to(LawyerHomepage());
+                      Get.to(const LawyerHomepage());
                     }),
                 SizedBox(
                   height: 10.h,

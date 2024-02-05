@@ -13,7 +13,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Color.fromRGBO(17, 25, 40, 1),
+              color: const Color.fromRGBO(17, 25, 40, 1),
             ),
             height: 80.h,
             width: 100.w,
@@ -22,7 +22,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.account_circle,
                     color: Colors.white,
                   ),
@@ -40,7 +40,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Color.fromRGBO(17, 25, 40, 1),
+              color: const Color.fromRGBO(17, 25, 40, 1),
             ),
             height: 80.h,
             width: 100.w,
@@ -49,7 +49,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.calendar_month_outlined,
                     color: Colors.white,
                   ),
@@ -68,7 +68,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Color.fromRGBO(17, 25, 40, 1),
+              color: const Color.fromRGBO(17, 25, 40, 1),
             ),
             height: 80.h,
             width: 100.w,
@@ -77,7 +77,7 @@ class HomepageIconsWithTextTemplate extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.build,
                     color: Colors.white,
                   ),

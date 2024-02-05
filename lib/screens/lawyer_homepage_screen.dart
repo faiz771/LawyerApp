@@ -1,20 +1,12 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:lawyerapp/components/Lawyer_slider_view_template.dart';
-import 'package:lawyerapp/components/filter_dropdown_button.dart';
-import 'package:lawyerapp/components/homepage_icons_with_text_template.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
-import 'package:lawyerapp/components/promotion_slider_view_template.dart';
-import 'package:lawyerapp/components/rounded_button.dart';
-import 'package:lawyerapp/screens/all_lawyer_screen.dart';
 import 'package:lawyerapp/screens/analytics_screen.dart';
 import 'package:lawyerapp/screens/appointment_detail_screen.dart';
 import 'package:lawyerapp/screens/cancelled_booking_screen.dart';
-import 'package:lawyerapp/screens/client_dashboard_screen.dart';
 import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
@@ -29,7 +21,7 @@ class LawyerHomepage extends StatefulWidget {
 
 class _LawyerHomepageState extends State<LawyerHomepage> {
   int _currentIndex = 0;
-  PageController _pageController = PageController();
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +55,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                         child: CircleAvatar(
                           radius: 30,
                           child: Container(
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
@@ -76,7 +68,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 10.w),
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -97,13 +89,13 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(Notificationscreen());
+                          Get.to(const Notificationscreen());
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: CircleAvatar(
                               backgroundColor: Colors.grey[300],
-                              child: Icon(Icons.notifications)),
+                              child: const Icon(Icons.notifications)),
                         ),
                       ),
                     ],
@@ -122,7 +114,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                       child: Column(
                         children: [
                           // Your TabBar widget
-                          TabBar(
+                          const TabBar(
                             indicatorColor: Color.fromRGBO(17, 25, 40, 1),
                             labelColor: Color.fromRGBO(17, 25, 40, 1),
                             unselectedLabelColor: Colors.grey,
@@ -148,7 +140,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                         button2: true,
                                         onPressed1: () {},
                                         onPressed2: () {
-                                          Get.to(AppointmentDetailScreen());
+                                          Get.to(const AppointmentDetailScreen());
                                         },
                                         button1title: 'Cancel',
                                         button2title: 'View',
@@ -158,7 +150,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                         button2: true,
                                         onPressed1: () {},
                                         onPressed2: () {
-                                          Get.to(AppointmentDetailScreen());
+                                          Get.to(const AppointmentDetailScreen());
                                         },
                                         button1title: 'Cancel',
                                         button2title: 'View',
@@ -168,12 +160,12 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                         button2: true,
                                         onPressed1: () {},
                                         onPressed2: () {
-                                          Get.to(AppointmentDetailScreen());
+                                          Get.to(const AppointmentDetailScreen());
                                         },
                                         button1title: 'Cancel',
                                         button2title: 'View',
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       )
                                     ],
@@ -192,7 +184,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                       CompletedBookingScreen(
                                         showbutton: false,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       )
                                     ],
@@ -214,7 +206,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                       CancelledBookingScreen(
                                         showbutton: false,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       )
                                     ],
@@ -231,9 +223,9 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
               ),
             ),
           ),
-          AnalyticsScreen(),
+          const AnalyticsScreen(),
           //ClientDashboardScreen(),
-          ProfileSettingScreen(),
+          const ProfileSettingScreen(),
         ],
       ),
 
@@ -248,19 +240,19 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
         },
         items: [
           BottomNavyBarItem(
-            icon: Icon(Icons.home_filled),
-            title: Text('Home'),
-            activeColor: Color.fromRGBO(17, 25, 40, 1),
+            icon: const Icon(Icons.home_filled),
+            title: const Text('Home'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.bar_chart_outlined),
-            title: Text('Analytics'),
-            activeColor: Color.fromRGBO(17, 25, 40, 1),
+            icon: const Icon(Icons.bar_chart_outlined),
+            title: const Text('Analytics'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile'),
-            activeColor: Color.fromRGBO(17, 25, 40, 1),
+            icon: const Icon(Icons.person),
+            title: const Text('Profile'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
         ],
       ),

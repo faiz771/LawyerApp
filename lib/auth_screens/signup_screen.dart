@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
@@ -12,7 +11,7 @@ import 'package:lawyerapp/screens/select_user_type.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -41,7 +40,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 60.h),
+                  padding: EdgeInsets.only(top: 20.h),
                   child: Center(
                       child: Image.asset(
                     'assets/images/logo.png',
@@ -49,7 +48,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   )),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+                  padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                   child: Center(
                     child: Text(
                       '(Appname)',
@@ -67,7 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 15.h, bottom: 15.h),
+                  padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                   child: Center(
                     child: Text(
                       'We are here to help you!',
@@ -117,7 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   disableLengthCheck: true,
                   controller: controller.phoneController,
                   keyboardType: TextInputType.phone,
-                  dropdownIcon: Icon(
+                  dropdownIcon: const Icon(
                     Icons.arrow_drop_down,
                     size: 28,
                   ),
@@ -166,11 +165,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 //     );
                 //   }).toList(),
                 // ),
-                SizedBox(
+                const SizedBox(
                   height: 7,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 3),
+                  padding: const EdgeInsets.only(bottom: 3),
                   child: DropDownTextField(
                     controller: controller.accounttype,
                     textFieldDecoration: InputDecoration(
@@ -243,7 +242,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             child: Center(
                               child: controller.agreed.value
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.check,
                                       color: Colors.white,
                                       size: 12,
@@ -252,8 +251,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ),
                         )),
-                    SizedBox(width: 10),
-                    Text(
+                    const SizedBox(width: 10),
+                    const Text(
                       'Agree to Terms & Conditions',
                       style: TextStyle(color: Colors.black, fontSize: 16),
                     ),
@@ -272,12 +271,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ? () {
                               print(controller.phoneController.text);
                               // print(object)
-                              Get.to(SelectUserTypeScreen());
+                              Get.to(const SelectUserTypeScreen());
                             }
                           : () {}),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 30.h),
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -285,13 +284,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         'Do you have an account? ',
                         style: TextStyle(
                           fontSize: 14.sp,
-                          color: Color.fromRGBO(107, 114, 128, 1),
+                          color: const Color.fromRGBO(107, 114, 128, 1),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(LoginScreen());
+                          Get.to(const LoginScreen());
                         },
                         child: Text(
                           'Sign In',

@@ -6,7 +6,7 @@ class RoundedButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Color;
 
-  const RoundedButton({
+  const RoundedButton({super.key, 
     required this.text,
     required this.onPressed,
     required this.Color,
@@ -18,7 +18,7 @@ class RoundedButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           color: Color, // Button background color
           borderRadius: BorderRadius.circular(20.0), // Rounded corners

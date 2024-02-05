@@ -29,7 +29,7 @@ class SelectUserTypeScreen extends StatelessWidget {
                 ),
                 InkWell(
                     onTap: () {
-                      Get.to(FillProfileScreen());
+                      Get.to(const FillProfileScreen());
                     },
                     child: Image.asset('assets/images/typecard1.png')),
                 SizedBox(
@@ -37,7 +37,7 @@ class SelectUserTypeScreen extends StatelessWidget {
                 ),
                 InkWell(
                     onTap: () {
-                      Get.offAll(ClientHomepage());
+                      Get.offAll(const ClientHomepage());
                     },
                     child: Image.asset('assets/images/typecard2.png')),
                 SizedBox(

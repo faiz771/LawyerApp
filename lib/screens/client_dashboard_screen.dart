@@ -14,11 +14,11 @@ class ClientDashboardScreen extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: Text(
+          title: const Text(
             'My Bookings',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          bottom: TabBar(
+          bottom: const TabBar(
             indicatorColor: Color.fromRGBO(17, 25, 40, 1),
             labelColor: Color.fromRGBO(17, 25, 40, 1),
             unselectedLabelColor: Colors.grey,
@@ -62,7 +62,7 @@ class ClientDashboardScreen extends StatelessWidget {
                     button1title: 'Cancel',
                     button2title: 'Reschedule',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   )
                 ],
@@ -81,7 +81,7 @@ class ClientDashboardScreen extends StatelessWidget {
                   CompletedBookingScreen(
                     showbutton: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   )
                 ],
@@ -103,7 +103,7 @@ class ClientDashboardScreen extends StatelessWidget {
                   CancelledBookingScreen(
                     showbutton: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   )
                 ],
