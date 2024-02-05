@@ -28,7 +28,6 @@ class ClientDashboardScreen extends StatelessWidget {
                 text: 'Upcoming',
               ),
               Tab(text: 'Completed'),
-              Tab(text: 'Cancelled'),
             ],
           ),
         ),
@@ -40,27 +39,18 @@ class ClientDashboardScreen extends StatelessWidget {
                 children: [
                   UpcomingBookingScreen(
                     button1: true,
-                    button2: true,
                     onPressed1: () {},
-                    onPressed2: () {},
-                    button1title: 'Cancel',
-                    button2title: 'Reschedule',
+                    button1title: 'Reschedule',
                   ),
                   UpcomingBookingScreen(
                     button1: true,
-                    button2: true,
                     onPressed1: () {},
-                    onPressed2: () {},
-                    button1title: 'Cancel',
-                    button2title: 'Reschedule',
+                    button1title: 'Reschedule',
                   ),
                   UpcomingBookingScreen(
                     button1: true,
-                    button2: true,
                     onPressed1: () {},
-                    onPressed2: () {},
-                    button1title: 'Cancel',
-                    button2title: 'Reschedule',
+                    button1title: 'Reschedule',
                   ),
                   const SizedBox(
                     height: 10,
@@ -91,24 +81,24 @@ class ClientDashboardScreen extends StatelessWidget {
 
             // Content for Cancelled tab
             // CancelledBookingScreen
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  CancelledBookingScreen(
-                    showbutton: true,
-                  ),
-                  CancelledBookingScreen(
-                    showbutton: true,
-                  ),
-                  CancelledBookingScreen(
-                    showbutton: true,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  )
-                ],
-              ),
-            ),
+            // SingleChildScrollView(
+            //   child: Column(
+            //     children: [
+            //       CancelledBookingScreen(
+            //         showbutton: true,
+            //       ),
+            //       CancelledBookingScreen(
+            //         showbutton: true,
+            //       ),
+            //       CancelledBookingScreen(
+            //         showbutton: true,
+            //       ),
+            //       const SizedBox(
+            //         height: 10,
+            //       )
+            //     ],
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/auth_screens/change_password_screen.dart';
 import 'package:lawyerapp/auth_screens/forget_password.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/controllers/otp_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class VerifyOtpScreen extends StatefulWidget {
-  const VerifyOtpScreen({super.key});
+  String email = '';
+  VerifyOtpScreen({super.key, required this.email});
 
   @override
   State<VerifyOtpScreen> createState() => _VerifyOtpScreenState();
@@ -17,6 +20,7 @@ class VerifyOtpScreen extends StatefulWidget {
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
   List<TextEditingController> controllers =
       List.generate(5, (index) => TextEditingController());
+  VerifyOtpController verificationController = Get.put(VerifyOtpController());
 
   @override
   Widget build(BuildContext context) {
@@ -67,26 +71,27 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(
-                      5,
+                      6,
                       (index) => SizedBox(
                         width: 50,
                         child: TextField(
-                          controller: controllers[index],
+                          style: TextStyle(color: Colors.black),
+                          controller:
+                              verificationController.optControllers[index],
                           textAlign: TextAlign.center,
                           keyboardType: TextInputType.number,
                           maxLength: 1,
                           onChanged: (value) {
-                            if (value.isNotEmpty && index < 4) {
+                            if (value.isNotEmpty && index < 5) {
                               FocusScope.of(context).nextFocus();
                             }
                           },
                           decoration: InputDecoration(
                             counterText: '',
                             contentPadding: const EdgeInsets.all(12),
-                            focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Color.fromRGBO(17, 25, 40, 1)),
-                                borderRadius: BorderRadius.circular(10)),
+                            fillColor:
+                                Colors.white, // Replace with your desired color
+                            filled: true,
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -102,7 +107,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       Color: AppColor.teelColor,
                       text: 'Verify',
                       onPressed: () {
-                        Get.to(const ChangePasswordScreen());
+                        verificationController.verifyEmail(widget.email);
                       }),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),

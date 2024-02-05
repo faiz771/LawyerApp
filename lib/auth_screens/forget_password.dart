@@ -65,7 +65,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       Color: AppColor.teelColor,
                       text: 'Send Code',
                       onPressed: () {
-                        Get.to(const VerifyOtpScreen());
+                        // Get.to( VerifyOtpScreen());
                       }),
                   SizedBox(
                     height: 15.h,

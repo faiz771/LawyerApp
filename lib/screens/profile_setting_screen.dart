@@ -208,7 +208,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                               Color: AppColor.teelColor,
                               text: 'Logout',
                               onPressed: () {
-                                Get.offAll(const LoginScreen());
+                                Get.offAll(LoginScreen());
                               },
                             )
                             //   ],

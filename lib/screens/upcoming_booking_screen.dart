@@ -4,20 +4,17 @@ import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class UpcomingBookingScreen extends StatelessWidget {
-  UpcomingBookingScreen(
-      {super.key,
-      required this.button1,
-      required this.button2,
-      required this.onPressed1,
-      required this.onPressed2,
-      required this.button1title,
-      required this.button2title});
+  UpcomingBookingScreen({
+    super.key,
+    required this.button1,
+    required this.onPressed1,
+    required this.button1title,
+  });
   bool button1 = false;
-  bool button2 = false;
+
   String button1title = '';
-  String button2title = '';
+
   final VoidCallback onPressed1;
-  final VoidCallback onPressed2;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,53 +104,57 @@ class UpcomingBookingScreen extends StatelessWidget {
                     ],
                   ),
                   const Divider(),
-                  button1 & button2
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            button1
-                                ? ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStatePropertyAll(
-                                                Colors.grey[300])),
-                                    onPressed: onPressed1,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.w),
-                                      child: Text(
-                                        button1title,
-                                        style: const TextStyle(
-                                            color:
-                                                Color.fromRGBO(17, 25, 40, 1),
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ))
-                                : const SizedBox(),
-                            button2
-                                ? ElevatedButton(
-                                    style: const ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStatePropertyAll(
-                                                Color.fromRGBO(17, 25, 40, 1))),
-                                    onPressed: onPressed2,
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.w),
-                                      child: Text(
-                                        button2title,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ))
-                                : const SizedBox.shrink()
-                          ],
-                        )
-                      : RoundedButton(
-                          Color: AppColor.teelColor,
-                          text: button2title,
-                          onPressed: onPressed2)
+                  RoundedButton(
+                      text: button1title,
+                      onPressed: onPressed1,
+                      Color: AppColor.teelColor)
+                  // button1 & button2
+                  //     ? Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //         children: [
+                  //           button1
+                  //               ? ElevatedButton(
+                  //                   style: ButtonStyle(
+                  //                       backgroundColor:
+                  //                           MaterialStatePropertyAll(
+                  //                               Colors.grey[300])),
+                  //                   onPressed: onPressed1,
+                  //                   child: Padding(
+                  //                     padding: EdgeInsets.symmetric(
+                  //                         horizontal: 10.w),
+                  //                     child: Text(
+                  //                       button1title,
+                  //                       style: const TextStyle(
+                  //                           color:
+                  //                               Color.fromRGBO(17, 25, 40, 1),
+                  //                           fontWeight: FontWeight.bold),
+                  //                     ),
+                  //                   ))
+                  //               : const SizedBox(),
+                  //           button2
+                  //               ? ElevatedButton(
+                  //                   style: const ButtonStyle(
+                  //                       backgroundColor:
+                  //                           MaterialStatePropertyAll(
+                  //                               Color.fromRGBO(17, 25, 40, 1))),
+                  //                   onPressed: onPressed2,
+                  //                   child: Padding(
+                  //                     padding: EdgeInsets.symmetric(
+                  //                         horizontal: 10.w),
+                  //                     child: Text(
+                  //                       button2title,
+                  //                       style: const TextStyle(
+                  //                           color: Colors.white,
+                  //                           fontWeight: FontWeight.bold),
+                  //                     ),
+                  //                   ))
+                  //               : const SizedBox.shrink()
+                  //         ],
+                  //       )
+                  //     : RoundedButton(
+                  //         Color: AppColor.teelColor,
+                  //         text: button2title,
+                  //         onPressed: onPressed2)
                 ],
               ),
             ),

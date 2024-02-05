@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/components/onboarding_template.dart';
+import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 final _controller = PageController();
 
 class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
-
+  OnboardingScreen({super.key});
+  UserController controller = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -50,7 +51,7 @@ class OnboardingScreen extends StatelessWidget {
                     decsription:
                         'Stay on top of your legal agenda effortlessly. Receive timely reminders for upcoming appointments, ensuring you never miss a crucial consultation. LegalConnect is designed to keep you informed and in control, making your legal journey a seamless experience.',
                     onPressed: () {
-                      Get.to(const SignUpScreen());
+                      controller.getUserDetails();
                     },
                   ),
                 ],
@@ -75,7 +76,7 @@ class OnboardingScreen extends StatelessWidget {
                     SizedBox(height: 10.h),
                     GestureDetector(
                       onTap: () {
-                        Get.to(const SignUpScreen());
+                        controller.getUserDetails();
                       },
                       child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,

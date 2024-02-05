@@ -1,4 +1,6 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/screens/onboarding_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacity;
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const OnboardingScreen(),
+              OnboardingScreen(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(1.0, 0.0);
             const end = Offset.zero;

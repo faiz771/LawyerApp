@@ -6,8 +6,8 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
-import 'package:lawyerapp/controllers/signupcontroller.dart';
-import 'package:lawyerapp/screens/select_user_type.dart';
+import 'package:lawyerapp/controllers/signup_controller.dart';
+import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -18,6 +18,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  String completeNumber = '';
   final SignUpController controller = Get.put(SignUpController());
 
   late SingleValueDropDownController _rolecontroller;
@@ -136,9 +137,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(24)),
                   ),
                   onChanged: (phone) {
-                    //    print(phone.completeNumber);
-                    controller.phoneController.text = phone.completeNumber;
-                    print(controller.phoneController.text);
+                    completeNumber = phone.completeNumber;
                   },
                 ),
 
@@ -171,7 +170,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 3),
                   child: DropDownTextField(
-                    controller: controller.accounttype,
+                    controller: controller.accounttypeController,
                     textFieldDecoration: InputDecoration(
                       fillColor: Colors.grey[200],
                       filled: true,
@@ -269,9 +268,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       text: 'Create Account',
                       onPressed: controller.agreed.value
                           ? () {
-                              print(controller.phoneController.text);
+                              controller.phoneController.text = completeNumber;
+
+                              controller.signUp();
                               // print(object)
-                              Get.to(const SelectUserTypeScreen());
+                              // Get.to(const SelectUserTypeScreen());
                             }
                           : () {}),
                 ),
@@ -290,7 +291,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.to(const LoginScreen());
+                          Get.to(LoginScreen());
                         },
                         child: Text(
                           'Sign In',

@@ -1,4 +1,5 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -8,9 +9,12 @@ import 'package:lawyerapp/components/homepage_icons_with_text_template.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/promotion_slider_view_template.dart';
 import 'package:lawyerapp/screens/all_lawyer_screen.dart';
+import 'package:lawyerapp/screens/blog_screen.dart';
+import 'package:lawyerapp/screens/chat_bot_screen.dart';
 import 'package:lawyerapp/screens/client_dashboard_screen.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
+import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 
 class ClientHomepage extends StatefulWidget {
   const ClientHomepage({super.key});
@@ -42,6 +46,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
             padding: EdgeInsets.symmetric(horizontal: 12.w),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 40.h,
@@ -100,24 +105,54 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  MyTextField(hinttext: 'Search', icon: Icons.search),
+                  // SizedBox(
+                  //   height: 20.h,
+                  // ),
+                  // MyTextField(hinttext: 'Search', icon: Icons.search),
                   SizedBox(
                     height: 10.h,
                   ),
                   PromotionSliderViewTemplate(),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                    "Upcoming Appointnments",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const SizedBox(
                         height: 20,
                       ),
-                      const HomepageIconsWithTextTemplate(),
+                      // const HomepageIconsWithTextTemplate(),
+                      CarouselSlider(
+                        options: CarouselOptions(
+                          height: 280,
+                          enlargeCenterPage: true,
+                          autoPlay: true,
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enableInfiniteScroll: true,
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 800),
+                          viewportFraction: 1,
+                        ),
+                        items: [
+                          UpcomingBookingScreen(
+                            button1: true,
+                            onPressed1: () {
+                              // Handle button 1 press
+                            },
+                            button1title: 'Reschedule',
+                          ),
+                          // Add more instances of UpcomingBookingScreen for each item in the carousel
+                        ],
+                      ),
+
                       Padding(
-                        padding: EdgeInsets.only(
-                            right: 10.w, top: 10.h, bottom: 2.h),
+                        padding:
+                            EdgeInsets.only(right: 10.w, top: 5.h, bottom: 2.h),
                         child: InkWell(
                             onTap: () {
                               Get.to(const AllLawyerScreen());
@@ -142,6 +177,8 @@ class _ClientHomepageState extends State<ClientHomepage> {
           ),
           const ClientDashboardScreen(),
           const ProfileSettingScreen(),
+          const BlogScreen(),
+          const ChatBotScreen()
         ],
       ),
 
@@ -156,18 +193,43 @@ class _ClientHomepageState extends State<ClientHomepage> {
         },
         items: [
           BottomNavyBarItem(
-            icon: const Icon(Icons.home_filled),
+            icon: const Icon(
+              Icons.home_outlined,
+              size: 30,
+            ),
             title: const Text('Home'),
             activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(
-            icon: const Icon(Icons.event),
+            icon: Image.asset(
+              'assets/images/appointment.png',
+              scale: 20,
+            ),
             title: const Text('Bookings'),
             activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
           BottomNavyBarItem(
-            icon: const Icon(Icons.person),
+            icon: const Icon(
+              Icons.person_2_outlined,
+              size: 30,
+            ),
             title: const Text('Profile'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+          ),
+          BottomNavyBarItem(
+            icon: Image.asset(
+              'assets/images/blog-3.png',
+              scale: 22,
+            ),
+            title: const Text('Blogs'),
+            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+          ),
+          BottomNavyBarItem(
+            icon: Image.asset(
+              'assets/images/chatbot.png',
+              scale: 20,
+            ),
+            title: const Text('Ai Chat'),
             activeColor: const Color.fromRGBO(17, 25, 40, 1),
           ),
         ],

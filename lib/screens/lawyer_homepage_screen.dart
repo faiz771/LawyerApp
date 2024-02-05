@@ -124,7 +124,6 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                 text: 'Upcoming',
                               ),
                               Tab(text: 'Completed'),
-                              Tab(text: 'Cancelled'),
                             ],
                           ),
                           // The content associated with the tabs
@@ -136,34 +135,28 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                   child: Column(
                                     children: [
                                       UpcomingBookingScreen(
-                                        button1: false,
-                                        button2: true,
-                                        onPressed1: () {},
-                                        onPressed2: () {
-                                          Get.to(const AppointmentDetailScreen());
+                                        button1: true,
+                                        onPressed1: () {
+                                          Get.to(
+                                              const AppointmentDetailScreen());
                                         },
-                                        button1title: 'Cancel',
-                                        button2title: 'View',
+                                        button1title: 'View',
                                       ),
                                       UpcomingBookingScreen(
-                                        button1: false,
-                                        button2: true,
-                                        onPressed1: () {},
-                                        onPressed2: () {
-                                          Get.to(const AppointmentDetailScreen());
+                                        button1: true,
+                                        onPressed1: () {
+                                          Get.to(
+                                              const AppointmentDetailScreen());
                                         },
-                                        button1title: 'Cancel',
-                                        button2title: 'View',
+                                        button1title: 'View',
                                       ),
                                       UpcomingBookingScreen(
-                                        button1: false,
-                                        button2: true,
-                                        onPressed1: () {},
-                                        onPressed2: () {
-                                          Get.to(const AppointmentDetailScreen());
+                                        button1: true,
+                                        onPressed1: () {
+                                          Get.to(
+                                              const AppointmentDetailScreen());
                                         },
-                                        button1title: 'Cancel',
-                                        button2title: 'View',
+                                        button1title: 'View',
                                       ),
                                       const SizedBox(
                                         height: 10,
@@ -194,24 +187,24 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
 
                                 // Content for Cancelled tab
                                 // CancelledBookingScreen
-                                SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      CancelledBookingScreen(
-                                        showbutton: false,
-                                      ),
-                                      CancelledBookingScreen(
-                                        showbutton: false,
-                                      ),
-                                      CancelledBookingScreen(
-                                        showbutton: false,
-                                      ),
-                                      const SizedBox(
-                                        height: 10,
-                                      )
-                                    ],
-                                  ),
-                                ),
+                                // SingleChildScrollView(
+                                //   child: Column(
+                                //     children: [
+                                //       CancelledBookingScreen(
+                                //         showbutton: false,
+                                //       ),
+                                //       CancelledBookingScreen(
+                                //         showbutton: false,
+                                //       ),
+                                //       CancelledBookingScreen(
+                                //         showbutton: false,
+                                //       ),
+                                //       const SizedBox(
+                                //         height: 10,
+                                //       )
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

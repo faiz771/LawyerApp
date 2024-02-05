@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/auth_screens/forget_password.dart';
 import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-
+  LoginScreen({super.key});
+  final LoginController controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,8 +58,14 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                MyTextField(hinttext: 'Your Email', icon: Icons.email_outlined),
-                MyTextField(hinttext: 'Password', icon: Icons.lock_outline),
+                MyTextField(
+                    controller: controller.emailController,
+                    hinttext: 'Your Email',
+                    icon: Icons.email_outlined),
+                MyTextField(
+                    controller: controller.passwordController,
+                    hinttext: 'Password',
+                    icon: Icons.lock_outline),
                 SizedBox(
                   height: 15.h,
                 ),
@@ -65,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                     Color: AppColor.teelColor,
                     text: 'Sign In',
                     onPressed: () {
-                      Get.to(const ClientHomepage());
+                      controller.login();
                     }),
                 Padding(
                   padding: EdgeInsets.only(top: 30.h),
