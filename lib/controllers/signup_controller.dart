@@ -100,14 +100,14 @@ class SignUpController extends GetxController {
   }
 }
 
-void showStylishBottomToast(msg) {
-  Fluttertoast.showToast(
-    msg: msg,
-    toastLength: Toast.LENGTH_SHORT,
-    gravity: ToastGravity.BOTTOM,
-    timeInSecForIosWeb: 2,
-    backgroundColor: Colors.blue,
-    textColor: Colors.white,
-    fontSize: 16.0,
-  );
-}
+// void showStylishBottomToast(msg) {
+//   Fluttertoast.showToast(
+//     msg: msg,
+//     toastLength: Toast.LENGTH_SHORT,
+//     gravity: ToastGravity.BOTTOM,
+//     timeInSecForIosWeb: 2,
+//     backgroundColor: Colors.blue,
+//     textColor: Colors.white,
+//     fontSize: 16.0,
+//   );
+// }
