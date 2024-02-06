@@ -8,6 +8,7 @@ import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class VerifyOtpController extends GetxController {
+  RxBool isLoading = false.obs;
   List<TextEditingController> optControllers =
       List.generate(6, (index) => TextEditingController());
 
@@ -34,24 +35,12 @@ class VerifyOtpController extends GetxController {
 
       final responseData = json.decode(response.body);
       print(responseData['status']);
+      isLoading.value = false;
       if (responseData['status'] == 1) {
         // OTP verification successful
         print('Email verification successful');
         print('Message: ${responseData['message']}');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        showStylishBottomToast(responseData['message'].toString());
         Get.to(SelectRoleScreen(
           email: email,
         ));
@@ -59,22 +48,11 @@ class VerifyOtpController extends GetxController {
         // OTP verification failed
         print('Email verification failed');
         print('Message: ${responseData['message']}');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        isLoading.value = false;
+        showStylishBottomToast(responseData['message'].toString());
       }
     } catch (error) {
+      isLoading.value = false;
       print('Error during email verification: $error');
     }
   }

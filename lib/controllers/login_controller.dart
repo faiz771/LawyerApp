@@ -10,6 +10,8 @@ import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class LoginController extends GetxController {
+  RxBool isLoading = false.obs;
+  RxBool passToggle = false.obs;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final SharedPreferencesService sharedPreferencesService =
@@ -27,7 +29,7 @@ class LoginController extends GetxController {
       );
 
       final responseData = json.decode(response.body);
-
+      isLoading.value = false;
       if (responseData['status'] == 1) {
         // Login successful
         String token = responseData['token'];
@@ -36,20 +38,7 @@ class LoginController extends GetxController {
         print('Login successful');
         print('Token: $token');
         print('Role: $role');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        showStylishBottomToast(responseData['message'].toString());
         if (role == 0) {
           Get.to(SelectRoleScreen(
             email: emailController.text,
@@ -67,23 +56,27 @@ class LoginController extends GetxController {
         // Login failed
         print('Login failed');
         print('Message: ${responseData['message']}');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        isLoading.value = false;
+        showStylishBottomToast(responseData['message'].toString());
+        // Get.snackbar(
+        //   '',
+        //   responseData['message'].toString(), // Message
+        //   snackPosition:
+        //       SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
+        //   backgroundColor: AppColor.teelColor, // Background color
+        //   colorText: Colors.white, // Text color
+        //   borderRadius: 10,
+        //   snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
+        //   margin: EdgeInsets
+        //       .zero, // Remove margin to redu // BorderRadius for the snackbar
+        //   duration: Duration(
+        //       seconds: 3), // Duration for which the snackbar will be visible
+        // );
       }
     } catch (error) {
+      isLoading.value = false;
       print('Error during login: $error');
+      showStylishBottomToast(error.toString());
     }
   }
 }

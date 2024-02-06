@@ -68,12 +68,17 @@ class SelectRoleScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-                RoundedButton(
-                    text: 'Submit',
-                    onPressed: () {
-                      controller.updateRole(email);
-                    },
-                    Color: AppColor.teelColor)
+                Obx(() => controller.isLoading.value
+                    ? CircularProgressIndicator(
+                        color: AppColor.teelColor,
+                      )
+                    : RoundedButton(
+                        text: 'Submit',
+                        onPressed: () {
+                          controller.isLoading.value = true;
+                          controller.updateRole(email);
+                        },
+                        Color: AppColor.teelColor))
               ],
             ),
           ),

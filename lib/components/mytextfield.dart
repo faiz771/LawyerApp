@@ -4,9 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 // ignore: must_be_immutable
 class MyTextField extends StatelessWidget {
   MyTextField(
-      {super.key, this.controller, required this.hinttext, required this.icon});
+      {super.key,
+      this.controller,
+      required this.hinttext,
+      required this.icon,
+      this.icon2});
   final TextEditingController? controller;
   final IconData icon;
+  final IconData? icon2;
   String hinttext = '';
   @override
   Widget build(BuildContext context) {
@@ -19,6 +24,7 @@ class MyTextField extends StatelessWidget {
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 2, vertical: 10.h),
             prefixIcon: Icon(icon),
+            suffixIcon: Icon(icon2),
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.white),
               borderRadius: BorderRadius.circular(24),

@@ -261,20 +261,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: 15.h,
                 ),
                 Obx(
-                  () => RoundedButton(
-                      Color: controller.agreed.value
-                          ? AppColor.teelColor
-                          : AppColor.greyColor,
-                      text: 'Create Account',
-                      onPressed: controller.agreed.value
-                          ? () {
-                              controller.phoneController.text = completeNumber;
+                  () => controller.isLoading.value
+                      ? CircularProgressIndicator(
+                          color: AppColor.teelColor,
+                        )
+                      : RoundedButton(
+                          Color: controller.agreed.value
+                              ? AppColor.teelColor
+                              : AppColor.greyColor,
+                          text: 'Create Account',
+                          onPressed: controller.agreed.value
+                              ? () {
+                                  controller.isLoading.value = true;
+                                  controller.phoneController.text =
+                                      completeNumber;
 
-                              controller.signUp();
-                              // print(object)
-                              // Get.to(const SelectUserTypeScreen());
-                            }
-                          : () {}),
+                                  controller.signUp();
+                                  // print(object)
+                                  // Get.to(const SelectUserTypeScreen());
+                                }
+                              : () {}),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20.h),

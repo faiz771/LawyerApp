@@ -59,22 +59,29 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 MyTextField(
-                    controller: controller.emailController,
-                    hinttext: 'Your Email',
-                    icon: Icons.email_outlined),
+                  controller: controller.emailController,
+                  hinttext: 'Your Email',
+                  icon: Icons.email_outlined,
+                ),
                 MyTextField(
-                    controller: controller.passwordController,
-                    hinttext: 'Password',
-                    icon: Icons.lock_outline),
+                  controller: controller.passwordController,
+                  hinttext: 'Password',
+                  icon: Icons.lock_outline,
+                ),
                 SizedBox(
                   height: 15.h,
                 ),
-                RoundedButton(
-                    Color: AppColor.teelColor,
-                    text: 'Sign In',
-                    onPressed: () {
-                      controller.login();
-                    }),
+                Obx(() => controller.isLoading.value
+                    ? CircularProgressIndicator(
+                        color: AppColor.teelColor,
+                      )
+                    : RoundedButton(
+                        Color: AppColor.teelColor,
+                        text: 'Sign In',
+                        onPressed: () {
+                          controller.isLoading.value = true;
+                          controller.login();
+                        })),
                 Padding(
                   padding: EdgeInsets.only(top: 30.h),
                   child: InkWell(

@@ -8,6 +8,7 @@ import 'package:lawyerapp/controllers/signup_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class LawyerProfileController extends GetxController {
+  RxBool isLoading = false.obs;
   TextEditingController lawyerEducationController = TextEditingController();
   TextEditingController lawyerExperienceController = TextEditingController();
   TextEditingController lawyerAboutController = TextEditingController();
@@ -32,47 +33,24 @@ class LawyerProfileController extends GetxController {
       );
 
       final responseData = json.decode(response.body);
-
+      isLoading.value = false;
       if (responseData['status'] == 1) {
         // Profile creation successful
         print('Lawyer profile created successfully');
         print('Message: ${responseData['message']}');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        showStylishBottomToast(responseData['message'].toString());
         Get.offAll(LoginScreen());
       } else {
         // Profile creation failed
         print('Lawyer profile creation failed');
         print('Message: ${responseData['message']}');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        isLoading.value = false;
+        showStylishBottomToast(responseData['message'].toString());
       }
     } catch (error) {
+      isLoading.value = false;
       print('Error during lawyer profile creation: $error');
+      showStylishBottomToast(error.toString());
     }
   }
 

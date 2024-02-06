@@ -10,6 +10,7 @@ import 'package:lawyerapp/utils/app_colors.dart';
 
 class SignUpController extends GetxController {
   RxBool agreed = false.obs;
+  RxBool isLoading = false.obs;
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
@@ -39,51 +40,28 @@ class SignUpController extends GetxController {
       );
 
       final responseData = json.decode(response.body);
-
+      isLoading.value = false;
       if (responseData['status'] == 1) {
         // Successful signup
         print('Signup successful');
         print('Email: ${responseData['email']}');
         print('OTP: ${responseData['otp']}');
         print('Message: ${responseData['message']}');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        showStylishBottomToast(responseData['message'].toString());
         Get.to(VerifyOtpScreen(
           email: emailController.text,
         ));
       } else {
         // Signup failed
+        isLoading.value = false;
         print('Signup failed');
         print('Message: ${responseData['message']}');
-        Get.snackbar(
-          '',
-          responseData['message'], // Message
-          snackPosition:
-              SnackPosition.BOTTOM, // Change to SnackPosition.BOTTOM for bottom
-          backgroundColor: AppColor.teelColor, // Background color
-          colorText: Colors.white, // Text color
-          borderRadius: 10,
-          snackStyle: SnackStyle.FLOATING, // Set the snack style to FLOATING
-          margin: EdgeInsets
-              .zero, // Remove margin to redu // BorderRadius for the snackbar
-          duration: Duration(
-              seconds: 3), // Duration for which the snackbar will be visible
-        );
+        showStylishBottomToast(responseData['message'].toString());
       }
     } catch (error) {
+      isLoading.value = false;
       print('Error during signup: $error');
+      showStylishBottomToast(error.toString());
     }
   }
 
@@ -100,14 +78,14 @@ class SignUpController extends GetxController {
   }
 }
 
-// void showStylishBottomToast(msg) {
-//   Fluttertoast.showToast(
-//     msg: msg,
-//     toastLength: Toast.LENGTH_SHORT,
-//     gravity: ToastGravity.BOTTOM,
-//     timeInSecForIosWeb: 2,
-//     backgroundColor: Colors.blue,
-//     textColor: Colors.white,
-//     fontSize: 16.0,
-//   );
-// }
+void showStylishBottomToast(msg) {
+  Fluttertoast.showToast(
+    msg: msg,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 2,
+    backgroundColor: AppColor.teelColor,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}

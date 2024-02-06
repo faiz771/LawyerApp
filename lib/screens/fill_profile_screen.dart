@@ -162,12 +162,17 @@ class FillProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                RoundedButton(
-                    Color: AppColor.teelColor,
-                    text: 'Save',
-                    onPressed: () {
-                      controller.createLawyerProfile(email: email);
-                    }),
+                Obx(() => controller.isLoading.value
+                    ? CircularProgressIndicator(
+                        color: AppColor.teelColor,
+                      )
+                    : RoundedButton(
+                        Color: AppColor.teelColor,
+                        text: 'Save',
+                        onPressed: () {
+                          controller.isLoading.value = true;
+                          controller.createLawyerProfile(email: email);
+                        })),
                 SizedBox(
                   height: 10.h,
                 )

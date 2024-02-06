@@ -103,12 +103,17 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   SizedBox(
                     height: 15.h,
                   ),
-                  RoundedButton(
-                      Color: AppColor.teelColor,
-                      text: 'Verify',
-                      onPressed: () {
-                        verificationController.verifyEmail(widget.email);
-                      }),
+                  Obx(() => verificationController.isLoading.value
+                      ? CircularProgressIndicator(
+                          color: AppColor.teelColor,
+                        )
+                      : RoundedButton(
+                          Color: AppColor.teelColor,
+                          text: 'Verify',
+                          onPressed: () {
+                            verificationController.isLoading.value = true;
+                            verificationController.verifyEmail(widget.email);
+                          })),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: Row(
