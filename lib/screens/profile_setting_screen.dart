@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
@@ -15,6 +16,20 @@ class ProfileSettingScreen extends StatefulWidget {
 }
 
 class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
+  // Method to pick image from the gallery
+  Future<void> _pickImageFromGallery() async {
+    final pickedImage =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    // Do something with the picked image
+  }
+
+  // Method to pick image from the camera
+  Future<void> _pickImageFromCamera() async {
+    final pickedImage =
+        await ImagePicker().getImage(source: ImageSource.camera);
+    // Do something with the picked image
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,19 +68,58 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     ),
                     Positioned(
                       bottom: 15.h,
-                      // left: MediaQuery.of(context).size.height * 0.15,
-                      child: Container(
+                      child: GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    RoundedButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the bottom sheet
+                                        _pickImageFromGallery(); // Pick image from gallery
+                                      },
+                                      text: 'Pick from Gallery',
+                                      Color: AppColor.teelColor,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    RoundedButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the bottom sheet
+                                        _pickImageFromCamera(); // Pick image from camera
+                                      },
+                                      text: 'Take a Photo',
+                                      Color: AppColor.teelColor,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(6)),
-                          child: const Padding(
-                            padding: EdgeInsets.all(4.0),
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,
                             ),
-                          )),
-                    )
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
