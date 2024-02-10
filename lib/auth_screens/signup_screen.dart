@@ -42,23 +42,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 20.h),
+                    padding: EdgeInsets.only(top: 20.h, bottom: 20.h),
                     child: Center(
                         child: Image.asset(
-                      'assets/images/lawyerlogo.jpg',
-                      scale: 7,
+                      'assets/images/lawyerapp-logo.png',
+                      scale: 3,
                     )),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                    child: Center(
-                      child: Text(
-                        'LawyerConnect',
-                        style: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                  //   child: Center(
+                  //     child: Text(
+                  //       'LawyerConnect',
+                  //       style: TextStyle(
+                  //           fontSize: 20.sp, fontWeight: FontWeight.bold),
+                  //     ),
+                  //   ),
+                  // ),
                   Center(
                     child: Text(
                       'Create Account',
@@ -66,15 +66,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           fontSize: 20.sp, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                    child: Center(
-                      child: Text(
-                        'We are here to help you!',
-                        style: TextStyle(fontSize: 14.sp),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                  //   child: Center(
+                  //     child: Text(
+                  //       'We are here to help you!',
+                  //       style: TextStyle(fontSize: 14.sp),
+                  //     ),
+                  //   ),
+                  // ),
                   MyTextField(
                       isicon2: false,
                       controller: controller.nameController,

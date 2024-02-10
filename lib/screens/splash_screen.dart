@@ -78,8 +78,8 @@ class _SplashScreenState extends State<SplashScreen>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "assets/images/lawyerlogo.jpg",
-                        scale: 5,
+                        "assets/images/lawyerapp-logo.png",
+                        scale: 2.8,
                       ),
                       SizedBox(height: 10.h),
                       Text(

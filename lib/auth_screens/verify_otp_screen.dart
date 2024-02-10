@@ -26,120 +26,122 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
         appBar: AppBar(),
         body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 15.w),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 30.h),
-                    child: Center(
-                        child: Image.asset(
-                      'assets/images/lawyerlogo.jpg',
-                      scale: 7,
-                    )),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
-                    child: Center(
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 20.h),
+                      child: Center(
+                          child: Image.asset(
+                        'assets/images/lawyerapp-logo.png',
+                        scale: 3,
+                      )),
+                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
+                    //   child: Center(
+                    //     child: Text(
+                    //       'LawyerConnect',
+                    //       style: TextStyle(
+                    //         fontSize: 20.sp,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    Center(
                       child: Text(
-                        'LawyerConnect',
+                        'Verify Code',
                         style: TextStyle(
-                          fontSize: 20.sp,
+                            fontSize: 18.sp, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                      child: Center(
+                        child: Text(
+                          'Enter the the code we just sent you on your registered Email',
+                          style: TextStyle(fontSize: 14.sp),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Text(
-                      'Verify Code',
-                      style: TextStyle(
-                          fontSize: 20.sp, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.h, bottom: 20.h),
-                    child: Center(
-                      child: Text(
-                        'Enter the the code we just sent you on your registered Email',
-                        style: TextStyle(fontSize: 14.sp),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: List.generate(
-                      6,
-                      (index) => SizedBox(
-                        width: 50,
-                        child: TextField(
-                          style: const TextStyle(color: Colors.black),
-                          controller:
-                              verificationController.optControllers[index],
-                          textAlign: TextAlign.center,
-                          keyboardType: TextInputType.number,
-                          maxLength: 1,
-                          onChanged: (value) {
-                            if (value.isNotEmpty && index < 5) {
-                              FocusScope.of(context).nextFocus();
-                            }
-                          },
-                          decoration: InputDecoration(
-                            counterText: '',
-                            contentPadding: const EdgeInsets.all(12),
-                            fillColor:
-                                Colors.white, // Replace with your desired color
-                            filled: true,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: List.generate(
+                        6,
+                        (index) => SizedBox(
+                          width: 50,
+                          child: TextField(
+                            style: const TextStyle(color: Colors.black),
+                            controller:
+                                verificationController.optControllers[index],
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            maxLength: 1,
+                            onChanged: (value) {
+                              if (value.isNotEmpty && index < 5) {
+                                FocusScope.of(context).nextFocus();
+                              }
+                            },
+                            decoration: InputDecoration(
+                              counterText: '',
+                              contentPadding: const EdgeInsets.all(12),
+                              fillColor: Colors
+                                  .white, // Replace with your desired color
+                              filled: true,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Obx(() => verificationController.isLoading.value
-                      ? CircularProgressIndicator(
-                          color: AppColor.teelColor,
-                        )
-                      : RoundedButton(
-                          Color: AppColor.teelColor,
-                          text: 'Verify',
-                          onPressed: () {
-                            verificationController.isLoading.value = true;
-                            verificationController.verifyEmail(widget.email);
-                          })),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Didn\'t get the Code? ',
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: const Color.fromRGBO(107, 114, 128, 1),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.to(const ForgetPasswordScreen());
-                          },
-                          child: Text(
-                            'Resend',
-                            style: TextStyle(
-                                fontSize: 14.sp,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 15.h,
                     ),
-                  )
-                ],
+                    Obx(() => verificationController.isLoading.value
+                        ? CircularProgressIndicator(
+                            color: AppColor.teelColor,
+                          )
+                        : RoundedButton(
+                            Color: AppColor.teelColor,
+                            text: 'Verify',
+                            onPressed: () {
+                              verificationController.isLoading.value = true;
+                              verificationController.verifyEmail(widget.email);
+                            })),
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Didn\'t get the Code? ',
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: const Color.fromRGBO(107, 114, 128, 1),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.to(const ForgetPasswordScreen());
+                            },
+                            child: Text(
+                              'Resend',
+                              style: TextStyle(
+                                  fontSize: 14.sp,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             )),
       ),

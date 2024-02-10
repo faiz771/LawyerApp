@@ -23,23 +23,23 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 20.h),
+                    padding: EdgeInsets.only(top: 20.h, bottom: 20.h),
                     child: Center(
                         child: Image.asset(
-                      'assets/images/lawyerlogo.jpg',
-                      scale: 7,
+                      'assets/images/lawyerapp-logo.png',
+                      scale: 3,
                     )),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
-                    child: Center(
-                      child: Text(
-                        'LawyerConnect',
-                        style: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
+                  //   child: Center(
+                  //     child: Text(
+                  //       'LawyerConnect',
+                  //       style: TextStyle(
+                  //           fontSize: 20.sp, fontWeight: FontWeight.bold),
+                  //     ),
+                  //   ),
+                  // ),
                   // Padding(
                   //   padding: EdgeInsets.only(top: 20.h, bottom: 20.h),
                   //   child: Center(

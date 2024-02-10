@@ -25,7 +25,7 @@ class OnboardingScreen extends StatelessWidget {
                     onBoardingImage: 'assets/images/onboarding1.jpg',
                     heading: 'Secure Consultation',
                     decsription:
-                        'Embark on a hassle-free legal journey with LawyerConnect. Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters with confidence',
+                        'Embark on a hassle-free legal journey with Us. Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters with confidence',
                     onPressed: () {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 500),
@@ -37,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
                     onBoardingImage: 'assets/images/onboarding2.jpg',
                     heading: 'Transparent Pricing',
                     decsription:
-                        'No surprises, just clarity. Explore transparent pricing models before booking appointments, and rest assured that LawyerConnect ensures you have a clear understanding of costs, making your legal journey straightforward, predictable, and budget-friendly',
+                        'No surprises, just clarity. Explore transparent pricing models before booking appointments, and rest assured that you have a clear understanding of costs, making your legal journey straightforward, predictable, and budget-friendly',
                     onPressed: () {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 500),
