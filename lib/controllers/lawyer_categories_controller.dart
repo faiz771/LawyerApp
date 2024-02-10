@@ -13,9 +13,9 @@ class LawyerCategoriesController extends GetxController {
   }
 
   Future<void> fetchLawyerCategories() async {
-    final url =
+    const url =
         'https://lawyer-app.azsolutionspk.com/api/user/lawyer/categories';
-
+    print('Api: $url');
     try {
       final response = await http.get(Uri.parse(url));
 

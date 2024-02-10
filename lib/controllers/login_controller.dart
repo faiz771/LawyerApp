@@ -7,18 +7,17 @@ import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
-import 'package:lawyerapp/utils/app_colors.dart';
 
 class LoginController extends GetxController {
   RxBool isLoading = false.obs;
-  RxBool passToggle = false.obs;
+  RxBool passToggle = true.obs;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final SharedPreferencesService sharedPreferencesService =
       SharedPreferencesService();
   Future<void> login() async {
-    final url = 'https://lawyer-app.azsolutionspk.com/api/user/login';
-
+    const url = 'https://lawyer-app.azsolutionspk.com/api/user/login';
+    print('Api: $url');
     try {
       final response = await http.post(
         Uri.parse(url),
@@ -38,19 +37,20 @@ class LoginController extends GetxController {
         print('Login successful');
         print('Token: $token');
         print('Role: $role');
+        await sharedPreferencesService.saveToken(token);
         showStylishBottomToast(responseData['message'].toString());
         if (role == 0) {
           Get.to(SelectRoleScreen(
             email: emailController.text,
           ));
         } else if (role == 1) {
-          Get.offAll(LawyerHomepage());
+          Get.offAll(const LawyerHomepage());
         } else if (role == 2) {
-          Get.offAll(ClientHomepage());
+          Get.offAll(const ClientHomepage());
         }
         // Save the token in SharedPreferences
-        await sharedPreferencesService.saveToken(token);
-
+        String? receivedToken = await sharedPreferencesService.getToken();
+        print('Received Toke $receivedToken');
         // You can handle token and role as needed (e.g., navigate to another screen)
       } else {
         // Login failed

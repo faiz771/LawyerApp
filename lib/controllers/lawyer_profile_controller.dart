@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
-import 'package:lawyerapp/utils/app_colors.dart';
 
 class LawyerProfileController extends GetxController {
   RxBool isLoading = false.obs;
@@ -17,9 +16,9 @@ class LawyerProfileController extends GetxController {
   Future<void> createLawyerProfile({
     required String email,
   }) async {
-    final url =
+    const url =
         'https://lawyer-app.azsolutionspk.com/api/user/lawyer/profile/create';
-
+    print('Api: $url');
     try {
       final response = await http.post(
         Uri.parse(url),

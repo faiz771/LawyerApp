@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
 import 'package:lawyerapp/screens/select_role_screen.dart';
-import 'package:lawyerapp/utils/app_colors.dart';
 
 class VerifyOtpController extends GetxController {
   RxBool isLoading = false.obs;
@@ -23,7 +21,7 @@ class VerifyOtpController extends GetxController {
     print('otpnumbers: $optNumbers');
     final url =
         'https://lawyer-app.azsolutionspk.com/api/user/opt/verification/$email';
-
+    print('Api: $url');
     try {
       final response = await http.post(
         Uri.parse(url),

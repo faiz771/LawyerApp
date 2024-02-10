@@ -6,7 +6,7 @@ class CustomDropdownField extends StatelessWidget {
   final String? value;
   final Function(String?) onChanged;
 
-  const CustomDropdownField({
+  const CustomDropdownField({super.key, 
     required this.hintText,
     required this.items,
     required this.value,
@@ -16,7 +16,7 @@ class CustomDropdownField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(24),

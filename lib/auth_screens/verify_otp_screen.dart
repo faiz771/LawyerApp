@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:lawyerapp/auth_screens/change_password_screen.dart';
 import 'package:lawyerapp/auth_screens/forget_password.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/otp_controller.dart';
@@ -36,15 +33,15 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                     padding: EdgeInsets.only(top: 30.h),
                     child: Center(
                         child: Image.asset(
-                      'assets/images/logo.png',
-                      scale: 3.5,
+                      'assets/images/lawyerlogo.jpg',
+                      scale: 7,
                     )),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
                     child: Center(
                       child: Text(
-                        '(Appname)',
+                        'LawyerConnect',
                         style: TextStyle(
                           fontSize: 20.sp,
                         ),
@@ -75,7 +72,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       (index) => SizedBox(
                         width: 50,
                         child: TextField(
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                           controller:
                               verificationController.optControllers[index],
                           textAlign: TextAlign.center,

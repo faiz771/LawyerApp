@@ -22,7 +22,7 @@ class _AllLawyerScreenState extends State<AllLawyerScreen> {
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(
           children: [
-            MyTextField(hinttext: 'Search', icon: Icons.search),
+            MyTextField(isicon2: false, hinttext: 'Search', icon: Icons.search),
             SizedBox(
               height: 10.h,
             ),

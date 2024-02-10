@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lawyerapp/screens/cancelled_booking_screen.dart';
 import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 

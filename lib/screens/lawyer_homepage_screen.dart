@@ -7,7 +7,6 @@ import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/screens/analytics_screen.dart';
 import 'package:lawyerapp/screens/appointment_detail_screen.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
-import 'package:lawyerapp/screens/cancelled_booking_screen.dart';
 import 'package:lawyerapp/screens/chat_bot_screen.dart';
 import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
@@ -105,7 +104,8 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  MyTextField(hinttext: 'Search', icon: Icons.search),
+                  MyTextField(
+                      isicon2: false, hinttext: 'Search', icon: Icons.search),
                   SizedBox(
                     height: 10.h,
                   ),
@@ -221,7 +221,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
           const AnalyticsScreen(),
           //ClientDashboardScreen(),
           const ProfileSettingScreen(),
-          const BlogScreen(),
+          BlogScreen(),
           const ChatBotScreen()
         ],
       ),

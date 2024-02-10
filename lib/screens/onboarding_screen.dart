@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lawyerapp/auth_screens/signup_screen.dart';
 import 'package:lawyerapp/components/onboarding_template.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 final _controller = PageController();
@@ -25,7 +25,7 @@ class OnboardingScreen extends StatelessWidget {
                     onBoardingImage: 'assets/images/onboarding1.jpg',
                     heading: 'Secure Consultation',
                     decsription:
-                        'Embark on a hassle-free legal journey with (Appname). Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters with confidence',
+                        'Embark on a hassle-free legal journey with LawyerConnect. Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters with confidence',
                     onPressed: () {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 500),
@@ -37,7 +37,7 @@ class OnboardingScreen extends StatelessWidget {
                     onBoardingImage: 'assets/images/onboarding2.jpg',
                     heading: 'Transparent Pricing',
                     decsription:
-                        'No surprises, just clarity. Explore transparent pricing models before booking appointments, and rest assured that (Appname) ensures you have a clear understanding of costs, making your legal journey straightforward, predictable, and budget-friendly',
+                        'No surprises, just clarity. Explore transparent pricing models before booking appointments, and rest assured that LawyerConnect ensures you have a clear understanding of costs, making your legal journey straightforward, predictable, and budget-friendly',
                     onPressed: () {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 500),
@@ -74,22 +74,27 @@ class OnboardingScreen extends StatelessWidget {
                       count: 3,
                     ),
                     SizedBox(height: 10.h),
-                    GestureDetector(
-                      onTap: () {
-                        controller.getUserDetails();
-                      },
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Skip'),
-                          SizedBox(
-                              width:
-                                  8), // Adjust spacing between label and icon
-                          Icon(
-                            Icons.arrow_forward,
-                            color: Color.fromRGBO(17, 25, 40, 1),
-                          )
-                        ],
+                    Container(
+                      height: 40,
+                      width: 80,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(25),
+                        onTap: () {
+                          controller.getUserDetails();
+                        },
+                        child: const Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Skip'),
+                            SizedBox(
+                                width:
+                                    8), // Adjust spacing between label and icon
+                            Icon(
+                              Icons.arrow_forward,
+                              color: Color.fromRGBO(17, 25, 40, 1),
+                            )
+                          ],
+                        ),
                       ),
                     )
                   ],

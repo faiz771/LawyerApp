@@ -2,14 +2,9 @@ import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
-import 'package:lawyerapp/controllers/lawyer_categories_controller.dart';
 import 'package:lawyerapp/controllers/lawyer_profile_controller.dart';
-import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class FillProfileScreen extends StatelessWidget {
@@ -58,14 +53,14 @@ class FillProfileScreen extends StatelessWidget {
                 //     )
                 //   ],
                 // ),
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 75,
                   backgroundImage: AssetImage('assets/images/lawyerlogo.jpg'),
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                Text(
+                const Text(
                   'Fill Your Profile',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
@@ -146,14 +141,17 @@ class FillProfileScreen extends StatelessWidget {
                     )),
                 // MyTextField(hinttext: 'phone', icon: Icons.phone_outlined),
                 MyTextField(
+                    isicon2: false,
                     controller: controller.lawyerEducationController,
                     hinttext: 'Education',
                     icon: Icons.school_outlined),
                 MyTextField(
+                    isicon2: false,
                     controller: controller.lawyerExperienceController,
                     hinttext: 'Experience',
                     icon: Icons.description_outlined),
                 MyTextField(
+                    isicon2: false,
                     controller: controller.lawyerAboutController,
                     hinttext: 'About',
                     icon: Icons.info_outline),

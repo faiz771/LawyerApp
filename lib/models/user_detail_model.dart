@@ -1,4 +1,3 @@
-// user_model.dart
 class UserModel {
   final int id;
   final String name;
@@ -6,10 +5,10 @@ class UserModel {
   final String accountType;
   final String? companyName;
   final String? companyAddress;
-  final int lawyerType;
-  final String lawyerExperience;
-  final String lawyerEducation;
-  final String lawyerAbout;
+  final int? lawyerType;
+  final String? lawyerExperience;
+  final String? lawyerEducation;
+  final String? lawyerAbout;
   final String? lawyerFees;
   final String email;
   final int? emailVerifiedAt;
@@ -28,10 +27,10 @@ class UserModel {
     required this.accountType,
     this.companyName,
     this.companyAddress,
-    required this.lawyerType,
-    required this.lawyerExperience,
-    required this.lawyerEducation,
-    required this.lawyerAbout,
+    this.lawyerType,
+    this.lawyerExperience,
+    this.lawyerEducation,
+    this.lawyerAbout,
     this.lawyerFees,
     required this.email,
     this.emailVerifiedAt,

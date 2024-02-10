@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,8 +23,8 @@ class SignUpController extends GetxController {
   final phoneController = TextEditingController();
 
   Future<void> signUp() async {
-    final url = 'https://lawyer-app.azsolutionspk.com/api/user/register';
-
+    const url = 'https://lawyer-app.azsolutionspk.com/api/user/register';
+    print('Api: $url');
     try {
       final response = await http.post(
         Uri.parse(url),

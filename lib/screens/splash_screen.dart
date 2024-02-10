@@ -1,6 +1,4 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/screens/onboarding_screen.dart';
 
 import 'package:flutter/material.dart';

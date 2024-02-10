@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
-  const ChangePasswordScreen({super.key});
-
+  ChangePasswordScreen({super.key});
+  final LoginController loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -24,15 +27,15 @@ class ChangePasswordScreen extends StatelessWidget {
                     padding: EdgeInsets.only(top: 30.h),
                     child: Center(
                         child: Image.asset(
-                      'assets/images/logo.png',
-                      scale: 3.5,
+                      'assets/images/lawyerlogo.jpg',
+                      scale: 7,
                     )),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 10.h, bottom: 30.h),
                     child: Center(
                       child: Text(
-                        '(Appname)',
+                        'LawyerConnect',
                         style: TextStyle(
                           fontSize: 20.sp,
                         ),
@@ -56,9 +59,28 @@ class ChangePasswordScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  MyTextField(hinttext: 'Password', icon: Icons.email_outlined),
-                  MyTextField(
-                      hinttext: 'Confirm Password', icon: Icons.email_outlined),
+                  Obx(() => MyTextField(
+                      isicon2: true,
+                      onPressed: () {
+                        loginController.passToggle.value =
+                            !loginController.passToggle.value;
+                      },
+                      icon2: loginController.passToggle.value
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      hinttext: 'Password',
+                      icon: Icons.email_outlined)),
+                  Obx(() => MyTextField(
+                      isicon2: true,
+                      onPressed: () {
+                        loginController.passToggle.value =
+                            !loginController.passToggle.value;
+                      },
+                      icon2: loginController.passToggle.value
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      hinttext: 'Confirm Password',
+                      icon: Icons.email_outlined)),
                   SizedBox(
                     height: 15.h,
                   ),

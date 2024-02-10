@@ -5,15 +5,14 @@ import 'package:http/http.dart' as http;
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
 import 'package:lawyerapp/screens/fill_profile_screen.dart';
-import 'package:lawyerapp/screens/lawyer_detail_screen.dart';
 
 class RoleController extends GetxController {
   RxBool isLoading = false.obs;
   RxInt selectedValue = RxInt(2);
 
   Future<void> updateRole(String email) async {
-    final url = 'https://lawyer-app.azsolutionspk.com/api/user/update/role';
-
+    const url = 'https://lawyer-app.azsolutionspk.com/api/user/update/role';
+    print('Api: $url');
     try {
       final response = await http.post(
         Uri.parse(url),
