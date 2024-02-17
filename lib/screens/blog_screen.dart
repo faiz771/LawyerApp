@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:lawyerapp/controllers/blog_controller.dart';
+import 'package:lawyerapp/screens/articles_screen.dart';
 import 'package:lawyerapp/screens/blog_podcast.dart';
 import 'package:lawyerapp/screens/blog_videos.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class BlogScreen extends StatefulWidget {
+  const BlogScreen({super.key});
+
   @override
   _BlogScreenState createState() => _BlogScreenState();
 }
 
 class _BlogScreenState extends State<BlogScreen>
     with SingleTickerProviderStateMixin {
+  final BlogController blogController = Get.put(BlogController());
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    blogController.fetchArticles();
+    blogController.fetchVideos();
     _tabController = TabController(length: 3, vsync: this);
   }
 
-  final List<VideoItem> videos = [
-    VideoItem(videoUrl: 'video_url_1', title: 'This is Video title 1'),
-    VideoItem(videoUrl: 'video_url_2', title: 'This is video title 2'),
-    // Add more video items as needed
-  ];
   final List<PodcastItem> podcasts = [
     PodcastItem(
       title: 'Podcast Title 1',
@@ -42,16 +45,16 @@ class _BlogScreenState extends State<BlogScreen>
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Blogs',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
         bottom: TabBar(
           labelStyle:
-              TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           indicatorColor: AppColor.teelColor,
           controller: _tabController,
-          tabs: [
+          tabs: const [
             Tab(text: 'Articles', icon: Icon(Icons.article)),
             Tab(text: 'Videos', icon: Icon(Icons.video_library)),
             Tab(text: 'Podcasts', icon: Icon(Icons.headset)),
@@ -62,7 +65,7 @@ class _BlogScreenState extends State<BlogScreen>
         controller: _tabController,
         children: [
           ArticleListScreen(),
-          VideoList(videos: videos),
+          VideoList(),
           PodcastList(podcasts: podcasts),
         ],
       ),
@@ -161,145 +164,6 @@ class BlogPostContainer extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class Article {
-  final String title;
-  final String description;
-  final String imageUrl;
-
-  Article({
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-  });
-}
-
-class ArticleListScreen extends StatelessWidget {
-  final List<Article> articles = [
-    Article(
-      title: 'Article 1',
-      description:
-          'This is a brief description of Article 1. It provides an overview of the article content.',
-      imageUrl:
-          'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
-    ),
-    Article(
-      title: 'Article 2',
-      description:
-          'This is a brief description of Article 2. It provides an overview of the article content.',
-      imageUrl:
-          'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
-    ),
-    Article(
-      title: 'Article 3',
-      description:
-          'This is a brief description of Article 3. It provides an overview of the article content.',
-      imageUrl:
-          'https://www.simplilearn.com/ice9/free_resources_article_thumb/what_is_image_Processing.jpg',
-    ),
-    // Add more articles as needed
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Article List'),
-      // ),
-      body: ListView.builder(
-        itemCount: articles.length,
-        itemBuilder: (context, index) {
-          final article = articles[index];
-          return InkWell(
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => ArticleDetailsScreen(article: article),
-              //   ),
-              // );
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: Container(
-                height: 120,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-                  child: Row(
-                    children: [
-                      Container(
-                          height: 100,
-                          width: 90,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black, width: 2),
-                              borderRadius: BorderRadius.circular(12),
-                              image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                    'assets/images/article.png',
-                                  )))),
-                      SizedBox(
-                        width: 12.h,
-                      ),
-                      const Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Article Title',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                Icon(
-                                  Icons.favorite,
-                                  color: Colors.red,
-                                )
-                              ],
-                            ),
-                            Divider(
-                              thickness: 1,
-                              color: Colors.grey,
-                            ),
-                            Text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac tortor in velit venenatis aliquam. Nulla facilisi. Integer at nulla nec lorem posuere facilisis. Donec ullamcorper, nisi ut tempor gravida, eros nulla fermentum elit, sed congue ligula nunc nec justo. Integer nec turpis id justo sollicitudin vulputate.Phasellus auctor libero id augue fermentum, nec suscipit odio consequat. Ut a est sagittis, posuere libero nec, cursus nunc. Nam convallis, elit vel feugiat posuere, lectus orci elementum lorem, eget accumsan elit lorem id elit.Vivamus hendrerit sapien at urna pharetra, a placerat ligula tempus. Donec sit amet lorem et lectus scelerisque tristique. Duis in dolor sem. Vivamus sodales vel mauris ac consequat. Donec commodo tincidunt nunc, nec posuere sem tincidunt id. Nulla facilisi.',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          );
-        },
       ),
     );
   }

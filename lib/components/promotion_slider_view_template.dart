@@ -25,7 +25,7 @@ class PromotionSliderViewTemplate extends StatelessWidget {
           viewportFraction: 1),
       itemCount: 6,
       itemBuilder: (context, index, _) {
-        return BlogPostContainer();
+        return const BlogPostContainer();
       },
     );
   }

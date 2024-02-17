@@ -4,17 +4,18 @@ import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class OnboardingTemplate extends StatelessWidget {
-  const OnboardingTemplate({
-    super.key,
-    required this.onBoardingImage,
-    required this.heading,
-    required this.decsription,
-    required this.onPressed,
-  });
+  OnboardingTemplate(
+      {super.key,
+      required this.onBoardingImage,
+      required this.heading,
+      required this.decsription,
+      required this.onPressed,
+      required this.buttonTitle});
   final String onBoardingImage;
   final String heading;
   final String decsription;
   final VoidCallback onPressed;
+  String buttonTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +54,7 @@ class OnboardingTemplate extends StatelessWidget {
                   child: Center(
                     child: RoundedButton(
                       Color: AppColor.teelColor,
-                      text: 'Next',
+                      text: buttonTitle,
                       onPressed: onPressed
                       // _controller.nextPage(
                       //     duration: const Duration(milliseconds: 400),

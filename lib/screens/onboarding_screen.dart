@@ -3,14 +3,30 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/components/onboarding_template.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
-import 'package:lawyerapp/utils/app_colors.dart';
+import 'package:lawyerapp/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 final _controller = PageController();
 
-class OnboardingScreen extends StatelessWidget {
-  OnboardingScreen({super.key});
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
+  @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
   UserController controller = Get.put(UserController());
+
+  Future<void> _incrementOnboardingStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('onboardingStatus', 1);
+    setState(() {
+      onboardingStatus = 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,6 +38,7 @@ class OnboardingScreen extends StatelessWidget {
                 controller: _controller,
                 children: [
                   OnboardingTemplate(
+                    buttonTitle: "Next",
                     onBoardingImage: 'assets/images/onboarding1.jpg',
                     heading: 'Secure Consultation',
                     decsription:
@@ -34,6 +51,7 @@ class OnboardingScreen extends StatelessWidget {
                     },
                   ),
                   OnboardingTemplate(
+                    buttonTitle: "Next",
                     onBoardingImage: 'assets/images/onboarding2.jpg',
                     heading: 'Transparent Pricing',
                     decsription:
@@ -46,11 +64,13 @@ class OnboardingScreen extends StatelessWidget {
                     },
                   ),
                   OnboardingTemplate(
+                    buttonTitle: 'Get Started',
                     onBoardingImage: 'assets/images/onboarding3.jpg',
                     heading: 'Appointment Reminders',
                     decsription:
-                        'Stay on top of your legal agenda effortlessly. Receive timely reminders for upcoming appointments, ensuring you never miss a crucial consultation. LegalConnect is designed to keep you informed and in control, making your legal journey a seamless experience.',
+                        'Stay on top of your legal agenda effortlessly. Receive timely reminders for upcoming appointments, ensuring you never miss a crucial consultation.Moza Al-Shehhi Law Firm making your legal journey a seamless experience.',
                     onPressed: () {
+                      _incrementOnboardingStatus();
                       controller.getUserDetails();
                     },
                   ),
@@ -74,12 +94,13 @@ class OnboardingScreen extends StatelessWidget {
                       count: 3,
                     ),
                     SizedBox(height: 10.h),
-                    Container(
+                    SizedBox(
                       height: 40,
                       width: 80,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(25),
                         onTap: () {
+                          _incrementOnboardingStatus();
                           controller.getUserDetails();
                         },
                         child: const Row(

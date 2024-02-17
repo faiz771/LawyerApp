@@ -221,7 +221,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
           const AnalyticsScreen(),
           //ClientDashboardScreen(),
           const ProfileSettingScreen(),
-          BlogScreen(),
+          const BlogScreen(),
           const ChatBotScreen()
         ],
       ),

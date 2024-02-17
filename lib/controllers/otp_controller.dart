@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:lawyerapp/auth_screens/change_password_screen.dart';
+import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
 import 'package:lawyerapp/screens/select_role_screen.dart';
+import 'package:lawyerapp/utils/api_base_url.dart';
 
 class VerifyOtpController extends GetxController {
   RxBool isLoading = false.obs;
@@ -19,8 +22,7 @@ class VerifyOtpController extends GetxController {
   ) async {
     final String optNumbers = getNumbers().join();
     print('otpnumbers: $optNumbers');
-    final url =
-        'https://lawyer-app.azsolutionspk.com/api/user/opt/verification/$email';
+    String url = '${Api.ApiBaseUrl}/opt/verification/$email';
     print('Api: $url');
     try {
       final response = await http.post(
@@ -34,12 +36,52 @@ class VerifyOtpController extends GetxController {
       final responseData = json.decode(response.body);
       print(responseData['status']);
       isLoading.value = false;
+      String message = responseData['message'].join('\n');
       if (responseData['status'] == 1) {
         // OTP verification successful
         print('Email verification successful');
         print('Message: ${responseData['message']}');
-        showStylishBottomToast(responseData['message'].toString());
-        Get.to(SelectRoleScreen(
+        showStylishBottomToast(message);
+        Get.to(LoginScreen());
+      } else {
+        // OTP verification failed
+        print('Email verification failed');
+        print('Message: ${responseData['message']}');
+        isLoading.value = false;
+        showStylishBottomToast(message);
+      }
+    } catch (error) {
+      isLoading.value = false;
+      print('Error during email verification: $error');
+    }
+  }
+
+  Future<void> verifyForgotEmail(
+    String email,
+  ) async {
+    final String optNumbers = getNumbers().join();
+    print('otpnumbers: $optNumbers');
+    String url = '${Api.ApiBaseUrl}/opt/verification/$email';
+    print('Api: $url');
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          'email': email,
+          'otp': optNumbers,
+        },
+      );
+
+      final responseData = json.decode(response.body);
+      print(responseData['status']);
+      isLoading.value = false;
+      String message = responseData['message'].join('\n');
+      if (responseData['status'] == 1) {
+        // OTP verification successful
+        print('Email verification successful');
+        print('Message: ${responseData['message']}');
+        showStylishBottomToast(message);
+        Get.to(ChangePasswordScreen(
           email: email,
         ));
       } else {
@@ -47,7 +89,7 @@ class VerifyOtpController extends GetxController {
         print('Email verification failed');
         print('Message: ${responseData['message']}');
         isLoading.value = false;
-        showStylishBottomToast(responseData['message'].toString());
+        showStylishBottomToast(message);
       }
     } catch (error) {
       isLoading.value = false;

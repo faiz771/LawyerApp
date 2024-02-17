@@ -37,6 +37,7 @@ class UserController extends GetxController {
 
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
+        String message = responseData['message'].join('\n');
         print('Response Data: $responseData');
         print('status ${responseData['status']}');
         if (responseData['status'] == 1) {
@@ -45,28 +46,25 @@ class UserController extends GetxController {
           print('User Role: ${userDetail.role}');
 
           // Handle different user roles and navigate accordingly
-          if (userDetail.role == 0) {
-            Get.to(SelectRoleScreen(email: userDetail.email));
-          } else if (userDetail.role == 1) {
-            Get.offAll(LawyerHomepage());
-          } else if (userDetail.role == 2) {
-            Get.offAll(ClientHomepage());
+          if (userDetail.role == 1) {
+            Get.offAll(const LawyerHomepage());
+          } else if (userDetail.role == 0) {
+            Get.offAll(const ClientHomepage());
           }
         } else {
           // Handle error response
           clearPreferencesAndNavigateToLogin();
-          showStylishBottomToast(responseData['message'].toString());
           print(responseData['message']);
         }
       } else {
         // Handle non-200 status code
         clearPreferencesAndNavigateToLogin();
-        showStylishBottomToast('Failed to fetch user details');
+        print('Failed to fetch user details');
       }
     } catch (error) {
       // Handle other errors
       clearPreferencesAndNavigateToLogin();
-      showStylishBottomToast('Error: $error');
+      print('Error: $error');
     }
   }
 

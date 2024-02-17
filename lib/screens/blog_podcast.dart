@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PodcastList extends StatelessWidget {
   final List<PodcastItem> podcasts;
 
-  PodcastList({required this.podcasts});
+  const PodcastList({super.key, required this.podcasts});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class PodcastItem {
 class PodcastItemContainer extends StatelessWidget {
   final PodcastItem podcastItem;
 
-  PodcastItemContainer({required this.podcastItem});
+  const PodcastItemContainer({super.key, required this.podcastItem});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class PodcastItemContainer extends StatelessWidget {
                           image: AssetImage(
                             'assets/images/article.png',
                           ))),
-                  child: Icon(Icons.play_arrow),
+                  child: const Icon(Icons.play_arrow),
                 ),
                 SizedBox(
                   width: 12.h,

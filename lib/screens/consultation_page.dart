@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/consultation_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class ConsultationForm extends StatefulWidget {
+  const ConsultationForm({super.key});
+
   @override
   _ConsultationFormState createState() => _ConsultationFormState();
 }
@@ -26,9 +27,9 @@ class _ConsultationFormState extends State<ConsultationForm> {
         child: Scaffold(
             appBar: AppBar(
               centerTitle: true,
-              iconTheme: IconThemeData(color: Colors.white),
+              iconTheme: const IconThemeData(color: Colors.white),
               backgroundColor: AppColor.teelColor,
-              title: Text(
+              title: const Text(
                 'Book Consultation',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
@@ -42,15 +43,15 @@ class _ConsultationFormState extends State<ConsultationForm> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Select Consultation Type',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       DropdownButtonFormField<String>(
                         value: consultationType,
                         onChanged: (newValue) {
@@ -75,7 +76,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               borderSide: const BorderSide(
                                   color: Color.fromRGBO(17, 25, 40, 1)),
                               borderRadius: BorderRadius.circular(24)),
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 15),
                           hintText: "Select Consultation Type",
                           fillColor: Colors.grey[200],
@@ -102,13 +103,13 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           return null;
                         },
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         'Select Country',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       DropdownButtonFormField<String>(
                         value: country,
                         onChanged: (newValue) {
@@ -133,7 +134,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               borderSide: const BorderSide(
                                   color: Color.fromRGBO(17, 25, 40, 1)),
                               borderRadius: BorderRadius.circular(24)),
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 15),
                           hintText: "Select Consultation Type",
                           fillColor: Colors.grey[200],
@@ -160,15 +161,15 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           return null;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Brief Description of Your Case',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextFormField(
@@ -195,7 +196,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               borderSide: const BorderSide(
                                   color: Color.fromRGBO(17, 25, 40, 1)),
                               borderRadius: BorderRadius.circular(24)),
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 15),
                           hintText: "Provide a breif description of your case",
                           fillColor: Colors.grey[200],
@@ -216,7 +217,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
@@ -225,8 +226,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                             borderRadius: BorderRadius.circular(
                                 20)), // Change the color as needed
                         padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                        child: Row(
+                            const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                        child: const Row(
                           children: [
                             Icon(
                               Icons.file_upload,
@@ -244,7 +245,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Row(
@@ -295,7 +296,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
             bottomNavigationBar: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
               child: Obx(
-                () => Container(
+                () => SizedBox(
                   height: 55,
                   child: RoundedButton(
                     text: "Book Consultation",

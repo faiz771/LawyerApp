@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:better_player/better_player.dart';
+import 'package:get/get.dart';
+import 'package:lawyerapp/controllers/blog_controller.dart';
+import 'package:lawyerapp/screens/videos_model.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class VideoList extends StatelessWidget {
-  final List<VideoItem> videos;
-
-  VideoList({required this.videos});
-
+  VideoList({
+    Key? key,
+  }) : super(key: key);
+  final BlogController blogController = Get.put(BlogController());
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: videos.length,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: VideoItemContainer(videoItem: videos[index]),
-        );
-      },
-    );
+    return Obx(() => blogController.isLoading.value
+        ? Center(
+            child: CircularProgressIndicator(
+              color: AppColor.teelColor,
+            ),
+          )
+        : ListView.builder(
+            itemCount: blogController.videos.length,
+            itemBuilder: (context, index) {
+              final Video videos = blogController.videos[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: VideoItemContainer(video: videos),
+              );
+            },
+          ));
   }
 }
 
-class VideoItem {
-  final String videoUrl;
-  final String title;
-
-  VideoItem({required this.videoUrl, required this.title});
-}
-
 class VideoItemContainer extends StatelessWidget {
-  final VideoItem videoItem;
+  final Video video;
 
-  VideoItemContainer({required this.videoItem});
+  const VideoItemContainer({Key? key, required this.video}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print(video.mediaAppPath);
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -46,49 +51,76 @@ class VideoItemContainer extends StatelessWidget {
             offset: const Offset(0, 3),
           ),
         ],
-        // border: Border.all(color: Colors.grey),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AspectRatio(
-            aspectRatio: 16 / 9, // Adjust aspect ratio as needed
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(12),
-                      topLeft: Radius.circular(12)),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                          'https://www.techsmith.com/blog/wp-content/uploads/2021/02/video-thumbnails-hero-1.png'),
-                      fit: BoxFit.cover)),
-              child: Center(
-                  child: Icon(
-                Icons.play_arrow,
-                color: Colors.white,
-              )),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  videoItem.title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
+              child: BetterPlayerPlaylist(
+                betterPlayerConfiguration: BetterPlayerConfiguration(
+                  // deviceOrientationsOnFullScreen: [
+                  //   DeviceOrientation.portraitUp,
+                  // ],
+                  autoDetectFullscreenDeviceOrientation: true,
+                  fit: BoxFit.fitHeight,
+                  aspectRatio: 16 / 9,
+                  autoPlay: true,
+                  controlsConfiguration: BetterPlayerControlsConfiguration(
+                    enableProgressBar: true,
+                    // progressBarHandleColor: Colors.black,
+                    // progressBarPlayedColor: AppColors.yellocolor,
+                    loadingColor: AppColor.teelColor,
+                    controlBarColor: Colors.white.withAlpha(800),
+                    iconsColor: Colors.white,
                   ),
                 ),
-                Icon(
-                  Icons.favorite,
-                  color: Colors.red,
-                )
-              ],
+                betterPlayerPlaylistConfiguration:
+                    const BetterPlayerPlaylistConfiguration(
+                  loopVideos: false,
+                ),
+                betterPlayerDataSourceList: [
+                  BetterPlayerDataSource(
+                    BetterPlayerDataSourceType.network,
+                    video.mediaAppPath,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    video.title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Icon(
+                    Icons.favorite,
+                    color: Colors.red,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                video.content,
+                style: const TextStyle(fontSize: 14),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

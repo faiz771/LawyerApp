@@ -110,8 +110,8 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(6),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(4.0),
                             child: Icon(
                               Icons.edit,
                               color: Colors.white,

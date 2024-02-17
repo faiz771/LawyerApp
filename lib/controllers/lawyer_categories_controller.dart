@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:dropdown_textfield/dropdown_textfield.dart';
+import 'package:lawyerapp/utils/api_base_url.dart';
 
 class LawyerCategoriesController extends GetxController {
   RxList<DropDownValueModel> lawyerCategories = <DropDownValueModel>[].obs;
@@ -13,8 +14,7 @@ class LawyerCategoriesController extends GetxController {
   }
 
   Future<void> fetchLawyerCategories() async {
-    const url =
-        'https://lawyer-app.azsolutionspk.com/api/user/lawyer/categories';
+    String url = '${Api.ApiBaseUrl}/lawyer/categories';
     print('Api: $url');
     try {
       final response = await http.get(Uri.parse(url));

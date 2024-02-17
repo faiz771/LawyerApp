@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:lawyerapp/auth_screens/verify_otp_screen.dart';
+import 'package:lawyerapp/utils/api_base_url.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class SignUpController extends GetxController {
@@ -23,7 +24,7 @@ class SignUpController extends GetxController {
   final phoneController = TextEditingController();
 
   Future<void> signUp() async {
-    const url = 'https://lawyer-app.azsolutionspk.com/api/user/register';
+    String url = "${Api.ApiBaseUrl}/register";
     print('Api: $url');
     try {
       final response = await http.post(
@@ -40,27 +41,28 @@ class SignUpController extends GetxController {
 
       final responseData = json.decode(response.body);
       isLoading.value = false;
+      String message = responseData['message'].join('\n');
       if (responseData['status'] == 1) {
         // Successful signup
         print('Signup successful');
         print('Email: ${responseData['email']}');
         print('OTP: ${responseData['otp']}');
-        print('Message: ${responseData['message']}');
-        showStylishBottomToast(responseData['message'].toString());
+        print('Message: $message');
+        showStylishBottomToast(message);
         Get.to(VerifyOtpScreen(
           email: emailController.text,
+          isFromForgot: false,
         ));
       } else {
         // Signup failed
         isLoading.value = false;
         print('Signup failed');
-        print('Message: ${responseData['message']}');
-        showStylishBottomToast(responseData['message'].toString());
+        print('Message: $message');
+        showStylishBottomToast(message);
       }
     } catch (error) {
       isLoading.value = false;
       print('Error during signup: $error');
-      showStylishBottomToast(error.toString());
     }
   }
 
@@ -74,6 +76,22 @@ class SignUpController extends GetxController {
     confirmPasswordController;
     emailController;
     phoneController;
+  }
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    super.onClose();
+    emailController.clear();
+
+    passwordController.clear();
+
+    confirmPasswordController.clear();
+
+    nameController.clear();
+    accounttypeController.clearDropDown();
+
+    phoneController.clear();
   }
 }
 

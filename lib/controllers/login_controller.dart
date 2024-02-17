@@ -7,6 +7,7 @@ import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
+import 'package:lawyerapp/utils/api_base_url.dart';
 
 class LoginController extends GetxController {
   RxBool isLoading = false.obs;
@@ -16,7 +17,7 @@ class LoginController extends GetxController {
   final SharedPreferencesService sharedPreferencesService =
       SharedPreferencesService();
   Future<void> login() async {
-    const url = 'https://lawyer-app.azsolutionspk.com/api/user/login';
+    String url = "${Api.ApiBaseUrl}/login";
     print('Api: $url');
     try {
       final response = await http.post(
@@ -29,6 +30,8 @@ class LoginController extends GetxController {
 
       final responseData = json.decode(response.body);
       isLoading.value = false;
+
+      String message = responseData['message'].join('\n');
       if (responseData['status'] == 1) {
         // Login successful
         String token = responseData['token'];
@@ -38,14 +41,10 @@ class LoginController extends GetxController {
         print('Token: $token');
         print('Role: $role');
         await sharedPreferencesService.saveToken(token);
-        showStylishBottomToast(responseData['message'].toString());
-        if (role == 0) {
-          Get.to(SelectRoleScreen(
-            email: emailController.text,
-          ));
-        } else if (role == 1) {
+        showStylishBottomToast(message);
+        if (role == 1) {
           Get.offAll(const LawyerHomepage());
-        } else if (role == 2) {
+        } else if (role == 0) {
           Get.offAll(const ClientHomepage());
         }
         // Save the token in SharedPreferences
@@ -55,9 +54,9 @@ class LoginController extends GetxController {
       } else {
         // Login failed
         print('Login failed');
-        print('Message: ${responseData['message']}');
+        print('Message: $message');
         isLoading.value = false;
-        showStylishBottomToast(responseData['message'].toString());
+        showStylishBottomToast(message);
         // Get.snackbar(
         //   '',
         //   responseData['message'].toString(), // Message
@@ -76,7 +75,6 @@ class LoginController extends GetxController {
     } catch (error) {
       isLoading.value = false;
       print('Error during login: $error');
-      showStylishBottomToast(error.toString());
     }
   }
 }

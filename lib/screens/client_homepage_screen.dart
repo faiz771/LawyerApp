@@ -52,7 +52,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(ProfileSettingScreen());
+                          Get.to(const ProfileSettingScreen());
                         },
                         child: CircleAvatar(
                           radius: 30,
@@ -143,7 +143,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                   //     ],
                   //   ),
                   // ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10),
                     child: BookConsultationButton(),
                   ),
@@ -212,7 +212,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
           ),
           const ClientDashboardScreen(),
           // const ProfileSettingScreen(),
-          BlogScreen(),
+          const BlogScreen(),
           const ChatBotScreen()
         ],
       ),
@@ -274,6 +274,8 @@ class _ClientHomepageState extends State<ClientHomepage> {
 }
 
 class BookConsultationButton extends StatefulWidget {
+  const BookConsultationButton({super.key});
+
   @override
   _BookConsultationButtonState createState() => _BookConsultationButtonState();
 }
@@ -288,13 +290,13 @@ class _BookConsultationButtonState extends State<BookConsultationButton>
     super.initState();
     _vibrationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
     )..repeat(
         reverse:
             true); // Repeat the animation in forward and reverse directions
     _vibrationAnimation = Tween<Offset>(
-      begin: Offset(0, 0),
-      end: Offset(0.03, 0),
+      begin: const Offset(0, 0),
+      end: const Offset(0.03, 0),
     ).animate(_vibrationController);
   }
 
@@ -310,14 +312,14 @@ class _BookConsultationButtonState extends State<BookConsultationButton>
       position: _vibrationAnimation,
       child: InkWell(
         onTap: () {
-          Get.to(ConsultationForm());
+          Get.to(const ConsultationForm());
         },
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: Color.fromRGBO(17, 25, 40, 1),
-            boxShadow: [
+            color: const Color.fromRGBO(17, 25, 40, 1),
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black12,
                 blurRadius: 8,
@@ -335,8 +337,8 @@ class _BookConsultationButtonState extends State<BookConsultationButton>
                   scale: 20,
                   color: Colors.white,
                 ),
-                SizedBox(width: 8),
-                Text(
+                const SizedBox(width: 8),
+                const Text(
                   'Book Consultation',
                   style: TextStyle(
                     color: Colors.white,
