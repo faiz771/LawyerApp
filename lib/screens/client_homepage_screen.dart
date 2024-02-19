@@ -213,7 +213,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
           const ClientDashboardScreen(),
           // const ProfileSettingScreen(),
           const BlogScreen(),
-          const ChatBotScreen()
+          ChatPage()
         ],
       ),
 

@@ -222,7 +222,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
           //ClientDashboardScreen(),
           const ProfileSettingScreen(),
           const BlogScreen(),
-          const ChatBotScreen()
+          ChatPage()
         ],
       ),
 

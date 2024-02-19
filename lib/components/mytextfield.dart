@@ -9,7 +9,7 @@ class MyTextField extends StatelessWidget {
     Key? key,
     this.controller,
     required this.hinttext,
-    required this.icon,
+    this.icon,
     this.onPressed,
     required this.isicon2,
     this.icon2,
@@ -17,7 +17,7 @@ class MyTextField extends StatelessWidget {
   }) : super(key: key);
 
   final TextEditingController? controller;
-  final IconData icon;
+  final IconData? icon;
   final IconData? icon2;
   final bool isicon2;
   final String hinttext;

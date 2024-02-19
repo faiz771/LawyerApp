@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/controllers/lawyer_categories_controller.dart';
+import 'package:lawyerapp/screens/chat_bot_screen.dart';
+import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/splash_screen.dart';
 
 late int onboardingStatus;
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
       initialBinding: BindingsBuilder(() {
         Get.put(LawyerCategoriesController());
       }),
+      title: 'MOZA AL-SHEHHI LAW FIRM',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Inter',
@@ -27,7 +30,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromRGBO(17, 25, 40, 1)),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: ClientHomepage(),
     );
   }
 }
