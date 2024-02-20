@@ -7,23 +7,14 @@ import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:lawyerapp/utils/app_constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
 
-class ChatPage extends StatefulWidget {
-  @override
-  _ChatPageState createState() => _ChatPageState();
-}
+class ChatController extends GetxController {
+  RxList<Map<String, String>> messages = <Map<String, String>>[].obs;
 
-class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
-  final TextEditingController _controller = TextEditingController();
-  List<Map<String, String>> messages = [];
-  final ScrollController _scrollController = ScrollController();
-  bool isLoading = false;
-
-  Future<void> _sendMessage(String message) async {
-    setState(() {
-      messages
-          .add({'sender': 'User', 'message': message, 'isUserMessage': "true"});
-    });
+  Future<void> sendMessage(String message) async {
+    messages
+        .add({'sender': 'User', 'message': message, 'isUserMessage': "true"});
 
     final String apiKey = AppConstants.ChatGptKey;
     final String url = 'https://api.openai.com/v1/chat/completions';
@@ -41,9 +32,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     };
 
     try {
-      setState(() {
-        isLoading = true;
-      });
+      isLoading.value = true;
 
       final http.Response response = await http.post(
         Uri.parse(url),
@@ -61,46 +50,62 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
 
           if (responseMessage != null) {
             final String? reply = responseMessage['content'] as String?;
-            _scrollController
-                .jumpTo(_scrollController.position.maxScrollExtent);
+            scrollController.jumpTo(scrollController.position.maxScrollExtent);
             if (reply != null) {
-              setState(() {
-                isLoading = false;
-                messages.add({
-                  'sender': 'Assistant',
-                  'message': reply,
-                  'isUserMessage': "false"
-                });
+              isLoading.value = false;
+              messages.add({
+                'sender': 'Assistant',
+                'message': reply,
+                'isUserMessage': "false"
               });
               Future.delayed(Duration(milliseconds: 100), () {
-                _scrollController
-                    .jumpTo(_scrollController.position.maxScrollExtent);
+                scrollController
+                    .jumpTo(scrollController.position.maxScrollExtent);
               });
               Future.delayed(Duration(milliseconds: 100), () {
-                _scrollController
-                    .jumpTo(_scrollController.position.maxScrollExtent);
+                scrollController
+                    .jumpTo(scrollController.position.maxScrollExtent);
               });
             } else {
+              isLoading.value = false;
               print('Reply text from ChatGPT is null');
             }
           } else {
+            isLoading.value = false;
             print('Response message object from ChatGPT is null or not a map');
           }
         } else {
+          isLoading.value = false;
           print('No choices found in response from ChatGPT');
         }
       } else {
+        isLoading.value = false;
         print('Failed to send message: ${response.statusCode}');
       }
     } catch (e) {
+      isLoading.value = false;
       print('Error sending message: $e');
     }
   }
 
+  final TextEditingController textController = TextEditingController();
+  final ScrollController scrollController = ScrollController();
+  final isLoading = false.obs;
+
+  @override
+  void onClose() {
+    textController.dispose();
+    super.onClose();
+  }
+}
+
+class ChatPage extends StatelessWidget {
+  final ChatController chatController = Get.put(ChatController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: AppColor.teelColor,
         centerTitle: true,
@@ -109,144 +114,159 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Column(
-        children: [
-          messages.isEmpty
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 200.h,
-                      ),
-                      Center(
-                        child: Text(
-                          'Welcome to Moza Al-Shehhi Law Firm\'s AI Assistant! Feel free to ask any questions you may have.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: AppColor.teelColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              : Expanded(
-                  child: Padding(
+      body: Obx(
+        () => Column(
+          children: [
+            chatController.messages.isEmpty
+                ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount: messages.length,
-                      itemBuilder: (context, index) {
-                        final bool isUserMessage =
-                            messages[index]['isUserMessage'] == 'true';
-                        final CrossAxisAlignment alignment = isUserMessage
-                            ? CrossAxisAlignment.end
-                            : CrossAxisAlignment.start;
-                        final Color? backgroundColor =
-                            isUserMessage ? AppColor.teelColor : Colors.white;
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 200.h,
+                        ),
+                        Center(
+                          child: Text(
+                            'Welcome to Moza Al-Shehhi Law Firm\'s AI Assistant! Feel free to ask any questions you may have.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: AppColor.teelColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        controller: chatController.scrollController,
+                        itemCount: chatController.messages.length,
+                        itemBuilder: (context, index) {
+                          final bool isUserMessage =
+                              chatController.messages[index]['isUserMessage'] ==
+                                  'true';
+                          final CrossAxisAlignment alignment = isUserMessage
+                              ? CrossAxisAlignment.end
+                              : CrossAxisAlignment.start;
+                          final Color? backgroundColor =
+                              isUserMessage ? AppColor.teelColor : Colors.white;
 
-                        return Padding(
-                          padding: EdgeInsets.symmetric(vertical: 8.0),
-                          child: Align(
-                            alignment: isUserMessage
-                                ? Alignment.centerRight
-                                : Alignment.centerLeft,
-                            child: Container(
-                              padding: EdgeInsets.all(12.0),
-                              decoration: BoxDecoration(
-                                color: backgroundColor,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Text(
-                                messages[index]['message']!,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16.0,
-                                    color: isUserMessage
-                                        ? Colors.white
-                                        : AppColor.teelColor),
-                                textAlign: TextAlign.start,
+                          return Padding(
+                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            child: Align(
+                              alignment: isUserMessage
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              child: Container(
+                                padding: EdgeInsets.all(12.0),
+                                decoration: BoxDecoration(
+                                  color: backgroundColor,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Text(
+                                  chatController.messages[index]['message']!,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16.0,
+                                      color: isUserMessage
+                                          ? Colors.white
+                                          : AppColor.teelColor),
+                                  textAlign: TextAlign.start,
+                                ),
                               ),
                             ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+            chatController.isLoading.value
+                ? SpinKitThreeBounce(
+                    color: AppColor.teelColor,
+                    size: 35.0,
+                    // controller: AnimationController(
+                    //     vsync: this,
+                    //     duration: const Duration(milliseconds: 1200)),
+                  )
+                : SizedBox(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Obx(
+        () => chatController.isLoading.value
+            ? SizedBox.shrink()
+            : Container(
+                decoration: BoxDecoration(
+                  color: AppColor.teelColor,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(24),
+                      topLeft: Radius.circular(24)),
+                ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+                  child: TextField(
+                    controller: chatController.textController,
+                    decoration: InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(17, 25, 40, 1)),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.red),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.red,
+                        ),
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      errorStyle: TextStyle(
+                          color: Colors.red, fontWeight: FontWeight.bold),
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                      hintStyle: TextStyle(color: Colors.black),
+                      hintText: 'Message',
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.only(right: 5),
+                        child: IconButton(
+                          icon: Image.asset(
+                            'assets/images/paper-plane.png',
+                            color: AppColor.teelColor,
+                            scale: 20,
                           ),
-                        );
-                      },
+                          onPressed: () {
+                            if (chatController.textController.text.isNotEmpty) {
+                              final String message =
+                                  chatController.textController.text;
+                              print('Sending message: $message');
+                              chatController.sendMessage(message);
+                              chatController.textController.clear();
+                              chatController.scrollController.jumpTo(
+                                  chatController.scrollController.position
+                                      .maxScrollExtent);
+                            }
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
-          isLoading
-              ? SpinKitThreeBounce(
-                  color: AppColor.teelColor,
-                  size: 25.0,
-                  controller: AnimationController(
-                      vsync: this,
-                      duration: const Duration(milliseconds: 1200)),
-                )
-              : SizedBox(),
-        ],
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          color: AppColor.teelColor,
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(12), topLeft: Radius.circular(12)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 14),
-          child: TextField(
-            controller: _controller,
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.white),
-                borderRadius: BorderRadius.circular(24),
               ),
-              focusedBorder: OutlineInputBorder(
-                borderSide:
-                    const BorderSide(color: Color.fromRGBO(17, 25, 40, 1)),
-                borderRadius: BorderRadius.circular(24),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.red),
-                borderRadius: BorderRadius.circular(24),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.red,
-                ),
-                borderRadius: BorderRadius.circular(24),
-              ),
-              errorStyle:
-                  TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-              fillColor: Colors.grey[200],
-              filled: true,
-              hintStyle: TextStyle(color: Colors.black),
-              hintText: 'Message',
-              suffixIcon: Padding(
-                padding: const EdgeInsets.only(right: 5),
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/images/paper-plane.png',
-                    scale: 20,
-                  ),
-                  onPressed: () {
-                    final String message = _controller.text;
-                    print('Sending message: $message');
-                    _sendMessage(message);
-                    _controller.clear();
-                    _scrollController
-                        .jumpTo(_scrollController.position.maxScrollExtent);
-                  },
-                ),
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

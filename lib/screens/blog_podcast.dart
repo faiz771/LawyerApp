@@ -1,57 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:lawyerapp/controllers/blog_controller.dart';
+import 'package:lawyerapp/screens/podcast_view_page.dart';
 
-class PodcastList extends StatelessWidget {
-  final List<PodcastItem> podcasts;
+import '../models/podcast_model.dart';
 
-  const PodcastList({super.key, required this.podcasts});
+class PodcastList extends StatefulWidget {
+  PodcastList({
+    super.key,
+  });
+
+  @override
+  State<PodcastList> createState() => _PodcastListState();
+}
+
+class _PodcastListState extends State<PodcastList> {
+  final BlogController controller = Get.put(BlogController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controller.fetchPodcasts();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: podcasts.length,
+      itemCount: controller.podcasts.length,
       itemBuilder: (context, index) {
-        return PodcastItemContainer(podcastItem: podcasts[index]);
+        return PodcastItemContainer(podcastItem: controller.podcasts[index]);
       },
     );
   }
 }
 
-class PodcastItem {
-  final String title;
-  final String description;
-  final String imageUrl;
-
-  PodcastItem({
-    required this.title,
-    required this.description,
-    required this.imageUrl,
-  });
-}
-
 class PodcastItemContainer extends StatelessWidget {
   final PodcastItem podcastItem;
 
-  const PodcastItemContainer({super.key, required this.podcastItem});
-
+  PodcastItemContainer({super.key, required this.podcastItem});
+  final BlogController controller = Get.put(BlogController());
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => ArticleDetailsScreen(article: article),
-        //   ),
-        // );
+        Get.to(PodcastDetailPage(
+            isFavorite: podcastItem.is_favorite == 1 ? true : false,
+            blogId: podcastItem.id,
+            mediaType: podcastItem.mediaType == 'audio' ? true : false,
+            description: podcastItem.content,
+            title: podcastItem.title,
+            videoUrl: podcastItem.mediaAppPath));
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        padding: const EdgeInsets.all(8.0),
         child: Container(
-          height: 120,
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12.0),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -62,60 +68,72 @@ class PodcastItemContainer extends StatelessWidget {
             ],
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-            child: Row(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  height: 100,
-                  width: 90,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 2),
-                      borderRadius: BorderRadius.circular(12),
-                      image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            'assets/images/article.png',
-                          ))),
-                  child: const Icon(Icons.play_arrow),
-                ),
-                SizedBox(
-                  width: 12.h,
-                ),
-                const Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Podcast Title',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                          )
-                        ],
-                      ),
-                      Divider(
-                        thickness: 1,
-                        color: Colors.grey,
-                      ),
-                      Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac tortor in velit venenatis aliquam. Nulla facilisi. Integer at nulla nec lorem posuere facilisis. Donec ullamcorper, nisi ut tempor gravida, eros nulla fermentum elit, sed congue ligula nunc nec justo. Integer nec turpis id justo sollicitudin vulputate.Phasellus auctor libero id augue fermentum, nec suscipit odio consequat. Ut a est sagittis, posuere libero nec, cursus nunc. Nam convallis, elit vel feugiat posuere, lectus orci elementum lorem, eget accumsan elit lorem id elit.Vivamus hendrerit sapien at urna pharetra, a placerat ligula tempus. Donec sit amet lorem et lectus scelerisque tristique. Duis in dolor sem. Vivamus sodales vel mauris ac consequat. Donec commodo tincidunt nunc, nec posuere sem tincidunt id. Nulla facilisi.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                Stack(
+                  children: [
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          image: DecorationImage(
+                              image: NetworkImage(
+                                podcastItem.mediaType == 'audio'
+                                    ? 'https://cdn.pixabay.com/photo/2016/03/31/15/24/audio-1293262_1280.png'
+                                    : podcastItem.thumbnail ?? '',
+                              ),
+                              fit: BoxFit.cover)),
+                    ),
+                    Positioned(
+                      top: 70,
+                      bottom: 70,
+                      left: 70,
+                      right: 70,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white, shape: BoxShape.circle),
+                        child: Icon(
+                          Icons.play_arrow,
+                          size: 35,
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
                       ),
+                    )
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          podcastItem.title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      // const Icon(
+                      //   Icons.favorite,
+                      //   color: Colors.red,
+                      // ),
                     ],
                   ),
-                )
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    podcastItem.content,
+                    style: const TextStyle(fontSize: 14),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
           ),

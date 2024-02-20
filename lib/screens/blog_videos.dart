@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:better_player/better_player.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/controllers/blog_controller.dart';
-import 'package:lawyerapp/screens/videos_model.dart';
+import 'package:lawyerapp/screens/video_detail_page.dart';
+import 'package:lawyerapp/models/videos_model.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class VideoList extends StatelessWidget {
@@ -39,87 +39,90 @@ class VideoItemContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(video.mediaAppPath);
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(12)),
-              child: BetterPlayerPlaylist(
-                betterPlayerConfiguration: BetterPlayerConfiguration(
-                  // deviceOrientationsOnFullScreen: [
-                  //   DeviceOrientation.portraitUp,
-                  // ],
-                  autoDetectFullscreenDeviceOrientation: true,
-                  fit: BoxFit.fitHeight,
-                  aspectRatio: 16 / 9,
-                  autoPlay: true,
-                  controlsConfiguration: BetterPlayerControlsConfiguration(
-                    enableProgressBar: true,
-                    // progressBarHandleColor: Colors.black,
-                    // progressBarPlayedColor: AppColors.yellocolor,
-                    loadingColor: AppColor.teelColor,
-                    controlBarColor: Colors.white.withAlpha(800),
-                    iconsColor: Colors.white,
-                  ),
-                ),
-                betterPlayerPlaylistConfiguration:
-                    const BetterPlayerPlaylistConfiguration(
-                  loopVideos: false,
-                ),
-                betterPlayerDataSourceList: [
-                  BetterPlayerDataSource(
-                    BetterPlayerDataSourceType.network,
-                    video.mediaAppPath,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    video.title,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Icon(
-                    Icons.favorite,
-                    color: Colors.red,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                video.content,
-                style: const TextStyle(fontSize: 14),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
+    return InkWell(
+      onTap: () {
+        Get.to(VideoDetailPage(
+            isFavorite: video.is_favorite == 1 ? true : false,
+            blogId: video.id,
+            description: video.content,
+            title: video.title,
+            videoUrl: video.mediaAppPath));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3),
             ),
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    height: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                "https://lawyer-app.azsolutionspk.com/public/blogs/${video.thumbnail}"),
+                            fit: BoxFit.cover)),
+                  ),
+                  Positioned(
+                    top: 70,
+                    bottom: 70,
+                    left: 70,
+                    right: 70,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
+                      child: Icon(
+                        Icons.play_arrow,
+                        size: 35,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        video.title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  video.content,
+                  style: const TextStyle(fontSize: 14),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

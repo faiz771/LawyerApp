@@ -24,22 +24,10 @@ class _BlogScreenState extends State<BlogScreen>
     super.initState();
     blogController.fetchArticles();
     blogController.fetchVideos();
+    blogController.fetchPodcasts();
     _tabController = TabController(length: 3, vsync: this);
   }
 
-  final List<PodcastItem> podcasts = [
-    PodcastItem(
-      title: 'Podcast Title 1',
-      description: 'Description of Podcast 1',
-      imageUrl: 'https://example.com/podcast1.jpg',
-    ),
-    PodcastItem(
-      title: 'Podcast Title 2',
-      description: 'Description of Podcast 2',
-      imageUrl: 'https://example.com/podcast2.jpg',
-    ),
-    // Add more PodcastItem objects as needed
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +54,7 @@ class _BlogScreenState extends State<BlogScreen>
         children: [
           ArticleListScreen(),
           VideoList(),
-          PodcastList(podcasts: podcasts),
+          PodcastList(),
         ],
       ),
     );

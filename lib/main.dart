@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromRGBO(17, 25, 40, 1)),
         useMaterial3: true,
       ),
-      home: ClientHomepage(),
+      home: SplashScreen(),
     );
   }
 }

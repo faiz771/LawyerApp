@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:lawyerapp/models/article_model.dart';
-import 'package:lawyerapp/screens/videos_model.dart';
+import 'package:lawyerapp/models/podcast_model.dart';
+import 'package:lawyerapp/models/videos_model.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/api_base_url.dart';
 
 class BlogController extends GetxController {
+  RxBool isTrue = false.obs;
   String url = '${Api.ApiBaseUrl}/blogs/articals';
   final SharedPreferencesService prefsService = SharedPreferencesService();
 
@@ -70,6 +72,40 @@ class BlogController extends GetxController {
       }
     } catch (error) {
       print('Error fetching videos: $error');
+    }
+  }
+
+  RxList<PodcastItem> podcasts = <PodcastItem>[].obs;
+  void fetchPodcasts() async {
+    String url = '${Api.ApiBaseUrl}/blogs/podcasts';
+    print('Fetching podcast from: $url');
+    final String? token = await prefsService.getToken();
+    try {
+      var response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final responseData = json.decode(response.body);
+      print('Response data: $responseData');
+      if (response.statusCode == 200) {
+        isLoading.value = false;
+        // List<dynamic> podcastData = responseData['data'];
+        Iterable podcastsData = responseData['data'];
+        podcasts.value =
+            podcastsData.map((e) => PodcastItem.fromJson(e)).toList();
+        // podcasts.assignAll(
+        //   podcastsData.map((json) => PodcastItem.fromJson(json)).toList(),
+        // );
+        print('Fetched ${podcasts.length} podcasts');
+      } else {
+        // Handle error
+        print('Failed to fetch podcasts: ${response.statusCode}');
+      }
+    } catch (e) {
+      // Handle error
+      print('Error fetching podcasts: $e');
     }
   }
 }
