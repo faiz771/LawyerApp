@@ -68,7 +68,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                      'assets/images/onboard3.jpg',
+                                      'assets/images/onboard2.jpg',
                                     ))),
                           ),
                         ),

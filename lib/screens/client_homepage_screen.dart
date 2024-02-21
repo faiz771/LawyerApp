@@ -83,7 +83,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: AssetImage(
-                                      'assets/images/onboard3.jpg',
+                                      'assets/images/onboard2.jpg',
                                     ))),
                           ),
                         ),
