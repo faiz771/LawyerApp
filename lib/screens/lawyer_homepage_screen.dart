@@ -149,24 +149,24 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                       UpcomingBookingScreen(
                                         button1: true,
                                         onPressed1: () {
-                                          Get.to(
-                                              const AppointmentDetailScreen());
+                                          // Get.to(
+                                          //     const AppointmentDetailScreen());
                                         },
                                         button1title: 'View',
                                       ),
                                       UpcomingBookingScreen(
                                         button1: true,
                                         onPressed1: () {
-                                          Get.to(
-                                              const AppointmentDetailScreen());
+                                          // Get.to(
+                                          //     const AppointmentDetailScreen());
                                         },
                                         button1title: 'View',
                                       ),
                                       UpcomingBookingScreen(
                                         button1: true,
                                         onPressed1: () {
-                                          Get.to(
-                                              const AppointmentDetailScreen());
+                                          // Get.to(
+                                          //     const AppointmentDetailScreen());
                                         },
                                         button1title: 'View',
                                       ),
