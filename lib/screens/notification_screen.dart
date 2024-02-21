@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/notification_template.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class Notificationscreen extends StatelessWidget {
   const Notificationscreen({super.key});
@@ -9,24 +10,25 @@ class Notificationscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: AppColor.teelColor,
         centerTitle: true,
         title: const Text(
           'Notifications',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 10.w),
             child: Container(
               decoration: BoxDecoration(
-                  color: const Color.fromRGBO(17, 25, 40, 1),
-                  borderRadius: BorderRadius.circular(6)),
-              child: const Padding(
-                padding: EdgeInsets.all(5.0),
+                  color: Colors.white, borderRadius: BorderRadius.circular(6)),
+              child: Padding(
+                padding: EdgeInsets.all(7.0),
                 child: Text(
                   '1 New',
                   style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                      color: AppColor.teelColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ),

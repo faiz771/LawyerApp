@@ -2,20 +2,20 @@ class UserModel {
   final int id;
   final String name;
   final String phone;
-  final String accountType;
+  final String? accountType;
   final String? companyName;
   final String? companyAddress;
   final int? lawyerType;
   final String? lawyerExperience;
   final String? lawyerEducation;
   final String? lawyerAbout;
-  final String? lawyerFees;
+  final int? lawyerFees;
   final String email;
   final int? emailVerifiedAt;
   final String? profile;
   final int role;
-  final int otp;
-  final String otpExpireAt;
+  final int? otp;
+  final String? otpExpireAt;
   final int isVerified;
   final String createdAt;
   final String updatedAt;
@@ -24,7 +24,7 @@ class UserModel {
     required this.id,
     required this.name,
     required this.phone,
-    required this.accountType,
+    this.accountType,
     this.companyName,
     this.companyAddress,
     this.lawyerType,
@@ -36,8 +36,8 @@ class UserModel {
     this.emailVerifiedAt,
     this.profile,
     required this.role,
-    required this.otp,
-    required this.otpExpireAt,
+    this.otp,
+    this.otpExpireAt,
     required this.isVerified,
     required this.createdAt,
     required this.updatedAt,

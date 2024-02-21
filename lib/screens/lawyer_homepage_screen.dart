@@ -1,9 +1,11 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
+import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/screens/analytics_screen.dart';
 import 'package:lawyerapp/screens/appointment_detail_screen.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
@@ -12,9 +14,11 @@ import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class LawyerHomepage extends StatefulWidget {
-  const LawyerHomepage({super.key});
+  String name;
+  LawyerHomepage({super.key, required this.name});
 
   @override
   State<LawyerHomepage> createState() => _LawyerHomepageState();
@@ -23,6 +27,7 @@ class LawyerHomepage extends StatefulWidget {
 class _LawyerHomepageState extends State<LawyerHomepage> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
+  final UserController controller = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +56,9 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                     children: [
                       InkWell(
                         onTap: () {
-                          _pageController.jumpToPage(2);
+                          Get.to(ProfileSettingScreen(
+                            name: widget.name,
+                          ));
                         },
                         child: CircleAvatar(
                           radius: 30,
@@ -69,7 +76,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 10.w),
-                          child: const Column(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -78,7 +85,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Text(
-                                'John Doe William',
+                                widget.name,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],
@@ -101,13 +108,16 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                       ),
                     ],
                   ),
+                  // SizedBox(
+                  //   height: 20.h,
+                  // ),
+                  // MyTextField(
+                  //     isicon2: false, hinttext: 'Search', icon: Icons.search),
+                  // SizedBox(
+                  //   height: 10.h,
+                  // ),
                   SizedBox(
-                    height: 20.h,
-                  ),
-                  MyTextField(
-                      isicon2: false, hinttext: 'Search', icon: Icons.search),
-                  SizedBox(
-                    height: 10.h,
+                    height: 10,
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height,
@@ -220,14 +230,14 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
           ),
           const AnalyticsScreen(),
           //ClientDashboardScreen(),
-          const ProfileSettingScreen(),
+          // const ProfileSettingScreen(),
           const BlogScreen(),
           ChatPage()
         ],
       ),
 
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: AppColor.teelColor,
         selectedIndex: _currentIndex,
         onItemSelected: (index) {
           setState(() {
@@ -237,35 +247,53 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
         },
         items: [
           BottomNavyBarItem(
-            icon: const Icon(Icons.home_filled),
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
+            icon: const Icon(
+              Icons.home_filled,
+              color: Colors.white,
+            ),
             title: const Text('Home'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            activeColor: Colors.white,
           ),
           BottomNavyBarItem(
-            icon: const Icon(Icons.bar_chart_outlined),
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
+            icon: const Icon(
+              Icons.bar_chart_outlined,
+              color: Colors.white,
+            ),
             title: const Text('Analytics'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            activeColor: Colors.white,
           ),
+          // BottomNavyBarItem(
+          //    textAlign: TextAlign.center,
+          //   inactiveColor: Colors.grey,
+          //   icon: const Icon(Icons.person),
+          //   title: const Text('Profile'),
+          // activeColor: Colors.white,
+          // ),
           BottomNavyBarItem(
-            icon: const Icon(Icons.person),
-            title: const Text('Profile'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
-          ),
-          BottomNavyBarItem(
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
             icon: Image.asset(
               'assets/images/blog-3.png',
               scale: 22,
+              color: Colors.white,
             ),
             title: const Text('Blogs'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            activeColor: Colors.white,
           ),
           BottomNavyBarItem(
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
             icon: Image.asset(
               'assets/images/chatbot.png',
               scale: 20,
+              color: Colors.white,
             ),
             title: const Text('Ai Chat'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            activeColor: Colors.white,
           ),
         ],
       ),

@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/promotion_slider_view_template.dart';
+import 'package:lawyerapp/controllers/blog_controller.dart';
+import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
@@ -18,7 +20,8 @@ import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class ClientHomepage extends StatefulWidget {
-  const ClientHomepage({super.key});
+  String name;
+  ClientHomepage({super.key, required this.name});
 
   @override
   State<ClientHomepage> createState() => _ClientHomepageState();
@@ -28,10 +31,15 @@ class _ClientHomepageState extends State<ClientHomepage> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
   final UserController controller = Get.put(UserController());
+  final BlogController blogController = Get.put(BlogController());
+  final LoginController loginController = Get.put(LoginController());
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    blogController.fetchArticles();
+    blogController.fetchPodcasts();
+    blogController.fetchVideos();
   }
 
   @override
@@ -57,13 +65,15 @@ class _ClientHomepageState extends State<ClientHomepage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 40.h,
+                    height: 30.h,
                   ),
                   Row(
                     children: [
                       InkWell(
                         onTap: () {
-                          Get.to(const ProfileSettingScreen());
+                          Get.to(ProfileSettingScreen(
+                            name: widget.name,
+                          ));
                         },
                         child: CircleAvatar(
                           radius: 30,
@@ -90,7 +100,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Text(
-                                controller.user.value!.name,
+                                widget.name,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],
@@ -163,7 +173,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                   ),
                   const Text(
                     "Upcoming Appointnments",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -213,7 +223,12 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       //LawyerSliderViewTemplate()
                     ],
                   ),
-                  PromotionSliderViewTemplate(),
+                  //BlogScreen(),
+                  const Text(
+                    "Blogs Podcasts",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  ArticleCarouselSlider(),
                   const SizedBox(
                     height: 10,
                   )

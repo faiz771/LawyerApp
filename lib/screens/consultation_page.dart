@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/consultation_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
+import 'package:http/http.dart' as http;
 
 class ConsultationForm extends StatefulWidget {
   const ConsultationForm({super.key});
@@ -21,6 +26,51 @@ class _ConsultationFormState extends State<ConsultationForm> {
   bool isCountryTypeFilled = false;
   bool isCaseDescriptionFilled = false;
   final ConsultationController controller = Get.put(ConsultationController());
+
+  List<String> categoryNames = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategories();
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+            'https://lawyer-app.azsolutionspk.com/api/user/lawyer/categories'),
+      );
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        final List<dynamic> categories = jsonData['data'];
+        List<String> names = (categories as List<dynamic>)
+            .map<String>((category) => category['category_name'] as String)
+            .toList();
+        setState(() {
+          categoryNames = names;
+        });
+      } else {
+        throw Exception('Failed to load categories');
+      }
+    } catch (error) {
+      print('Error fetching categories: $error');
+    }
+  }
+
+  Future<void> _pickImageFromGallery() async {
+    final pickedImage =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    // Do something with the picked image
+  }
+
+  // Method to pick image from the camera
+  Future<void> _pickImageFromCamera() async {
+    final pickedImage =
+        await ImagePicker().getImage(source: ImageSource.camera);
+    // Do something with the picked image
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,6 +87,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
             ),
             body: SingleChildScrollView(
               child: Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 key: _formKey, // Assign the GlobalKey to the Form
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -60,7 +111,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                             isConsultationTypeFilled = newValue != null;
                           });
                         },
-                        items: [' Type 1', ' Type 2', ' Type 3']
+                        items: categoryNames
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -118,8 +169,14 @@ class _ConsultationFormState extends State<ConsultationForm> {
                             isCountryTypeFilled = newValue != null;
                           });
                         },
-                        items: ['Pakistan', 'Afghanistan', 'India']
-                            .map<DropdownMenuItem<String>>((String value) {
+                        items: [
+                          'Pakistan',
+                          'Afghanistan',
+                          'India',
+                          'Oman',
+                          'Bangladesh',
+                          'Turkey',
+                        ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),
@@ -136,7 +193,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               borderRadius: BorderRadius.circular(24)),
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 15),
-                          hintText: "Select Consultation Type",
+                          hintText: "Select Country",
                           fillColor: Colors.grey[200],
                           filled: true,
                           errorBorder: OutlineInputBorder(
@@ -220,29 +277,67 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: AppColor.teelColor,
-                            borderRadius: BorderRadius.circular(
-                                20)), // Change the color as needed
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                        child: const Row(
-                          children: [
-                            Icon(
-                              Icons.file_upload,
-                              color: Colors.white,
-                            ),
-                            SizedBox(width: 8),
-                            Text(
-                              'Upload Document(Optional)',
-                              style: TextStyle(
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    RoundedButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the bottom sheet
+                                        _pickImageFromGallery(); // Pick image from gallery
+                                      },
+                                      text: 'Pick from Gallery',
+                                      Color: AppColor.teelColor,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    RoundedButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the bottom sheet
+                                        _pickImageFromCamera(); // Pick image from camera
+                                      },
+                                      text: 'Take a Photo',
+                                      Color: AppColor.teelColor,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: AppColor.teelColor,
+                              borderRadius: BorderRadius.circular(
+                                  20)), // Change the color as needed
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 16),
+                          child: const Row(
+                            children: [
+                              Icon(
+                                Icons.file_upload,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 8),
+                              Text(
+                                'Upload Document(Optional)',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -303,26 +398,12 @@ class _ConsultationFormState extends State<ConsultationForm> {
                     onPressed: controller.agreed.value
                         ? () {
                             if (_formKey.currentState!.validate()) {
-                              // Form is valid, perform booking consultation action
-                              // Navigate to confirmation page or perform desired action
-                              // print('Consultation booked successfully');
-                              // showDialog(
-                              //   context: context,
-                              //   builder: (BuildContext context) {
-                              //     return AlertDialog(
-                              //       title: Text('Success'),
-                              //       content: Text('Consultation booked successfully'),
-                              //       actions: <Widget>[
-                              //         TextButton(
-                              //           onPressed: () {
-                              //             Navigator.of(context).pop();
-                              //           },
-                              //           child: Text('OK'),
-                              //         ),
-                              //       ],
-                              //     );
-                              //   },
-                              // );
+                              print('Consultation booked successfully');
+                              Get.dialog(CustomDialog(
+                                  heading: "Consultation Booking",
+                                  text:
+                                      'Consultation Appointment Booked Successfuly',
+                                  buttontext: 'OK'));
                             }
                           }
                         : () {},

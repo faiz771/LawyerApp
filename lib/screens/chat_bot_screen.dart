@@ -4,19 +4,46 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:lawyerapp/components/mytextfield.dart';
+import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:lawyerapp/utils/app_constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
 class ChatController extends GetxController {
+  RxString chatGptKey = ''.obs;
+
+  Future<void> fetchChatGptKey() async {
+    final SharedPreferencesService prefsService = SharedPreferencesService();
+    final String? token = await prefsService.getToken();
+    final url =
+        Uri.parse('https://lawyer-app.azsolutionspk.com/api/user/chat/key');
+
+    try {
+      final response = await http.get(
+        url,
+        headers: {'Authorization': 'Bearer $token'},
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+        final data = responseData['data'];
+        chatGptKey.value = data;
+      } else {
+        print('Failed to fetch chatGpt key: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error fetching chatGpt key: $e');
+    }
+  }
+
   RxList<Map<String, String>> messages = <Map<String, String>>[].obs;
 
   Future<void> sendMessage(String message) async {
     messages
         .add({'sender': 'User', 'message': message, 'isUserMessage': "true"});
 
-    final String apiKey = AppConstants.ChatGptKey;
+    final String apiKey = chatGptKey.toString();
     final String url = 'https://api.openai.com/v1/chat/completions';
     final Map<String, dynamic> data = {
       'model': 'gpt-3.5-turbo-0613',
@@ -99,8 +126,19 @@ class ChatController extends GetxController {
   }
 }
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
   final ChatController chatController = Get.put(ChatController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    chatController.fetchChatGptKey();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +163,7 @@ class ChatPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 200.h,
+                          height: 120.h,
                         ),
                         Center(
                           child: Text(

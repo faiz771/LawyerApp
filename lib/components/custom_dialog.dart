@@ -59,7 +59,8 @@ class CustomDialog extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 TextButton(
-                    onPressed: () {}, child: const Text('Edit your appointment'))
+                    onPressed: () {},
+                    child: const Text('Edit your appointment'))
               ],
             ),
           ),

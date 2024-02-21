@@ -32,15 +32,17 @@ class _FavoriteScreenState extends State<FavoriteScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
+        backgroundColor: AppColor.teelColor,
         centerTitle: true,
         title: const Text(
           'Favorites',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         bottom: TabBar(
           labelStyle:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          indicatorColor: AppColor.teelColor,
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          indicatorColor: Colors.white,
           controller: _tabController,
           tabs: const [
             Tab(text: 'Articles', icon: Icon(Icons.article)),

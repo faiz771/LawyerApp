@@ -13,7 +13,8 @@ import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class ProfileSettingScreen extends StatefulWidget {
-  const ProfileSettingScreen({super.key});
+  String name;
+  ProfileSettingScreen({super.key, required this.name});
 
   @override
   State<ProfileSettingScreen> createState() => _ProfileSettingScreenState();
@@ -132,7 +133,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: Text(
-                  controller.user.value!.name,
+                  widget.name,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),

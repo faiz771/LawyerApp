@@ -37,7 +37,8 @@ class ArticleListScreen extends StatelessWidget {
                         isFromFavorite
                             ? "You haven't added any articles to favorites."
                             : "No articles available.",
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),

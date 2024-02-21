@@ -45,10 +45,15 @@ class UserController extends GetxController {
           user.value = userDetail;
           print('User Role: ${userDetail.role}');
           // Handle different user roles and navigate accordingly
+          update();
           if (userDetail.role == 1) {
-            Get.offAll(const LawyerHomepage());
+            Get.offAll(LawyerHomepage(
+              name: user.value!.name,
+            ));
           } else if (userDetail.role == 0) {
-            Get.offAll(const ClientHomepage());
+            Get.offAll(ClientHomepage(
+              name: user.value!.name,
+            ));
           }
         } else {
           // Handle error response

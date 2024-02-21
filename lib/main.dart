@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lawyerapp/controllers/lawyer_categories_controller.dart';
 import 'package:lawyerapp/screens/chat_bot_screen.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
+import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/screens/splash_screen.dart';
 
 late int onboardingStatus;
