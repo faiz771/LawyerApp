@@ -46,7 +46,7 @@ class _PodcastDetailPageState extends State<PodcastDetailPage> {
     _chewieController = chewie.ChewieController(
       aspectRatio: 16 / 9,
       videoPlayerController: _videoPlayerController,
-      autoPlay: false,
+      autoPlay: true,
       looping: true,
     );
   }

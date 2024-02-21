@@ -23,7 +23,7 @@ class ChatController extends GetxController {
       'messages': [
         {'role': 'assistant', 'content': message}
       ],
-      'max_tokens': 150,
+      'max_tokens': 4000,
       'temperature': 0.7,
     };
     final Map<String, String> headers = {

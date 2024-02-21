@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/controllers/blog_controller.dart';
 import 'package:lawyerapp/screens/podcast_view_page.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 import '../models/podcast_model.dart';
 
 class PodcastList extends StatefulWidget {
-  PodcastList({
-    super.key,
-  });
+  final bool isFromFavorite;
+
+  const PodcastList({Key? key, required this.isFromFavorite}) : super(key: key);
 
   @override
   State<PodcastList> createState() => _PodcastListState();
@@ -17,40 +18,78 @@ class PodcastList extends StatefulWidget {
 
 class _PodcastListState extends State<PodcastList> {
   final BlogController controller = Get.put(BlogController());
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller.fetchPodcasts();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: controller.podcasts.length,
-      itemBuilder: (context, index) {
-        return PodcastItemContainer(podcastItem: controller.podcasts[index]);
-      },
-    );
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: AppColor.teelColor,
+          ),
+        );
+      } else {
+        final List<PodcastItem> podcasts = controller.podcasts;
+        final List<PodcastItem> filteredPodcasts = widget.isFromFavorite
+            ? podcasts.where((podcast) => podcast.is_favorite == 1).toList()
+            : podcasts;
+
+        if (filteredPodcasts.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Center(
+              child: Text(
+                widget.isFromFavorite
+                    ? "You haven't added any podcasts to favorites."
+                    : "No podcasts available.",
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          );
+        }
+
+        return ListView.builder(
+          itemCount: filteredPodcasts.length,
+          itemBuilder: (context, index) {
+            return PodcastItemContainer(
+              podcastItem: filteredPodcasts[index],
+            );
+          },
+        );
+      }
+    });
   }
 }
 
 class PodcastItemContainer extends StatelessWidget {
   final PodcastItem podcastItem;
 
-  PodcastItemContainer({super.key, required this.podcastItem});
-  final BlogController controller = Get.put(BlogController());
+  const PodcastItemContainer({
+    Key? key,
+    required this.podcastItem,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(PodcastDetailPage(
-            isFavorite: podcastItem.is_favorite == 1 ? true : false,
+        Get.to(
+          PodcastDetailPage(
+            isFavorite: podcastItem.is_favorite == 1,
             blogId: podcastItem.id,
-            mediaType: podcastItem.mediaType == 'audio' ? true : false,
+            mediaType: podcastItem.mediaType == 'audio',
             description: podcastItem.content,
             title: podcastItem.title,
-            videoUrl: podcastItem.mediaAppPath));
+            videoUrl: podcastItem.mediaAppPath,
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -78,14 +117,16 @@ class PodcastItemContainer extends StatelessWidget {
                     Container(
                       height: 200,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                podcastItem.mediaType == 'audio'
-                                    ? 'https://cdn.pixabay.com/photo/2016/03/31/15/24/audio-1293262_1280.png'
-                                    : podcastItem.thumbnail ?? '',
-                              ),
-                              fit: BoxFit.cover)),
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            podcastItem.mediaType == 'audio'
+                                ? 'https://cdn.pixabay.com/photo/2016/03/31/15/24/audio-1293262_1280.png'
+                                : podcastItem.thumbnail ?? '',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                     Positioned(
                       top: 70,
@@ -94,7 +135,9 @@ class PodcastItemContainer extends StatelessWidget {
                       right: 70,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                        ),
                         child: Icon(
                           Icons.play_arrow,
                           size: 35,
@@ -118,10 +161,6 @@ class PodcastItemContainer extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      // const Icon(
-                      //   Icons.favorite,
-                      //   color: Colors.red,
-                      // ),
                     ],
                   ),
                 ),

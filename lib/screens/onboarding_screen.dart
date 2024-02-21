@@ -42,7 +42,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     onBoardingImage: 'assets/images/onboarding1.jpg',
                     heading: 'Secure Consultation',
                     decsription:
-                        'Embark on a hassle-free legal journey with Us. Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters with confidence',
+                        'Embark on a hassle-free legal journey with Us. Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters.',
                     onPressed: () {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 500),

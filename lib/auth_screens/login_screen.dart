@@ -99,32 +99,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
 
                             // Example: Check for lowercase letters
-                            final hasLowercase =
-                                RegExp(r'[a-z]').hasMatch(value);
-                            if (!hasLowercase) {
-                              return 'Password must contain lowercase letters';
-                            }
+                            // final hasLowercase =
+                            //     RegExp(r'[a-z]').hasMatch(value);
+                            // if (!hasLowercase) {
+                            //   return 'Password must contain lowercase letters';
+                            // }
 
-                            // Example: Check for uppercase letters
-                            final hasUppercase =
-                                RegExp(r'[A-Z]').hasMatch(value);
-                            if (!hasUppercase) {
-                              return 'Password must contain uppercase letters';
-                            }
+                            // // Example: Check for uppercase letters
+                            // final hasUppercase =
+                            //     RegExp(r'[A-Z]').hasMatch(value);
+                            // if (!hasUppercase) {
+                            //   return 'Password must contain uppercase letters';
+                            // }
 
-                            // Example: Check for numbers
-                            final hasNumber = RegExp(r'[0-9]').hasMatch(value);
-                            if (!hasNumber) {
-                              return 'Password must contain numbers';
-                            }
+                            // // Example: Check for numbers
+                            // final hasNumber = RegExp(r'[0-9]').hasMatch(value);
+                            // if (!hasNumber) {
+                            //   return 'Password must contain numbers';
+                            // }
 
-                            // Example: Check for special characters
-                            final hasSpecialCharacters =
-                                RegExp(r'[!@#$%^&*(),.?":{}|<>]')
-                                    .hasMatch(value);
-                            if (!hasSpecialCharacters) {
-                              return 'Password must contain special characters';
-                            }
+                            // // Example: Check for special characters
+                            // final hasSpecialCharacters =
+                            //     RegExp(r'[!@#$%^&*(),.?":{}|<>]')
+                            //         .hasMatch(value);
+                            // if (!hasSpecialCharacters) {
+                            //   return 'Password must contain special characters';
+                            // }
 
                             // Password meets all criteria, so return null indicating validation passed
                             return null;

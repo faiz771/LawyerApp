@@ -6,28 +6,54 @@ import 'package:lawyerapp/models/videos_model.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class VideoList extends StatelessWidget {
-  VideoList({
-    Key? key,
-  }) : super(key: key);
-  final BlogController blogController = Get.put(BlogController());
+  final bool isFromFavorite;
+
+  const VideoList({Key? key, required this.isFromFavorite}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Obx(() => blogController.isLoading.value
-        ? Center(
-            child: CircularProgressIndicator(
-              color: AppColor.teelColor,
+    final blogController = Get.put(BlogController());
+
+    return Obx(() {
+      if (blogController.isLoading.value) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: AppColor.teelColor,
+          ),
+        );
+      } else {
+        final List<Video> videos = blogController.videos;
+        final List<Video> filteredVideos = isFromFavorite
+            ? videos.where((video) => video.is_favorite == 1).toList()
+            : videos;
+
+        if (filteredVideos.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Center(
+              child: Text(
+                isFromFavorite
+                    ? "You haven't added any videos to favorites."
+                    : "No videos available.",
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
             ),
-          )
-        : ListView.builder(
-            itemCount: blogController.videos.length,
-            itemBuilder: (context, index) {
-              final Video videos = blogController.videos[index];
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: VideoItemContainer(video: videos),
-              );
-            },
-          ));
+          );
+        }
+
+        return ListView.builder(
+          itemCount: filteredVideos.length,
+          itemBuilder: (context, index) {
+            final Video video = filteredVideos[index];
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: VideoItemContainer(video: video),
+            );
+          },
+        );
+      }
+    });
   }
 }
 
@@ -38,15 +64,17 @@ class VideoItemContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(video.mediaAppPath);
     return InkWell(
       onTap: () {
-        Get.to(VideoDetailPage(
-            isFavorite: video.is_favorite == 1 ? true : false,
+        Get.to(
+          VideoDetailPage(
+            isFavorite: video.is_favorite == 1,
             blogId: video.id,
             description: video.content,
             title: video.title,
-            videoUrl: video.mediaAppPath));
+            videoUrl: video.mediaAppPath,
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -72,11 +100,14 @@ class VideoItemContainer extends StatelessWidget {
                   Container(
                     height: 200,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                "https://lawyer-app.azsolutionspk.com/public/blogs/${video.thumbnail}"),
-                            fit: BoxFit.cover)),
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          "https://lawyer-app.azsolutionspk.com/public/blogs/${video.thumbnail}",
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   Positioned(
                     top: 70,
@@ -85,7 +116,9 @@ class VideoItemContainer extends StatelessWidget {
                     right: 70,
                     child: Container(
                       decoration: BoxDecoration(
-                          color: Colors.white, shape: BoxShape.circle),
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
                       child: Icon(
                         Icons.play_arrow,
                         size: 35,

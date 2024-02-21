@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class ClientDashboardScreen extends StatelessWidget {
   const ClientDashboardScreen({super.key});
@@ -11,15 +12,17 @@ class ClientDashboardScreen extends StatelessWidget {
       length: 3, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: AppColor.teelColor,
           automaticallyImplyLeading: false,
           centerTitle: true,
           title: const Text(
             'My Bookings',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
           bottom: const TabBar(
-            indicatorColor: Color.fromRGBO(17, 25, 40, 1),
-            labelColor: Color.fromRGBO(17, 25, 40, 1),
+            physics: BouncingScrollPhysics(),
+            indicatorColor: Colors.white,
+            labelColor: Colors.white,
             unselectedLabelColor: Colors.grey,
             labelStyle: TextStyle(fontWeight: FontWeight.bold),
             tabs: [

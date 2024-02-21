@@ -7,14 +7,14 @@ import 'package:lawyerapp/screens/blog_podcast.dart';
 import 'package:lawyerapp/screens/blog_videos.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-class BlogScreen extends StatefulWidget {
-  const BlogScreen({super.key});
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key});
 
   @override
-  _BlogScreenState createState() => _BlogScreenState();
+  _FavoriteScreenState createState() => _FavoriteScreenState();
 }
 
-class _BlogScreenState extends State<BlogScreen>
+class _FavoriteScreenState extends State<FavoriteScreen>
     with SingleTickerProviderStateMixin {
   final BlogController blogController = Get.put(BlogController());
   late TabController _tabController;
@@ -32,16 +32,14 @@ class _BlogScreenState extends State<BlogScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColor.teelColor,
         centerTitle: true,
         title: const Text(
-          'Blogs',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          'Favorites',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
         bottom: TabBar(
-          physics: BouncingScrollPhysics(),
           labelStyle:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
           indicatorColor: AppColor.teelColor,
           controller: _tabController,
           tabs: const [
@@ -55,13 +53,13 @@ class _BlogScreenState extends State<BlogScreen>
         controller: _tabController,
         children: [
           ArticleListScreen(
-            isFromFavorite: false,
+            isFromFavorite: true,
           ),
           VideoList(
-            isFromFavorite: false,
+            isFromFavorite: true,
           ),
           PodcastList(
-            isFromFavorite: false,
+            isFromFavorite: true,
           ),
         ],
       ),

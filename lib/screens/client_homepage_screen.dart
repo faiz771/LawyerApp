@@ -2,9 +2,12 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/promotion_slider_view_template.dart';
+import 'package:lawyerapp/controllers/user_controller.dart';
+import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
 import 'package:lawyerapp/screens/chat_bot_screen.dart';
 import 'package:lawyerapp/screens/client_dashboard_screen.dart';
@@ -12,6 +15,7 @@ import 'package:lawyerapp/screens/consultation_page.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class ClientHomepage extends StatefulWidget {
   const ClientHomepage({super.key});
@@ -23,6 +27,13 @@ class ClientHomepage extends StatefulWidget {
 class _ClientHomepageState extends State<ClientHomepage> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
+  final UserController controller = Get.put(UserController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,7 +81,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.only(left: 10.w),
-                          child: const Column(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -79,7 +90,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Text(
-                                'John Doe William',
+                                controller.user.value!.name,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],
@@ -218,7 +229,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
       ),
 
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: AppColor.teelColor,
         selectedIndex: _currentIndex,
         onItemSelected: (index) {
           setState(() {
@@ -228,20 +239,26 @@ class _ClientHomepageState extends State<ClientHomepage> {
         },
         items: [
           BottomNavyBarItem(
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
             icon: Image.asset(
               'assets/images/home-2.png',
               scale: 20,
+              color: Colors.white,
             ),
             title: const Text('Home'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            activeColor: Colors.white,
           ),
           BottomNavyBarItem(
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
             icon: Image.asset(
               'assets/images/appointment.png',
               scale: 20,
+              color: Colors.white,
             ),
             title: const Text('Bookings'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            activeColor: Colors.white,
           ),
           // BottomNavyBarItem(
           //   icon: const Icon(
@@ -252,20 +269,26 @@ class _ClientHomepageState extends State<ClientHomepage> {
           //   activeColor: const Color.fromRGBO(17, 25, 40, 1),
           // ),
           BottomNavyBarItem(
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
             icon: Image.asset(
               'assets/images/blog-3.png',
               scale: 22,
+              color: Colors.white,
             ),
             title: const Text('Blogs'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            activeColor: Colors.white,
           ),
           BottomNavyBarItem(
+            textAlign: TextAlign.center,
+            inactiveColor: Colors.grey,
             icon: Image.asset(
               'assets/images/chatbot.png',
               scale: 20,
+              color: Colors.white,
             ),
-            title: const Text('Ai Chat'),
-            activeColor: const Color.fromRGBO(17, 25, 40, 1),
+            title: const Text('AI Chat'),
+            activeColor: Colors.white,
           ),
         ],
       ),

@@ -10,14 +10,14 @@ import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
+import 'package:lawyerapp/utils/api_base_url.dart';
 
 class UserController extends GetxController {
-  final String baseUrl = 'https://lawyer-app.azsolutionspk.com/api/user';
-
   Rx<UserModel?> user = Rx<UserModel?>(null);
 
   Future<void> getUserDetails() async {
-    print('Api: $baseUrl');
+    final String url = '${Api.ApiBaseUrl}/user-detail';
+    print('Api: $url');
     try {
       final SharedPreferencesService prefsService = SharedPreferencesService();
       final String? token = await prefsService.getToken();
@@ -28,12 +28,11 @@ class UserController extends GetxController {
       }
       print(token);
       final response = await http.get(
-        Uri.parse('$baseUrl/user-detail'),
+        Uri.parse(url),
         headers: {'Authorization': 'Bearer $token'},
       );
       print('Saved Token $token');
       print('status code ${response.statusCode}');
-      print('Response ${response.body}');
 
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
@@ -43,8 +42,8 @@ class UserController extends GetxController {
         if (responseData['status'] == 1) {
           // Get.offAll(ClientHomepage());
           final userDetail = UserModel.fromJson(responseData['data']);
+          user.value = userDetail;
           print('User Role: ${userDetail.role}');
-
           // Handle different user roles and navigate accordingly
           if (userDetail.role == 1) {
             Get.offAll(const LawyerHomepage());

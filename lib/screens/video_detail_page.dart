@@ -38,7 +38,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
     _chewieController = ChewieController(
       aspectRatio: 16 / 9,
       videoPlayerController: _videoPlayerController,
-      autoPlay: false,
+      autoPlay: true,
       looping: true,
     );
   }

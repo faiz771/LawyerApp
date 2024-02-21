@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
+import 'package:lawyerapp/controllers/user_controller.dart';
+import 'package:lawyerapp/screens/blog_screen.dart';
+import 'package:lawyerapp/screens/favorite_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
@@ -29,6 +33,8 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
         await ImagePicker().getImage(source: ImageSource.camera);
     // Do something with the picked image
   }
+
+  final UserController controller = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -125,8 +131,8 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10.h),
-                child: const Text(
-                  'Joe Doe William',
+                child: Text(
+                  controller.user.value!.name,
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -161,7 +167,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   Icons.favorite_outline,
                   color: Color.fromRGBO(17, 25, 40, 1),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(FavoriteScreen());
+                },
               ),
               ListTile(
                 trailing: const Icon(
