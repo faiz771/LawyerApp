@@ -79,6 +79,22 @@ class SignUpController extends GetxController {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailController.clear();
+
+    passwordController.clear();
+
+    confirmPasswordController.clear();
+
+    nameController.clear();
+    accounttypeController.clearDropDown();
+
+    phoneController.clear();
+  }
+
+  @override
   void onClose() {
     // TODO: implement onClose
     super.onClose();

@@ -11,6 +11,7 @@ import 'package:lawyerapp/screens/blog_screen.dart';
 import 'package:lawyerapp/screens/favorite_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileSettingScreen extends StatefulWidget {
   String name;

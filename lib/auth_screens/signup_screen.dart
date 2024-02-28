@@ -10,6 +10,7 @@ import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
+import 'package:lawyerapp/main.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -133,9 +134,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 5.h,
                     ),
                     IntlPhoneField(
+                      //  key: _formKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       validator: (phoneNumber) {
-                        if (phoneNumber == null) {
+                        if (controller.phoneController.text.isEmpty) {
                           return 'Phone number cannot be empty';
                         }
                         return null; // Return null if the validation passes
@@ -152,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         filled: true,
                         hintText: 'Phone',
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10.h),
+                            horizontal: 10, vertical: 10.h),
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(color: Colors.grey.shade200),
                           borderRadius: BorderRadius.circular(24),
@@ -311,10 +314,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             if (!hasSpecialCharacters) {
                               return 'Password must contain special characters';
                             }
-                            if (controller.passwordController.value !=
-                                controller.confirmPasswordController.value) {
-                              return 'Password and Confirm Password must match.';
-                            }
+                            // if (controller.passwordController.value !=
+                            //     controller.confirmPasswordController.value) {
+                            //   return 'Password and Confirm Password must match.';
+                            // }
                             // Password meets all criteria, so return null indicating validation passed
                             return null;
                           },
@@ -449,7 +452,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               text: 'Create Account',
                               onPressed: controller.agreed.value
                                   ? () {
-                                      if (_formKey.currentState!.validate()) {
+                                      if (_formKey.currentState!.validate() &&
+                                          controller.phoneController.text
+                                              .isNotEmpty) {
                                         controller.isLoading.value = true;
                                         controller.phoneController.text =
                                             completeNumber;

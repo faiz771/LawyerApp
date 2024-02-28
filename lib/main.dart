@@ -7,7 +7,7 @@ import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
 import 'package:lawyerapp/screens/splash_screen.dart';
 
-late int onboardingStatus;
+int onboardingStatus = 0;
 void main() {
   runApp(const MyApp());
 }

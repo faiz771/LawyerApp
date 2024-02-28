@@ -103,10 +103,10 @@ class ChangePasswordScreen extends StatelessWidget {
                           if (!hasSpecialCharacters) {
                             return 'Password must contain special characters';
                           }
-                          if (controller.passwordController.value !=
-                              controller.confirmPasswordController.value) {
-                            return 'Password and Confirm Password must match.';
-                          }
+                          // if (controller.passwordController.value !=
+                          //     controller.confirmPasswordController.value) {
+                          //   return 'Password and Confirm Password must match.';
+                          // }
                           // Password meets all criteria, so return null indicating validation passed
                           return null;
                         },

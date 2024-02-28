@@ -48,7 +48,10 @@ class ChatController extends GetxController {
     final Map<String, dynamic> data = {
       'model': 'gpt-3.5-turbo-0613',
       'messages': [
-        {'role': 'assistant', 'content': message}
+        {
+          'role': 'assistant',
+          'content': "Prompt${AppConstants.GptPrompt} \n Message: ${message}"
+        }
       ],
       'max_tokens': 4000,
       'temperature': 0.7,
