@@ -8,6 +8,7 @@ import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
+import 'package:lawyerapp/screens/edit_profile_screen.dart';
 import 'package:lawyerapp/screens/favorite_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
@@ -42,10 +43,15 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
+          backgroundColor: AppColor.teelColor,
           centerTitle: true,
           title: Text(
             'Profile Settings',
-            style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: 22.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
           ),
         ),
         body: SingleChildScrollView(
@@ -64,71 +70,12 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                 height: 10.h,
               ),
               Center(
-                child: Stack(
-                  alignment: Alignment.bottomRight,
-                  children: [
-                    const CircleAvatar(
-                      radius: 75,
-                      backgroundColor: Colors.white,
-                      backgroundImage: AssetImage(
-                        'assets/images/onboard2.jpg',
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 15.h,
-                      child: GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    RoundedButton(
-                                      onPressed: () {
-                                        Navigator.pop(
-                                            context); // Close the bottom sheet
-                                        _pickImageFromGallery(); // Pick image from gallery
-                                      },
-                                      text: 'Pick from Gallery',
-                                      Color: AppColor.teelColor,
-                                    ),
-                                    const SizedBox(height: 16),
-                                    RoundedButton(
-                                      onPressed: () {
-                                        Navigator.pop(
-                                            context); // Close the bottom sheet
-                                        _pickImageFromCamera(); // Pick image from camera
-                                      },
-                                      text: 'Take a Photo',
-                                      Color: AppColor.teelColor,
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(4.0),
-                            child: Icon(
-                              Icons.edit,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: const CircleAvatar(
+                  radius: 75,
+                  backgroundColor: Colors.white,
+                  backgroundImage: AssetImage(
+                    'assets/images/onboard2.jpg',
+                  ),
                 ),
               ),
               Padding(
@@ -152,7 +99,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   Icons.edit_outlined,
                   color: Color.fromRGBO(17, 25, 40, 1),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(EditProfileScreen());
+                },
               ),
 
               ListTile(
