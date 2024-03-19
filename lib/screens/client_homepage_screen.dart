@@ -21,7 +21,17 @@ import 'package:lawyerapp/utils/app_colors.dart';
 
 class ClientHomepage extends StatefulWidget {
   String name;
-  ClientHomepage({super.key, required this.name});
+  String profile;
+  String email;
+  String phone;
+  String accountType;
+  ClientHomepage(
+      {super.key,
+      required this.name,
+      required this.accountType,
+      required this.profile,
+      required this.email,
+      required this.phone});
 
   @override
   State<ClientHomepage> createState() => _ClientHomepageState();
@@ -73,18 +83,20 @@ class _ClientHomepageState extends State<ClientHomepage> {
                         onTap: () {
                           Get.to(ProfileSettingScreen(
                             name: widget.name,
+                            profile: widget.profile,
+                            phone: widget.phone,
+                            email: widget.email,
+                            accountType: widget.accountType,
                           ));
                         },
                         child: CircleAvatar(
                           radius: 30,
                           child: Container(
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage(
-                                      'assets/images/onboard2.jpg',
-                                    ))),
+                                    image: NetworkImage(widget.profile))),
                           ),
                         ),
                       ),
@@ -184,7 +196,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       // const HomepageIconsWithTextTemplate(),
                       CarouselSlider(
                         options: CarouselOptions(
-                          height: 280,
+                          height: 210,
                           enlargeCenterPage: true,
                           autoPlay: true,
                           autoPlayCurve: Curves.fastOutSlowIn,
@@ -195,7 +207,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                         ),
                         items: [
                           UpcomingBookingScreen(
-                            button1: true,
+                            button1: false,
                             onPressed1: () {
                               // Handle button 1 press
                             },

@@ -11,14 +11,16 @@ import 'package:lawyerapp/utils/app_colors.dart';
 class SignUpController extends GetxController {
   RxBool agreed = false.obs;
   RxBool isLoading = false.obs;
-  final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
   final confirmPasswordController = TextEditingController();
 
   final nameController = TextEditingController();
-
+  final emailController = TextEditingController();
+  final companyNameController = TextEditingController();
+  final companyProfessionController = TextEditingController();
+  final companyLocationController = TextEditingController();
   late SingleValueDropDownController accounttypeController;
 
   final phoneController = TextEditingController();
@@ -26,18 +28,23 @@ class SignUpController extends GetxController {
   Future<void> signUp() async {
     String url = "${Api.ApiBaseUrl}/register";
     print('Api: $url');
+    Map<String, dynamic> body = {
+      'name': nameController.text,
+      'phone': phoneController.text,
+      'account_type': accounttypeController.dropDownValue!.name,
+      'email': emailController.text,
+      'password': passwordController.text,
+      'password_confirmation': confirmPasswordController.text,
+    };
+    if (accounttypeController.dropDownValue != null &&
+        accounttypeController.dropDownValue!.name == 'Company') {
+      // Add company-related variables
+      body['company_name'] = companyNameController.text;
+      body['company_profession'] = companyProfessionController.text;
+      body['company_address'] = companyLocationController.text;
+    }
     try {
-      final response = await http.post(
-        Uri.parse(url),
-        body: {
-          'name': nameController.text,
-          'phone': phoneController.text,
-          'account_type': accounttypeController.dropDownValue!.name,
-          'email': emailController.text,
-          'password': passwordController.text,
-          'password_confirmation': confirmPasswordController.text,
-        },
-      );
+      final response = await http.post(Uri.parse(url), body: body);
 
       final responseData = json.decode(response.body);
       isLoading.value = false;

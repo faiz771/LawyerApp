@@ -25,7 +25,7 @@ class UpcomingBookingScreen extends StatelessWidget {
             height: 10,
           ),
           Container(
-            height: 240,
+            height: 170,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(8),
@@ -103,11 +103,11 @@ class UpcomingBookingScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  const Divider(),
-                  RoundedButton(
-                      text: button1title,
-                      onPressed: onPressed1,
-                      Color: AppColor.teelColor)
+                  // const Divider(),
+                  // RoundedButton(
+                  //     text: button1title,
+                  //     onPressed: onPressed1,
+                  //     Color: AppColor.teelColor)
                   // button1 & button2
                   //     ? Row(
                   //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

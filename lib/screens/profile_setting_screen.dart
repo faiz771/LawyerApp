@@ -16,7 +16,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileSettingScreen extends StatefulWidget {
   String name;
-  ProfileSettingScreen({super.key, required this.name});
+  String profile;
+  String email;
+  String phone;
+  String accountType;
+  ProfileSettingScreen(
+      {super.key,
+      required this.name,
+      required this.profile,
+      required this.email,
+      required this.phone,
+      required this.accountType});
 
   @override
   State<ProfileSettingScreen> createState() => _ProfileSettingScreenState();
@@ -70,12 +80,10 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                 height: 10.h,
               ),
               Center(
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   radius: 75,
                   backgroundColor: Colors.white,
-                  backgroundImage: AssetImage(
-                    'assets/images/onboard2.jpg',
-                  ),
+                  backgroundImage: NetworkImage(widget.profile),
                 ),
               ),
               Padding(
@@ -100,7 +108,13 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   color: Color.fromRGBO(17, 25, 40, 1),
                 ),
                 onTap: () {
-                  Get.to(EditProfileScreen());
+                  Get.to(EditProfileScreen(
+                    profile: widget.profile,
+                    email: widget.email,
+                    phone: widget.phone,
+                    name: widget.name,
+                    accountType: widget.accountType,
+                  ));
                 },
               ),
 

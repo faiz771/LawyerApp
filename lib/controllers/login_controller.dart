@@ -46,14 +46,22 @@ class LoginController extends GetxController {
         final userDetail = UserModel.fromJson(responseData['data']);
         user.value = userDetail;
         print('yeh hai user detail after the loginR ${user.value!.name}');
-        // update();
+
         if (role == 1) {
           Get.offAll(LawyerHomepage(
             name: user.value!.name,
+            profile: user.value!.profile_path,
+            email: user.value!.email,
+            phone: user.value!.phone,
+            accountType: user.value!.accountType!,
           ));
         } else if (role == 0) {
           Get.offAll(ClientHomepage(
+            accountType: user.value!.accountType!,
             name: user.value!.name,
+            profile: user.value!.profile_path,
+            email: user.value!.email,
+            phone: user.value!.phone,
           ));
         }
         // Save the token in SharedPreferences
@@ -88,53 +96,53 @@ class LoginController extends GetxController {
   }
 
   Rx<UserModel?> user = Rx<UserModel?>(null);
-  Future<void> getUserDetails() async {
-    final String url = '${Api.ApiBaseUrl}/user-detail';
-    print('Api: $url');
-    try {
-      final SharedPreferencesService prefsService = SharedPreferencesService();
-      final String? token = await prefsService.getToken();
-      if (token == null) {
-        // Handle the case where token is null
-        // clearPreferencesAndNavigateToLogin();
-        return;
-      }
-      print(token);
-      final response = await http.get(
-        Uri.parse(url),
-        headers: {'Authorization': 'Bearer $token'},
-      );
-      print('Saved Token $token');
-      print('status code ${response.statusCode}');
+  // Future<void> getUserDetails() async {
+  //   final String url = '${Api.ApiBaseUrl}/user-detail';
+  //   print('Api: $url');
+  //   try {
+  //     final SharedPreferencesService prefsService = SharedPreferencesService();
+  //     final String? token = await prefsService.getToken();
+  //     if (token == null) {
+  //       // Handle the case where token is null
+  //       // clearPreferencesAndNavigateToLogin();
+  //       return;
+  //     }
+  //     print(token);
+  //     final response = await http.get(
+  //       Uri.parse(url),
+  //       headers: {'Authorization': 'Bearer $token'},
+  //     );
+  //     print('Saved Token $token');
+  //     print('status code ${response.statusCode}');
 
-      if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        String message = responseData['message'].join('\n');
-        print('Response Data: $responseData');
-        print('status ${responseData['status']}');
-        if (responseData['status'] == 1) {
-          // Get.offAll(ClientHomepage());
-          final userDetail = UserModel.fromJson(responseData['data']);
-          user.value = userDetail;
-          print('User Role: ${userDetail.role}');
-          // Handle different user roles and navigate accordingly
-          // if (userDetail.role == 1) {
-          //   Get.offAll(const LawyerHomepage());
-          // } else if (userDetail.role == 0) {
-          //   Get.offAll(const ClientHomepage());
-          // }
-        } else {
-          // Handle error response
+  //     if (response.statusCode == 200) {
+  //       final responseData = json.decode(response.body);
+  //       String message = responseData['message'].join('\n');
+  //       print('Response Data: $responseData');
+  //       print('status ${responseData['status']}');
+  //       if (responseData['status'] == 1) {
+  //         // Get.offAll(ClientHomepage());
+  //         final userDetail = UserModel.fromJson(responseData['data']);
+  //         user.value = userDetail;
+  //         print('User Role: ${userDetail.role}');
+  //         // Handle different user roles and navigate accordingly
+  //         // if (userDetail.role == 1) {
+  //         //   Get.offAll(const LawyerHomepage());
+  //         // } else if (userDetail.role == 0) {
+  //         //   Get.offAll(const ClientHomepage());
+  //         // }
+  //       } else {
+  //         // Handle error response
 
-          print(responseData['message']);
-        }
-      } else {
-        // Handle non-200 status code
-      }
-    } catch (error) {
-      // Handle other errors
+  //         print(responseData['message']);
+  //       }
+  //     } else {
+  //       // Handle non-200 status code
+  //     }
+  //   } catch (error) {
+  //     // Handle other errors
 
-      print('Error: $error');
-    }
-  }
+  //     print('Error: $error');
+  //   }
+//  }
 }

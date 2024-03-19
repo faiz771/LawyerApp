@@ -49,10 +49,18 @@ class UserController extends GetxController {
           if (userDetail.role == 1) {
             Get.offAll(LawyerHomepage(
               name: user.value!.name,
+              profile: user.value!.profile_path,
+              email: user.value!.email,
+              phone: user.value!.phone,
+              accountType: user.value!.accountType!,
             ));
           } else if (userDetail.role == 0) {
             Get.offAll(ClientHomepage(
               name: user.value!.name,
+              profile: user.value!.profile_path,
+              email: user.value!.email,
+              phone: user.value!.phone,
+              accountType: user.value!.accountType!,
             ));
           }
         } else {

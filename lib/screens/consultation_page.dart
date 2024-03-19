@@ -6,6 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/consultation_controller.dart';
+import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
+import 'package:lawyerapp/utils/api_base_url.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,18 +30,44 @@ class _ConsultationFormState extends State<ConsultationForm> {
   final ConsultationController controller = Get.put(ConsultationController());
 
   List<String> categoryNames = [];
+  List<String> countryNames = [];
 
   @override
   void initState() {
     super.initState();
     fetchCategories();
+    fetchCountries();
+  }
+
+  Future<void> fetchCountries() async {
+    final SharedPreferencesService prefsService = SharedPreferencesService();
+    final String? token = await prefsService.getToken();
+    try {
+      final response = await http.get(
+        Uri.parse('${Api.ApiBaseUrl}/get-countries'),
+        headers: {'Authorization': 'Bearer $token'},
+      );
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        final List<dynamic> countries = jsonData['data'];
+        List<String> names = (countries as List<dynamic>)
+            .map<String>((countries) => countries['contry_name'] as String)
+            .toList();
+        setState(() {
+          countryNames = names;
+        });
+      } else {
+        throw Exception('Failed to load countries');
+      }
+    } catch (error) {
+      print('Error fetching countries: $error');
+    }
   }
 
   Future<void> fetchCategories() async {
     try {
       final response = await http.get(
-        Uri.parse(
-            'https://lawyer-app.azsolutionspk.com/api/user/lawyer/categories'),
+        Uri.parse('${Api.ApiBaseUrl}/lawyer/categories'),
       );
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
@@ -104,6 +132,9 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       ),
                       const SizedBox(height: 10),
                       DropdownButtonFormField<String>(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        isExpanded: true,
+                        menuMaxHeight: 300,
                         value: consultationType,
                         onChanged: (newValue) {
                           setState(() {
@@ -162,6 +193,9 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       ),
                       const SizedBox(height: 10),
                       DropdownButtonFormField<String>(
+                        isExpanded: true,
+                        menuMaxHeight: 300,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
                         value: country,
                         onChanged: (newValue) {
                           setState(() {
@@ -169,14 +203,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                             isCountryTypeFilled = newValue != null;
                           });
                         },
-                        items: [
-                          'Pakistan',
-                          'Afghanistan',
-                          'India',
-                          'Oman',
-                          'Bangladesh',
-                          'Turkey',
-                        ].map<DropdownMenuItem<String>>((String value) {
+                        items: countryNames
+                            .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(value),

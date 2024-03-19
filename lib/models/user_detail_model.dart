@@ -6,6 +6,7 @@ class UserModel {
   final String? companyName;
   final String? companyAddress;
   final int? lawyerType;
+  final String profile_path;
   final String? lawyerExperience;
   final String? lawyerEducation;
   final String? lawyerAbout;
@@ -24,6 +25,7 @@ class UserModel {
     required this.id,
     required this.name,
     required this.phone,
+    required this.profile_path,
     this.accountType,
     this.companyName,
     this.companyAddress,
@@ -59,6 +61,8 @@ class UserModel {
       email: json['email'],
       emailVerifiedAt: json['email_verified_at'],
       profile: json['profile'],
+      profile_path: json['profile_path'] ??
+          'https://huntfish-live.azsolutionspk.com/uploads/profiles/sample.png',
       role: json['role'],
       otp: json['otp'],
       otpExpireAt: json['otp_expire_at'],

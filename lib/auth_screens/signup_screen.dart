@@ -255,10 +255,59 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ],
                         onChanged: (selectedValue) {
                           print("$selectedValue");
+                          setState(() {});
                         },
                         dropDownItemCount: 2,
                       ),
                     ),
+                    //controller.accounttypeController.va
+                    controller.accounttypeController.dropDownValue == null
+                        ? SizedBox()
+                        : controller.accounttypeController.dropDownValue!
+                                    .name ==
+                                'Company'
+                            ? Column(
+                                children: [
+                                  MyTextField(
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please Enter Company Name';
+                                        }
+                                        return null; // Return null if the validation passes
+                                      },
+                                      isicon2: false,
+                                      controller:
+                                          controller.companyNameController,
+                                      hinttext: 'Company Name',
+                                      icon: Icons.person_2_outlined),
+                                  MyTextField(
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please Company Profession';
+                                        }
+                                        return null; // Return null if the validation passes
+                                      },
+                                      isicon2: false,
+                                      controller: controller
+                                          .companyProfessionController,
+                                      hinttext: 'Company Profession',
+                                      icon: Icons.person_2_outlined),
+                                  MyTextField(
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please Enter Company Location';
+                                        }
+                                        return null; // Return null if the validation passes
+                                      },
+                                      isicon2: false,
+                                      controller:
+                                          controller.companyLocationController,
+                                      hinttext: 'Company Location',
+                                      icon: Icons.person_2_outlined),
+                                ],
+                              )
+                            : SizedBox(),
+
                     MyTextField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {

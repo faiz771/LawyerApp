@@ -18,7 +18,17 @@ import 'package:lawyerapp/utils/app_colors.dart';
 
 class LawyerHomepage extends StatefulWidget {
   String name;
-  LawyerHomepage({super.key, required this.name});
+  String profile;
+  String email;
+  String phone;
+  String accountType;
+  LawyerHomepage(
+      {super.key,
+      required this.name,
+      required this.profile,
+      required this.email,
+      required this.phone,
+      required this.accountType});
 
   @override
   State<LawyerHomepage> createState() => _LawyerHomepageState();
@@ -58,18 +68,20 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                         onTap: () {
                           Get.to(ProfileSettingScreen(
                             name: widget.name,
+                            profile: widget.profile,
+                            email: widget.email,
+                            phone: widget.phone,
+                            accountType: widget.accountType,
                           ));
                         },
                         child: CircleAvatar(
                           radius: 30,
                           child: Container(
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage(
-                                      'assets/images/onboard2.jpg',
-                                    ))),
+                                    image: NetworkImage(widget.profile))),
                           ),
                         ),
                       ),
