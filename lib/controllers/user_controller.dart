@@ -53,6 +53,9 @@ class UserController extends GetxController {
               email: user.value!.email,
               phone: user.value!.phone,
               accountType: user.value!.accountType!,
+              companyAddress: user.value!.companyAddress!,
+              companyName: user.value!.companyName!,
+              companyProfession: user.value!.company_profession!,
             ));
           } else if (userDetail.role == 0) {
             Get.offAll(ClientHomepage(
@@ -61,6 +64,9 @@ class UserController extends GetxController {
               email: user.value!.email,
               phone: user.value!.phone,
               accountType: user.value!.accountType!,
+              companyAddress: user.value!.companyAddress!,
+              companyName: user.value!.companyName!,
+              companyProfession: user.value!.company_profession!,
             ));
           }
         } else {

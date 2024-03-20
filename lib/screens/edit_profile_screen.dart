@@ -1,10 +1,13 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
@@ -22,12 +25,18 @@ class EditProfileScreen extends StatefulWidget {
   String email;
   String phone;
   String accountType;
+  String companyName;
+  String companyAddress;
+  String companyProfession;
   EditProfileScreen({
     required this.profile,
     required this.email,
     required this.name,
     required this.phone,
     required this.accountType,
+    required this.companyAddress,
+    required this.companyName,
+    required this.companyProfession,
     super.key,
   });
 
@@ -50,9 +59,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       nameController.text = widget.name;
       phoneController.text = widget.phone;
       email = widget.email;
+      editProfileController.companyNameController.text = widget.companyName;
+
+      editProfileController.companyLocationController.text =
+          widget.companyAddress;
+
+      editProfileController.companyProfessionController.text =
+          widget.companyProfession;
     });
   }
 
+  String countrycode = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -194,12 +211,60 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    MyTextField(
-                      hinttext: 'Phone',
-                      controller: phoneController,
-                      isicon2: false,
-                      icon: Icons.person,
+                    IntlPhoneField(
+                      initialCountryCode: '+92',
+                      //  key: _formKey,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      validator: (phoneNumber) {
+                        if (editProfileController
+                            .phoneController.text.isEmpty) {
+                          return 'Phone number cannot be empty';
+                        }
+                        return null; // Return null if the validation passes
+                      },
+                      disableLengthCheck: true,
+                      controller: editProfileController.phoneController,
+                      keyboardType: TextInputType.phone,
+                      dropdownIcon: const Icon(
+                        Icons.arrow_drop_down,
+                        size: 28,
+                      ),
+                      decoration: InputDecoration(
+                        fillColor: Colors.grey[200],
+                        filled: true,
+                        hintText: 'Phone',
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10.h),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.grey.shade200),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromRGBO(17, 25, 40, 1)),
+                            borderRadius: BorderRadius.circular(24)),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.red),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.red,
+                          ),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        errorStyle: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold),
+                      ),
+                      onChanged: (phone) {
+                        print(phone.countryCode);
+                        setState(() {
+                          countrycode = phone.countryCode.tr;
+                        });
+                      },
                     ),
+
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 5),
@@ -369,7 +434,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     RoundedButton(
                         text: 'Save',
-                        onPressed: () {},
+                        onPressed: () {
+                          print(countrycode);
+                        },
                         Color: AppColor.teelColor)
                   ],
                 ),

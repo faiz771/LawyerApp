@@ -14,6 +14,7 @@ class UserModel {
   final String email;
   final int? emailVerifiedAt;
   final String? profile;
+  final String? company_profession;
   final int role;
   final int? otp;
   final String? otpExpireAt;
@@ -26,6 +27,7 @@ class UserModel {
     required this.name,
     required this.phone,
     required this.profile_path,
+    required this.company_profession,
     this.accountType,
     this.companyName,
     this.companyAddress,
@@ -53,6 +55,7 @@ class UserModel {
       accountType: json['account_type'],
       companyName: json['company_name'],
       companyAddress: json['company_address'],
+      company_profession: json['company_profession'],
       lawyerType: json['lawyer_type'],
       lawyerExperience: json['lawyer_experience'],
       lawyerEducation: json['lawyer_education'],

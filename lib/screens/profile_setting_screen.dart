@@ -20,13 +20,19 @@ class ProfileSettingScreen extends StatefulWidget {
   String email;
   String phone;
   String accountType;
+  String companyAddress;
+  String companyName;
+  String companyProfession;
   ProfileSettingScreen(
       {super.key,
       required this.name,
       required this.profile,
       required this.email,
       required this.phone,
-      required this.accountType});
+      required this.accountType,
+      required this.companyAddress,
+      required this.companyName,
+      required this.companyProfession});
 
   @override
   State<ProfileSettingScreen> createState() => _ProfileSettingScreenState();
@@ -114,6 +120,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                     phone: widget.phone,
                     name: widget.name,
                     accountType: widget.accountType,
+                    companyAddress: widget.companyAddress,
+                    companyName: widget.companyName,
+                    companyProfession: widget.companyProfession,
                   ));
                 },
               ),

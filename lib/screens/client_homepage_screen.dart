@@ -25,13 +25,19 @@ class ClientHomepage extends StatefulWidget {
   String email;
   String phone;
   String accountType;
+  String companyName;
+  String companyAddress;
+  String companyProfession;
   ClientHomepage(
       {super.key,
       required this.name,
       required this.accountType,
       required this.profile,
       required this.email,
-      required this.phone});
+      required this.phone,
+      required this.companyAddress,
+      required this.companyName,
+      required this.companyProfession});
 
   @override
   State<ClientHomepage> createState() => _ClientHomepageState();
@@ -87,6 +93,9 @@ class _ClientHomepageState extends State<ClientHomepage> {
                             phone: widget.phone,
                             email: widget.email,
                             accountType: widget.accountType,
+                            companyAddress: widget.companyAddress,
+                            companyName: widget.companyName,
+                            companyProfession: widget.companyProfession,
                           ));
                         },
                         child: CircleAvatar(

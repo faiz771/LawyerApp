@@ -24,6 +24,7 @@ class SignUpController extends GetxController {
   late SingleValueDropDownController accounttypeController;
 
   final phoneController = TextEditingController();
+  final countryCodeCountry = TextEditingController();
 
   Future<void> signUp() async {
     String url = "${Api.ApiBaseUrl}/register";
@@ -34,6 +35,7 @@ class SignUpController extends GetxController {
       'account_type': accounttypeController.dropDownValue!.name,
       'email': emailController.text,
       'password': passwordController.text,
+      'Country_code': countryCodeCountry.text,
       'password_confirmation': confirmPasswordController.text,
     };
     if (accounttypeController.dropDownValue != null &&

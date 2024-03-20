@@ -54,6 +54,9 @@ class LoginController extends GetxController {
             email: user.value!.email,
             phone: user.value!.phone,
             accountType: user.value!.accountType!,
+            companyAddress: user.value!.companyAddress!,
+            companyName: user.value!.companyName!,
+            companyProfession: user.value!.company_profession!,
           ));
         } else if (role == 0) {
           Get.offAll(ClientHomepage(
@@ -62,6 +65,9 @@ class LoginController extends GetxController {
             profile: user.value!.profile_path,
             email: user.value!.email,
             phone: user.value!.phone,
+            companyAddress: user.value!.companyAddress!,
+            companyName: user.value!.companyName!,
+            companyProfession: user.value!.company_profession!,
           ));
         }
         // Save the token in SharedPreferences

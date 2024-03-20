@@ -11,6 +11,7 @@ class EditProfileController extends GetxController {
   final companyNameController = TextEditingController();
   final companyProfessionController = TextEditingController();
   final companyLocationController = TextEditingController();
+
   late SingleValueDropDownController accounttypeController;
 
   final phoneController = TextEditingController();

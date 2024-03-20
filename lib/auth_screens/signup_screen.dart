@@ -21,7 +21,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String completeNumber = '';
   final SignUpController controller = Get.put(SignUpController());
 
   late SingleValueDropDownController _rolecontroller;
@@ -178,10 +177,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             color: Colors.red, fontWeight: FontWeight.bold),
                       ),
                       onChanged: (phone) {
-                        completeNumber = phone.completeNumber;
+                        setState(() {
+                          controller.phoneController.text = phone.number.tr;
+                          controller.countryCodeCountry.text =
+                              phone.countryCode.tr;
+                        });
                       },
                     ),
-
                     // DropDownTextField(dropDownList: const [
                     //   DropDownValueModel(
                     //     name: "company",
@@ -505,8 +507,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           controller.phoneController.text
                                               .isNotEmpty) {
                                         controller.isLoading.value = true;
-                                        controller.phoneController.text =
-                                            completeNumber;
 
                                         controller.signUp();
                                         // print(object)
