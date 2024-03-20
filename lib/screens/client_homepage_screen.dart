@@ -20,24 +20,8 @@ import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class ClientHomepage extends StatefulWidget {
-  String name;
-  String profile;
-  String email;
-  String phone;
-  String accountType;
-  String companyName;
-  String companyAddress;
-  String companyProfession;
-  ClientHomepage(
-      {super.key,
-      required this.name,
-      required this.accountType,
-      required this.profile,
-      required this.email,
-      required this.phone,
-      required this.companyAddress,
-      required this.companyName,
-      required this.companyProfession});
+  UserModel user;
+  ClientHomepage({super.key, required this.user});
 
   @override
   State<ClientHomepage> createState() => _ClientHomepageState();
@@ -76,184 +60,198 @@ class _ClientHomepageState extends State<ClientHomepage> {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 30.h,
+            child: Scaffold(
+              floatingActionButton: Container(
+                decoration: BoxDecoration(
+                  color: AppColor.teelColor,
+                  borderRadius: BorderRadius.circular(
+                    12,
                   ),
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Get.to(ProfileSettingScreen(
-                            name: widget.name,
-                            profile: widget.profile,
-                            phone: widget.phone,
-                            email: widget.email,
-                            accountType: widget.accountType,
-                            companyAddress: widget.companyAddress,
-                            companyName: widget.companyName,
-                            companyProfession: widget.companyProfession,
-                          ));
-                        },
-                        child: CircleAvatar(
-                          radius: 30,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(widget.profile))),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Hi, Welcome Back!',
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                              Text(
-                                widget.name,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.to(const Notificationscreen());
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset(
+                    'assets/images/chat.png',
+                    scale: 13,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 30.h,
+                    ),
+                    Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Get.to(ProfileSettingScreen(
+                              user: widget.user,
+                            ));
+                          },
                           child: CircleAvatar(
-                              backgroundColor: Colors.grey[300],
-                              child: const Icon(Icons.notifications)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  // SizedBox(
-                  //   height: 20.h,
-                  // ),
-                  // MyTextField(hinttext: 'Search', icon: Icons.search),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  // Container(
-                  //   margin: const EdgeInsets.all(8),
-                  //   padding: const EdgeInsets.all(8),
-                  //   decoration: BoxDecoration(
-                  //     borderRadius: BorderRadius.circular(15),
-                  //     color: Colors.white,
-                  //     boxShadow: [
-                  //       BoxShadow(
-                  //         color: Colors.grey.withOpacity(0.5),
-                  //         spreadRadius: 5,
-                  //         blurRadius: 7,
-                  //         offset: const Offset(0, 3),
-                  //       ),
-                  //     ],
-                  //   ),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //     children: [
-                  //       Image.asset(
-                  //         'assets/images/book_consultaion.png',
-                  //         scale: 10,
-                  //       ),
-                  //       const Text(
-                  //         'Book Consultation Now',
-                  //         style: TextStyle(
-                  //             fontSize: 20, fontWeight: FontWeight.bold),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: BookConsultationButton(),
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  const Text(
-                    "Upcoming Appointnments",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      // const HomepageIconsWithTextTemplate(),
-                      CarouselSlider(
-                        options: CarouselOptions(
-                          height: 210,
-                          enlargeCenterPage: true,
-                          autoPlay: true,
-                          autoPlayCurve: Curves.fastOutSlowIn,
-                          enableInfiniteScroll: true,
-                          autoPlayAnimationDuration:
-                              const Duration(milliseconds: 800),
-                          viewportFraction: 1,
-                        ),
-                        items: [
-                          UpcomingBookingScreen(
-                            button1: false,
-                            onPressed1: () {
-                              // Handle button 1 press
-                            },
-                            button1title: 'Reschedule',
+                            radius: 30,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          widget.user.profile_path!))),
+                            ),
                           ),
-                          // Add more instances of UpcomingBookingScreen for each item in the carousel
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 10.w),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Hi, Welcome Back!',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                Text(
+                                  widget.user.name,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.to(const Notificationscreen());
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12.w),
+                            child: CircleAvatar(
+                                backgroundColor: Colors.grey[300],
+                                child: const Icon(Icons.notifications)),
+                          ),
+                        ),
+                      ],
+                    ),
+                    // SizedBox(
+                    //   height: 20.h,
+                    // ),
+                    // MyTextField(hinttext: 'Search', icon: Icons.search),
+                    SizedBox(
+                      height: 10.h,
+                    ),
 
-                      // Padding(
-                      //   padding:
-                      //       EdgeInsets.only(right: 10.w, top: 5.h, bottom: 2.h),
-                      //   child: InkWell(
-                      //       onTap: () {
-                      //         Get.to(const AllLawyerScreen());
-                      //       },
-                      //       child: const Text('See All')),
-                      // ),
-                      // LawyerSliderViewTemplate(),
-                      // RoundedButton(
-                      //     text: 'Top Rated Lawyers',
-                      //     onPressed: () {
-                      //       Get.to(AllLawyerScreen());
-                      //     }),
-                      //LawyerSliderViewTemplate()
-                    ],
-                  ),
-                  //BlogScreen(),
-                  const Text(
-                    "Blogs Podcasts",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  ArticleCarouselSlider(),
-                  const SizedBox(
-                    height: 10,
-                  )
-                ],
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    // Container(
+                    //   margin: const EdgeInsets.all(8),
+                    //   padding: const EdgeInsets.all(8),
+                    //   decoration: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(15),
+                    //     color: Colors.white,
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: Colors.grey.withOpacity(0.5),
+                    //         spreadRadius: 5,
+                    //         blurRadius: 7,
+                    //         offset: const Offset(0, 3),
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //     children: [
+                    //       Image.asset(
+                    //         'assets/images/book_consultaion.png',
+                    //         scale: 10,
+                    //       ),
+                    //       const Text(
+                    //         'Book Consultation Now',
+                    //         style: TextStyle(
+                    //             fontSize: 20, fontWeight: FontWeight.bold),
+                    //       )
+                    //     ],
+                    //   ),
+                    // ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      child: BookConsultationButton(),
+                    ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    const Text(
+                      "Upcoming Appointnments",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        // const HomepageIconsWithTextTemplate(),
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            height: 210,
+                            enlargeCenterPage: true,
+                            autoPlay: true,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: true,
+                            autoPlayAnimationDuration:
+                                const Duration(milliseconds: 800),
+                            viewportFraction: 1,
+                          ),
+                          items: [
+                            UpcomingBookingScreen(
+                              button1: false,
+                              onPressed1: () {
+                                // Handle button 1 press
+                              },
+                              button1title: 'Reschedule',
+                            ),
+                            // Add more instances of UpcomingBookingScreen for each item in the carousel
+                          ],
+                        ),
+
+                        // Padding(
+                        //   padding:
+                        //       EdgeInsets.only(right: 10.w, top: 5.h, bottom: 2.h),
+                        //   child: InkWell(
+                        //       onTap: () {
+                        //         Get.to(const AllLawyerScreen());
+                        //       },
+                        //       child: const Text('See All')),
+                        // ),
+                        // LawyerSliderViewTemplate(),
+                        // RoundedButton(
+                        //     text: 'Top Rated Lawyers',
+                        //     onPressed: () {
+                        //       Get.to(AllLawyerScreen());
+                        //     }),
+                        //LawyerSliderViewTemplate()
+                      ],
+                    ),
+                    //BlogScreen(),
+                    const Text(
+                      "Blogs Podcasts",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    ArticleCarouselSlider(),
+                    const SizedBox(
+                      height: 10,
+                    )
+                  ],
+                ),
               ),
             ),
           ),

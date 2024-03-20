@@ -20,7 +20,6 @@ class ConsultationForm extends StatefulWidget {
 
 class _ConsultationFormState extends State<ConsultationForm> {
   final _formKey = GlobalKey<FormState>(); // GlobalKey for the Form
-
   var consultationType;
   var caseDescription;
   var country;

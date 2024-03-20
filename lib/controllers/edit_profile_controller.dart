@@ -1,9 +1,15 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'package:lawyerapp/controllers/signup_controller.dart';
+import 'package:lawyerapp/controllers/user_controller.dart';
+import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
+import 'package:lawyerapp/utils/api_base_url.dart';
 
 class EditProfileController extends GetxController {
   final nameController = TextEditingController();
@@ -13,7 +19,7 @@ class EditProfileController extends GetxController {
   final companyLocationController = TextEditingController();
 
   late SingleValueDropDownController accounttypeController;
-
+  final UserController userController = Get.put(UserController());
   final phoneController = TextEditingController();
   final ImagePicker picker = ImagePicker();
   RxBool isloading = false.obs;
@@ -28,6 +34,68 @@ class EditProfileController extends GetxController {
       }
     } catch (e) {
       print('Error picking image: $e');
+    }
+  }
+
+  Future<void> updateProfile(File? imageFile, String countryCode) async {
+    final SharedPreferencesService prefsService = SharedPreferencesService();
+    final String? token = await prefsService.getToken();
+    try {
+      isloading.value = true;
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('${Api.ApiBaseUrl}/profile/update'),
+      );
+      request.headers.addAll({
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
+
+      request.fields['name'] = nameController.text;
+      request.fields['phone'] = phoneController.text;
+      request.fields['country_code'] = countryCode;
+      request.fields['account_type'] =
+          accounttypeController.dropDownValue!.name;
+      accounttypeController.dropDownValue!.name == 'Personal'
+          ? null
+          : request.fields['company_name'] = companyNameController.text;
+      accounttypeController.dropDownValue!.name == 'Personal'
+          ? null
+          : request.fields['company_profession'] =
+              companyProfessionController.text;
+      accounttypeController.dropDownValue!.name == 'Personal'
+          ? null
+          : request.fields['company_address'] = companyLocationController.text;
+      if (imageFile != null) {
+        request.files.add(
+          await http.MultipartFile.fromPath('profile', imageFile.path),
+        );
+      }
+
+      var response = await request.send();
+      var responseBody = await response.stream.bytesToString();
+
+      // Parse the response body JSON
+      var jsonResponse = json.decode(responseBody);
+      print(jsonResponse);
+      var message = jsonResponse['message'][0];
+      // Extract the message
+      // var message = jsonResponse['message'];
+
+      if (response.statusCode == 200) {
+        showStylishBottomToast(message);
+        isloading.value = false;
+        await userController.getUserDetails();
+        // settingsController.jumpToPages(0);
+      } else {
+        // DioClient.get().toAst(message);
+        showStylishBottomToast(message);
+        print('Failed to update profile. Status code: ${response.statusCode}');
+        isloading.value = false;
+      }
+    } catch (e) {
+      print('Error updating profile: $e');
+      isloading.value = false;
     }
   }
 

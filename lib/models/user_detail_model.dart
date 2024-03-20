@@ -6,7 +6,7 @@ class UserModel {
   final String? companyName;
   final String? companyAddress;
   final int? lawyerType;
-  final String profile_path;
+  final String? profile_path;
   final String? lawyerExperience;
   final String? lawyerEducation;
   final String? lawyerAbout;
@@ -19,15 +19,17 @@ class UserModel {
   final int? otp;
   final String? otpExpireAt;
   final int isVerified;
-  final String createdAt;
-  final String updatedAt;
+  final String? createdAt;
+  final String? updatedAt;
+  final String? countryCode;
 
   UserModel({
     required this.id,
     required this.name,
     required this.phone,
-    required this.profile_path,
-    required this.company_profession,
+    this.profile_path,
+    this.company_profession,
+    this.countryCode,
     this.accountType,
     this.companyName,
     this.companyAddress,
@@ -43,8 +45,8 @@ class UserModel {
     this.otp,
     this.otpExpireAt,
     required this.isVerified,
-    required this.createdAt,
-    required this.updatedAt,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -53,17 +55,18 @@ class UserModel {
       name: json['name'],
       phone: json['phone'],
       accountType: json['account_type'],
-      companyName: json['company_name'],
-      companyAddress: json['company_address'],
-      company_profession: json['company_profession'],
-      lawyerType: json['lawyer_type'],
-      lawyerExperience: json['lawyer_experience'],
-      lawyerEducation: json['lawyer_education'],
-      lawyerAbout: json['lawyer_about'],
-      lawyerFees: json['lawyer_fees'],
+      companyName: json['company_name'] ?? '',
+      companyAddress: json['company_address'] ?? '',
+      company_profession: json['company_profession'] ?? '',
+      lawyerType: json['lawyer_type'] ?? 0,
+      lawyerExperience: json['lawyer_experience'] ?? '',
+      lawyerEducation: json['lawyer_education'] ?? '',
+      lawyerAbout: json['lawyer_about'] ?? '',
+      lawyerFees: json['lawyer_fees'] ?? 0,
       email: json['email'],
       emailVerifiedAt: json['email_verified_at'],
       profile: json['profile'],
+      countryCode: json['country_code'] ?? '+1',
       profile_path: json['profile_path'] ??
           'https://huntfish-live.azsolutionspk.com/uploads/profiles/sample.png',
       role: json['role'],

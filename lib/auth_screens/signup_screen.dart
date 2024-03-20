@@ -180,7 +180,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         setState(() {
                           controller.phoneController.text = phone.number.tr;
                           controller.countryCodeCountry.text =
-                              phone.countryCode.tr;
+                              phone.countryISOCode.tr;
                         });
                       },
                     ),
@@ -505,10 +505,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ? () {
                                       if (_formKey.currentState!.validate() &&
                                           controller.phoneController.text
+                                              .isNotEmpty &&
+                                          controller.countryCodeCountry.text
                                               .isNotEmpty) {
                                         controller.isLoading.value = true;
-
-                                        controller.signUp();
+                                        print(
+                                            'Country Code ${controller.countryCodeCountry.text}');
+                                        print(
+                                            'Country Code ${controller.phoneController.text}');
+                                        controller.signUp(
+                                            controller.countryCodeCountry.text,
+                                            controller.phoneController.text);
                                         // print(object)
                                         // Get.to(const SelectUserTypeScreen());
                                       }

@@ -49,25 +49,11 @@ class LoginController extends GetxController {
 
         if (role == 1) {
           Get.offAll(LawyerHomepage(
-            name: user.value!.name,
-            profile: user.value!.profile_path,
-            email: user.value!.email,
-            phone: user.value!.phone,
-            accountType: user.value!.accountType!,
-            companyAddress: user.value!.companyAddress!,
-            companyName: user.value!.companyName!,
-            companyProfession: user.value!.company_profession!,
+            user: userDetail,
           ));
         } else if (role == 0) {
           Get.offAll(ClientHomepage(
-            accountType: user.value!.accountType!,
-            name: user.value!.name,
-            profile: user.value!.profile_path,
-            email: user.value!.email,
-            phone: user.value!.phone,
-            companyAddress: user.value!.companyAddress!,
-            companyName: user.value!.companyName!,
-            companyProfession: user.value!.company_profession!,
+            user: userDetail,
           ));
         }
         // Save the token in SharedPreferences

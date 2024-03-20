@@ -48,25 +48,11 @@ class UserController extends GetxController {
           update();
           if (userDetail.role == 1) {
             Get.offAll(LawyerHomepage(
-              name: user.value!.name,
-              profile: user.value!.profile_path,
-              email: user.value!.email,
-              phone: user.value!.phone,
-              accountType: user.value!.accountType!,
-              companyAddress: user.value!.companyAddress!,
-              companyName: user.value!.companyName!,
-              companyProfession: user.value!.company_profession!,
+              user: userDetail,
             ));
           } else if (userDetail.role == 0) {
             Get.offAll(ClientHomepage(
-              name: user.value!.name,
-              profile: user.value!.profile_path,
-              email: user.value!.email,
-              phone: user.value!.phone,
-              accountType: user.value!.accountType!,
-              companyAddress: user.value!.companyAddress!,
-              companyName: user.value!.companyName!,
-              companyProfession: user.value!.company_profession!,
+              user: userDetail,
             ));
           }
         } else {

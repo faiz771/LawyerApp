@@ -6,6 +6,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
+import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/analytics_screen.dart';
 import 'package:lawyerapp/screens/appointment_detail_screen.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
@@ -17,24 +18,8 @@ import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 class LawyerHomepage extends StatefulWidget {
-  String name;
-  String profile;
-  String email;
-  String phone;
-  String accountType;
-  String companyName;
-  String companyAddress;
-  String companyProfession;
-  LawyerHomepage(
-      {super.key,
-      required this.name,
-      required this.profile,
-      required this.email,
-      required this.phone,
-      required this.accountType,
-      required this.companyAddress,
-      required this.companyName,
-      required this.companyProfession});
+  UserModel user;
+  LawyerHomepage({super.key, required this.user});
 
   @override
   State<LawyerHomepage> createState() => _LawyerHomepageState();
@@ -73,14 +58,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                       InkWell(
                         onTap: () {
                           Get.to(ProfileSettingScreen(
-                            name: widget.name,
-                            profile: widget.profile,
-                            email: widget.email,
-                            phone: widget.phone,
-                            accountType: widget.accountType,
-                            companyAddress: widget.companyAddress,
-                            companyName: widget.companyName,
-                            companyProfession: widget.companyProfession,
+                            user: widget.user,
                           ));
                         },
                         child: CircleAvatar(
@@ -90,7 +68,8 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(widget.profile))),
+                                    image: NetworkImage(
+                                        widget.user.profile_path!))),
                           ),
                         ),
                       ),
@@ -106,7 +85,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                                 style: TextStyle(color: Colors.grey),
                               ),
                               Text(
-                                widget.name,
+                                widget.user.name,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ],

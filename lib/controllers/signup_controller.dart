@@ -26,18 +26,20 @@ class SignUpController extends GetxController {
   final phoneController = TextEditingController();
   final countryCodeCountry = TextEditingController();
 
-  Future<void> signUp() async {
+  Future<void> signUp(code, number) async {
     String url = "${Api.ApiBaseUrl}/register";
     print('Api: $url');
     Map<String, dynamic> body = {
       'name': nameController.text,
-      'phone': phoneController.text,
+      'phone': number,
       'account_type': accounttypeController.dropDownValue!.name,
       'email': emailController.text,
       'password': passwordController.text,
-      'Country_code': countryCodeCountry.text,
+      'country_code': code,
       'password_confirmation': confirmPasswordController.text,
     };
+    print('Country Code $number');
+    print('Number $code');
     if (accounttypeController.dropDownValue != null &&
         accounttypeController.dropDownValue!.name == 'Company') {
       // Add company-related variables
