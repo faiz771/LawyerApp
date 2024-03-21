@@ -10,6 +10,9 @@ import 'package:lawyerapp/utils/app_constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ChatController extends GetxController {
   RxString chatGptKey = ''.obs;
 
@@ -151,7 +154,7 @@ class _ChatPageState extends State<ChatPage> {
         backgroundColor: AppColor.teelColor,
         centerTitle: true,
         title: Text(
-          'AI Assistant',
+          AppLocalizations.of(context)!.ai_assistant,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
@@ -170,7 +173,7 @@ class _ChatPageState extends State<ChatPage> {
                         ),
                         Center(
                           child: Text(
-                            'Welcome to Moza Al-Shehhi Law Firm\'s AI Assistant! Feel free to ask any questions you may have.',
+                            AppLocalizations.of(context)!.welcomeAi,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: AppColor.teelColor,
@@ -281,7 +284,7 @@ class _ChatPageState extends State<ChatPage> {
                       fillColor: Colors.grey[200],
                       filled: true,
                       hintStyle: TextStyle(color: Colors.black),
-                      hintText: 'Message',
+                      hintText: AppLocalizations.of(context)!.message,
                       suffixIcon: Padding(
                         padding: const EdgeInsets.only(right: 5),
                         child: IconButton(

@@ -6,6 +6,8 @@ import 'package:lawyerapp/screens/podcast_view_page.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 import '../models/podcast_model.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PodcastList extends StatefulWidget {
   final bool isFromFavorite;
@@ -46,8 +48,8 @@ class _PodcastListState extends State<PodcastList> {
             child: Center(
               child: Text(
                 widget.isFromFavorite
-                    ? "You haven't added any podcasts to favorites."
-                    : "No podcasts available.",
+                    ? AppLocalizations.of(context)!.no_favorite_podcasts
+                    : AppLocalizations.of(context)!.no_available_podcasts,
                 style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

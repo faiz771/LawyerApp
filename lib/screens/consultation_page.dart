@@ -11,6 +11,9 @@ import 'package:lawyerapp/utils/api_base_url.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ConsultationForm extends StatefulWidget {
   const ConsultationForm({super.key});
 
@@ -106,8 +109,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
               centerTitle: true,
               iconTheme: const IconThemeData(color: Colors.white),
               backgroundColor: AppColor.teelColor,
-              title: const Text(
-                'Book Consultation',
+              title: Text(
+                AppLocalizations.of(context)!.book_consultation,
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
@@ -124,8 +127,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'Select Consultation Type',
+                      Text(
+                        AppLocalizations.of(context)!.select_consultation_type,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
@@ -159,7 +162,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               borderRadius: BorderRadius.circular(24)),
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 15),
-                          hintText: "Select Consultation Type",
+                          hintText: AppLocalizations.of(context)!
+                              .select_consultation_type,
                           fillColor: Colors.grey[200],
                           filled: true,
                           errorBorder: OutlineInputBorder(

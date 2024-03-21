@@ -8,6 +8,9 @@ import 'package:lawyerapp/screens/blog_podcast.dart';
 import 'package:lawyerapp/screens/blog_videos.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class BlogScreen extends StatefulWidget {
   const BlogScreen({super.key});
 
@@ -35,8 +38,8 @@ class _BlogScreenState extends State<BlogScreen>
       appBar: AppBar(
         backgroundColor: AppColor.teelColor,
         centerTitle: true,
-        title: const Text(
-          'Blogs',
+        title: Text(
+          AppLocalizations.of(context)!.blogs,
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         bottom: TabBar(
@@ -45,10 +48,16 @@ class _BlogScreenState extends State<BlogScreen>
               const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           indicatorColor: AppColor.teelColor,
           controller: _tabController,
-          tabs: const [
-            Tab(text: 'Articles', icon: Icon(Icons.article)),
-            Tab(text: 'Videos', icon: Icon(Icons.video_library)),
-            Tab(text: 'Podcasts', icon: Icon(Icons.headset)),
+          tabs: [
+            Tab(
+                text: AppLocalizations.of(context)!.articles,
+                icon: Icon(Icons.article)),
+            Tab(
+                text: AppLocalizations.of(context)!.videos,
+                icon: Icon(Icons.video_library)),
+            Tab(
+                text: AppLocalizations.of(context)!.podcasts,
+                icon: Icon(Icons.headset)),
           ],
         ),
       ),

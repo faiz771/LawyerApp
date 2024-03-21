@@ -7,6 +7,9 @@ import 'package:lawyerapp/controllers/forgot_password_controller.dart';
 import 'package:lawyerapp/controllers/otp_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class VerifyOtpScreen extends StatefulWidget {
   String email = '';
   bool isFromForgot;
@@ -58,7 +61,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                       // ),
                       Center(
                         child: Text(
-                          'Verify Code',
+                          AppLocalizations.of(context)!.verify_code,
                           style: TextStyle(
                               fontSize: 18.sp, fontWeight: FontWeight.bold),
                         ),
@@ -67,7 +70,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                         padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                         child: Center(
                           child: Text(
-                            'Enter the the code we just sent you on your registered Email',
+                            AppLocalizations.of(context)!.enter_code,
                             style: TextStyle(fontSize: 14.sp),
                             textAlign: TextAlign.center,
                           ),
@@ -120,7 +123,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                             )
                           : RoundedButton(
                               Color: AppColor.teelColor,
-                              text: 'Verify',
+                              text: AppLocalizations.of(context)!.verify,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   if (widget.isFromForgot == true) {

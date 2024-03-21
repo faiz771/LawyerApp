@@ -44,7 +44,7 @@ class _ConfirmAppointmentScreenState extends State<ConfirmAppointmentScreen> {
               SizedBox(
                 height: 10.h,
               ),
-              const CalendarTemplate(),
+              //  const CalendarTemplate(),
               SizedBox(
                 height: 10.h,
               ),
@@ -125,8 +125,9 @@ class _ConfirmAppointmentScreenState extends State<ConfirmAppointmentScreen> {
         width: 100.w,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
-            color:
-                isSelected ? const Color.fromRGBO(17, 25, 40, 1) : Colors.grey[300]),
+            color: isSelected
+                ? const Color.fromRGBO(17, 25, 40, 1)
+                : Colors.grey[300]),
         child: Center(
           child: Text(
             buttonText,

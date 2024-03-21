@@ -8,6 +8,9 @@ import 'package:lawyerapp/controllers/change_password_controller.dart';
 import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ChangePasswordScreen extends StatelessWidget {
   String email;
   ChangePasswordScreen({super.key, required this.email});
@@ -52,7 +55,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     // ),
                     Center(
                       child: Text(
-                        'Create New Password',
+                        AppLocalizations.of(context)!.create_new_password,
                         style: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.bold),
                       ),
@@ -61,7 +64,7 @@ class ChangePasswordScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                       child: Center(
                         child: Text(
-                          'Your new password must be different from previously used password',
+                          AppLocalizations.of(context)!.new_password_different,
                           style: TextStyle(fontSize: 14.sp),
                           textAlign: TextAlign.center,
                         ),
@@ -71,10 +74,11 @@ class ChangePasswordScreen extends StatelessWidget {
                         controller: controller.passwordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Password cannot be empty';
+                            return AppLocalizations.of(context)!.password_empty;
                           }
                           if (value.length < 8) {
-                            return 'Password must be at least 8 characters long';
+                            return AppLocalizations.of(context)!
+                                .password_length;
                           }
                           // Add additional password strength checks as needed
                           // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
@@ -82,30 +86,33 @@ class ChangePasswordScreen extends StatelessWidget {
                           // Example: Check for lowercase letters
                           final hasLowercase = RegExp(r'[a-z]').hasMatch(value);
                           if (!hasLowercase) {
-                            return 'Password must contain lowercase letters';
+                            return AppLocalizations.of(context)!
+                                .lowercase_letters;
                           }
 
                           // Example: Check for uppercase letters
                           final hasUppercase = RegExp(r'[A-Z]').hasMatch(value);
                           if (!hasUppercase) {
-                            return 'Password must contain uppercase letters';
+                            return AppLocalizations.of(context)!
+                                .uppercase_letters;
                           }
 
                           // Example: Check for numbers
                           final hasNumber = RegExp(r'[0-9]').hasMatch(value);
                           if (!hasNumber) {
-                            return 'Password must contain numbers';
+                            return AppLocalizations.of(context)!.numbers;
                           }
 
                           // Example: Check for special characters
                           final hasSpecialCharacters =
                               RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
                           if (!hasSpecialCharacters) {
-                            return 'Password must contain special characters';
+                            return AppLocalizations.of(context)!
+                                .special_characters;
                           }
                           // if (controller.passwordController.value !=
                           //     controller.confirmPasswordController.value) {
-                          //   return 'Password and Confirm Password must match.';
+                          //   return AppLocalizations.of(context)!.password_match;
                           // }
                           // Password meets all criteria, so return null indicating validation passed
                           return null;
@@ -118,16 +125,17 @@ class ChangePasswordScreen extends StatelessWidget {
                         icon2: loginController.passToggle.value
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        hinttext: 'Password',
-                        icon: Icons.email_outlined)),
+                        hinttext: AppLocalizations.of(context)!.password,
+                        icon: Icons.lock_outline)),
                     Obx(() => MyTextField(
                         controller: controller.confirmPasswordController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Password cannot be empty';
+                            return AppLocalizations.of(context)!.password_empty;
                           }
                           if (value.length < 8) {
-                            return 'Password must be at least 8 characters long';
+                            return AppLocalizations.of(context)!
+                                .password_length;
                           }
                           // Add additional password strength checks as needed
                           // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
@@ -135,30 +143,33 @@ class ChangePasswordScreen extends StatelessWidget {
                           // Example: Check for lowercase letters
                           final hasLowercase = RegExp(r'[a-z]').hasMatch(value);
                           if (!hasLowercase) {
-                            return 'Password must contain lowercase letters';
+                            return AppLocalizations.of(context)!
+                                .lowercase_letters;
                           }
 
                           // Example: Check for uppercase letters
                           final hasUppercase = RegExp(r'[A-Z]').hasMatch(value);
                           if (!hasUppercase) {
-                            return 'Password must contain uppercase letters';
+                            return AppLocalizations.of(context)!
+                                .uppercase_letters;
                           }
 
                           // Example: Check for numbers
                           final hasNumber = RegExp(r'[0-9]').hasMatch(value);
                           if (!hasNumber) {
-                            return 'Password must contain numbers';
+                            return AppLocalizations.of(context)!.numbers;
                           }
 
                           // Example: Check for special characters
                           final hasSpecialCharacters =
                               RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value);
                           if (!hasSpecialCharacters) {
-                            return 'Password must contain special characters';
+                            return AppLocalizations.of(context)!
+                                .special_characters;
                           }
                           if (controller.passwordController.value !=
                               controller.confirmPasswordController.value) {
-                            return 'Password and Confirm Password must match.';
+                            return AppLocalizations.of(context)!.password_match;
                           }
                           // Password meets all criteria, so return null indicating validation passed
                           return null;
@@ -171,8 +182,9 @@ class ChangePasswordScreen extends StatelessWidget {
                         icon2: loginController.passToggle.value
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        hinttext: 'Confirm Password',
-                        icon: Icons.email_outlined)),
+                        hinttext:
+                            AppLocalizations.of(context)!.confirm_password,
+                        icon: Icons.lock_outline)),
                     SizedBox(
                       height: 15.h,
                     ),
@@ -184,7 +196,7 @@ class ChangePasswordScreen extends StatelessWidget {
                           )
                         : RoundedButton(
                             Color: AppColor.teelColor,
-                            text: 'Reset Password',
+                            text: AppLocalizations.of(context)!.reset_password,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 controller.isLoading.value = true;

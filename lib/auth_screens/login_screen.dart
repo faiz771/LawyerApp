@@ -8,6 +8,9 @@ import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
 
@@ -72,28 +75,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     MyTextField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Email cannot be empty';
+                          return AppLocalizations.of(context)!.email_empty;
                         }
                         // Regular expression for email validation
                         final emailRegex =
                             RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                         if (!emailRegex.hasMatch(value)) {
-                          return 'Invalid email format';
+                          return AppLocalizations.of(context)!
+                              .invalid_email_format;
                         }
                         return null; // Return null if the validation passes
                       },
                       isicon2: false,
                       controller: controller.emailController,
-                      hinttext: 'Your Email',
+                      hinttext: AppLocalizations.of(context)!.email,
                       icon: Icons.email_outlined,
                     ),
                     Obx(() => MyTextField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Password cannot be empty';
+                              return AppLocalizations.of(context)!
+                                  .password_empty;
                             }
                             if (value.length < 8) {
-                              return 'Password must be at least 8 characters long';
+                              return AppLocalizations.of(context)!
+                                  .password_length;
                             }
                             // Add additional password strength checks as needed
                             // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
@@ -138,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ? Icons.visibility_off
                               : Icons.visibility,
                           controller: controller.passwordController,
-                          hinttext: 'Password',
+                          hinttext: AppLocalizations.of(context)!.password,
                           icon: Icons.lock_outline,
                         )),
                     SizedBox(
@@ -150,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         : RoundedButton(
                             Color: AppColor.teelColor,
-                            text: 'Sign In',
+                            text: AppLocalizations.of(context)!.signin,
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 // Validation passed, perform sign-up
@@ -166,7 +172,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Get.to(ForgetPasswordScreen());
                         },
                         child: Text(
-                          'Forget password?',
+                          '${AppLocalizations.of(context)!.forgotpassword}?',
                           style: TextStyle(
                               color: Colors.blue,
                               fontWeight: FontWeight.bold,
@@ -180,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Don\'t have an account yet? ',
+                            AppLocalizations.of(context)!.donthaveaccount + ' ',
                             style: TextStyle(
                               fontSize: 14.sp,
                               color: const Color.fromRGBO(107, 114, 128, 1),
@@ -192,7 +198,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Get.to(const SignUpScreen());
                             },
                             child: Text(
-                              'Sign Up',
+                              AppLocalizations.of(context)!.signup,
                               style: TextStyle(
                                   fontSize: 14.sp,
                                   color: Colors.blue,

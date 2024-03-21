@@ -12,12 +12,15 @@ import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
 import 'package:lawyerapp/screens/chat_bot_screen.dart';
-import 'package:lawyerapp/screens/client_dashboard_screen.dart';
+import 'package:lawyerapp/screens/my_booking_screen.dart';
 import 'package:lawyerapp/screens/consultation_page.dart';
 import 'package:lawyerapp/screens/notification_screen.dart';
 import 'package:lawyerapp/screens/profile_setting_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClientHomepage extends StatefulWidget {
   UserModel user;
@@ -92,15 +95,18 @@ class _ClientHomepageState extends State<ClientHomepage> {
                               user: widget.user,
                             ));
                           },
-                          child: CircleAvatar(
-                            radius: 30,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: NetworkImage(
-                                          widget.user.profile_path!))),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            child: CircleAvatar(
+                              radius: 30,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                            widget.user.profile_path!))),
+                              ),
                             ),
                           ),
                         ),
@@ -111,7 +117,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Hi, Welcome Back!',
+                                  AppLocalizations.of(context)!.welcome_back,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(color: Colors.grey),
                                 ),
@@ -187,8 +193,8 @@ class _ClientHomepageState extends State<ClientHomepage> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    const Text(
-                      "Upcoming Appointnments",
+                    Text(
+                      AppLocalizations.of(context)!.upcoming_appointments,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -216,7 +222,8 @@ class _ClientHomepageState extends State<ClientHomepage> {
                               onPressed1: () {
                                 // Handle button 1 press
                               },
-                              button1title: 'Reschedule',
+                              button1title:
+                                  AppLocalizations.of(context)!.reschedule,
                             ),
                             // Add more instances of UpcomingBookingScreen for each item in the carousel
                           ],
@@ -241,8 +248,8 @@ class _ClientHomepageState extends State<ClientHomepage> {
                       ],
                     ),
                     //BlogScreen(),
-                    const Text(
-                      "Blogs Podcasts",
+                    Text(
+                      AppLocalizations.of(context)!.blogs_podcasts,
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -255,7 +262,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
               ),
             ),
           ),
-          const ClientDashboardScreen(),
+          const MyBookingScreen(),
           // const ProfileSettingScreen(),
           const BlogScreen(),
           ChatPage()
@@ -280,7 +287,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
               scale: 20,
               color: Colors.white,
             ),
-            title: const Text('Home'),
+            title: Text(AppLocalizations.of(context)!.home),
             activeColor: Colors.white,
           ),
           BottomNavyBarItem(
@@ -291,7 +298,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
               scale: 20,
               color: Colors.white,
             ),
-            title: const Text('Bookings'),
+            title: Text(AppLocalizations.of(context)!.bookings),
             activeColor: Colors.white,
           ),
           // BottomNavyBarItem(
@@ -310,7 +317,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
               scale: 22,
               color: Colors.white,
             ),
-            title: const Text('Blogs'),
+            title: Text(AppLocalizations.of(context)!.blogs),
             activeColor: Colors.white,
           ),
           BottomNavyBarItem(
@@ -321,7 +328,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
               scale: 20,
               color: Colors.white,
             ),
-            title: const Text('AI Chat'),
+            title: Text(AppLocalizations.of(context)!.ai_chat),
             activeColor: Colors.white,
           ),
         ],
@@ -395,8 +402,8 @@ class _BookConsultationButtonState extends State<BookConsultationButton>
                   color: Colors.white,
                 ),
                 const SizedBox(width: 8),
-                const Text(
-                  'Book Consultation',
+                Text(
+                  AppLocalizations.of(context)!.book_consultation,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,

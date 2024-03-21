@@ -4,6 +4,8 @@ import 'package:lawyerapp/controllers/blog_controller.dart';
 import 'package:lawyerapp/screens/video_detail_page.dart';
 import 'package:lawyerapp/models/videos_model.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoList extends StatelessWidget {
   final bool isFromFavorite;
@@ -33,8 +35,8 @@ class VideoList extends StatelessWidget {
             child: Center(
               child: Text(
                 isFromFavorite
-                    ? "You haven't added any videos to favorites."
-                    : "No videos available.",
+                    ? AppLocalizations.of(context)!.no_favorite_videos
+                    : AppLocalizations.of(context)!.no_available_videos,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),

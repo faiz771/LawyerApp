@@ -5,6 +5,8 @@ import 'package:lawyerapp/controllers/blog_controller.dart';
 import 'package:lawyerapp/models/article_model.dart';
 import 'package:lawyerapp/screens/Article_view_page.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ArticleListScreen extends StatelessWidget {
   final bool isFromFavorite;
@@ -35,8 +37,9 @@ class ArticleListScreen extends StatelessWidget {
                     child: Center(
                       child: Text(
                         isFromFavorite
-                            ? "You haven't added any articles to favorites."
-                            : "No articles available.",
+                            ? AppLocalizations.of(context)!.no_favorite_articles
+                            : AppLocalizations.of(context)!
+                                .no_available_articles,
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,

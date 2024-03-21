@@ -3,8 +3,11 @@ import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-class ClientDashboardScreen extends StatelessWidget {
-  const ClientDashboardScreen({super.key});
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+class MyBookingScreen extends StatelessWidget {
+  const MyBookingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,11 @@ class ClientDashboardScreen extends StatelessWidget {
           backgroundColor: AppColor.teelColor,
           automaticallyImplyLeading: false,
           centerTitle: true,
-          title: const Text(
-            'My Bookings',
+          title: Text(
+            AppLocalizations.of(context)!.my_bookings,
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
-          bottom: const TabBar(
+          bottom: TabBar(
             physics: BouncingScrollPhysics(),
             indicatorColor: Colors.white,
             labelColor: Colors.white,
@@ -27,9 +30,9 @@ class ClientDashboardScreen extends StatelessWidget {
             labelStyle: TextStyle(fontWeight: FontWeight.bold),
             tabs: [
               Tab(
-                text: 'Upcoming',
+                text: AppLocalizations.of(context)!.upcoming,
               ),
-              Tab(text: 'Completed'),
+              Tab(text: AppLocalizations.of(context)!.completed),
             ],
           ),
         ),
@@ -42,17 +45,17 @@ class ClientDashboardScreen extends StatelessWidget {
                   UpcomingBookingScreen(
                     button1: true,
                     onPressed1: () {},
-                    button1title: 'Reschedule',
+                    button1title: AppLocalizations.of(context)!.reschedule,
                   ),
                   UpcomingBookingScreen(
                     button1: true,
                     onPressed1: () {},
-                    button1title: 'Reschedule',
+                    button1title: AppLocalizations.of(context)!.reschedule,
                   ),
                   UpcomingBookingScreen(
                     button1: true,
                     onPressed1: () {},
-                    button1title: 'Reschedule',
+                    button1title: AppLocalizations.of(context)!.reschedule,
                   ),
                   const SizedBox(
                     height: 10,

@@ -12,6 +12,8 @@ import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
 import 'package:lawyerapp/main.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -73,7 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // ),
                     Center(
                       child: Text(
-                        'Create Account',
+                        AppLocalizations.of(context)!.create_account,
                         style: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.bold),
                       ),
@@ -90,13 +92,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     MyTextField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please Enter Your Name';
+                            return AppLocalizations.of(context)!.enter_name;
                           }
                           return null; // Return null if the validation passes
                         },
                         isicon2: false,
                         controller: controller.nameController,
-                        hinttext: 'Full Name',
+                        hinttext: AppLocalizations.of(context)!.full_name,
                         icon: Icons.person_2_outlined),
                     // Padding(
                     //     padding: EdgeInsets.symmetric(horizontal: 3.h),
@@ -138,7 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                       validator: (phoneNumber) {
                         if (controller.phoneController.text.isEmpty) {
-                          return 'Phone number cannot be empty';
+                          return AppLocalizations.of(context)!.phone_empty;
                         }
                         return null; // Return null if the validation passes
                       },
@@ -152,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       decoration: InputDecoration(
                         fillColor: Colors.grey[200],
                         filled: true,
-                        hintText: 'Phone',
+                        hintText: AppLocalizations.of(context)!.phone,
                         contentPadding: EdgeInsets.symmetric(
                             horizontal: 10, vertical: 10.h),
                         enabledBorder: OutlineInputBorder(
@@ -215,7 +217,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: DropDownTextField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please Select Account Type';
+                            return AppLocalizations.of(context)!
+                                .select_account_type;
                           }
                           return null;
                         } // Return null if the validation passes
@@ -224,7 +227,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         textFieldDecoration: InputDecoration(
                           fillColor: Colors.grey[200],
                           filled: true,
-                          hintText: 'Account Type',
+                          hintText: AppLocalizations.of(context)!.account_type,
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10.h),
                           enabledBorder: OutlineInputBorder(
@@ -248,12 +251,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           errorStyle: TextStyle(
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
-                        dropDownList: const [
+                        dropDownList: [
                           DropDownValueModel(
-                            name: "Company",
+                            name: AppLocalizations.of(context)!.company,
                             value: 0,
                           ),
-                          DropDownValueModel(name: "Personal", value: 1),
+                          DropDownValueModel(
+                              name: AppLocalizations.of(context)!.personal,
+                              value: 1),
                         ],
                         onChanged: (selectedValue) {
                           print("$selectedValue");
@@ -267,44 +272,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ? SizedBox()
                         : controller.accounttypeController.dropDownValue!
                                     .name ==
-                                'Company'
+                                AppLocalizations.of(context)!.company
                             ? Column(
                                 children: [
                                   MyTextField(
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Please Enter Company Name';
+                                          return AppLocalizations.of(context)!
+                                              .enter_company_name;
                                         }
                                         return null; // Return null if the validation passes
                                       },
                                       isicon2: false,
                                       controller:
                                           controller.companyNameController,
-                                      hinttext: 'Company Name',
+                                      hinttext: AppLocalizations.of(context)!
+                                          .company_name,
                                       icon: Icons.person_2_outlined),
                                   MyTextField(
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Please Company Profession';
+                                          return AppLocalizations.of(context)!
+                                              .enter_company_profession;
                                         }
                                         return null; // Return null if the validation passes
                                       },
                                       isicon2: false,
                                       controller: controller
                                           .companyProfessionController,
-                                      hinttext: 'Company Profession',
+                                      hinttext: AppLocalizations.of(context)!
+                                          .company_profession,
                                       icon: Icons.person_2_outlined),
                                   MyTextField(
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Please Enter Company Location';
+                                          return AppLocalizations.of(context)!
+                                              .enter_company_location;
                                         }
                                         return null; // Return null if the validation passes
                                       },
                                       isicon2: false,
                                       controller:
                                           controller.companyLocationController,
-                                      hinttext: 'Company Location',
+                                      hinttext: AppLocalizations.of(context)!
+                                          .company_location,
                                       icon: Icons.person_2_outlined),
                                 ],
                               )
@@ -313,27 +324,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     MyTextField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Email cannot be empty';
+                            return AppLocalizations.of(context)!.email_empty;
                           }
                           // Regular expression for email validation
                           final emailRegex =
                               RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                           if (!emailRegex.hasMatch(value)) {
-                            return 'Invalid email format';
+                            return AppLocalizations.of(context)!
+                                .invalid_email_format;
                           }
                           return null; // Return null if the validation passes
                         },
                         isicon2: false,
                         controller: controller.emailController,
-                        hinttext: 'Email',
+                        hinttext: AppLocalizations.of(context)!.email,
                         icon: Icons.email_outlined),
                     Obx(() => MyTextField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Password cannot be empty';
+                              return AppLocalizations.of(context)!
+                                  .password_empty;
                             }
                             if (value.length < 8) {
-                              return 'Password must be at least 8 characters long';
+                              return AppLocalizations.of(context)!
+                                  .password_length;
                             }
                             // Add additional password strength checks as needed
                             // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
@@ -342,20 +356,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             final hasLowercase =
                                 RegExp(r'[a-z]').hasMatch(value);
                             if (!hasLowercase) {
-                              return 'Password must contain lowercase letters';
+                              return AppLocalizations.of(context)!
+                                  .lowercase_letters;
                             }
 
                             // Example: Check for uppercase letters
                             final hasUppercase =
                                 RegExp(r'[A-Z]').hasMatch(value);
                             if (!hasUppercase) {
-                              return 'Password must contain uppercase letters';
+                              return AppLocalizations.of(context)!
+                                  .uppercase_letters;
                             }
 
                             // Example: Check for numbers
                             final hasNumber = RegExp(r'[0-9]').hasMatch(value);
                             if (!hasNumber) {
-                              return 'Password must contain numbers';
+                              return AppLocalizations.of(context)!.numbers;
                             }
 
                             // Example: Check for special characters
@@ -363,7 +379,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 RegExp(r'[!@#$%^&*(),.?":{}|<>]')
                                     .hasMatch(value);
                             if (!hasSpecialCharacters) {
-                              return 'Password must contain special characters';
+                              return AppLocalizations.of(context)!
+                                  .special_characters;
                             }
                             // if (controller.passwordController.value !=
                             //     controller.confirmPasswordController.value) {
@@ -381,17 +398,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ? Icons.visibility_off
                               : Icons.visibility,
                           controller: controller.passwordController,
-                          hinttext: 'Password',
+                          hinttext: AppLocalizations.of(context)!.password,
                           icon: Icons.lock_outline,
                         )),
 
                     Obx(() => MyTextField(
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Password cannot be empty';
+                              return AppLocalizations.of(context)!
+                                  .password_empty;
                             }
                             if (value.length < 8) {
-                              return 'Password must be at least 8 characters long';
+                              return AppLocalizations.of(context)!
+                                  .password_length;
                             }
                             // Add additional password strength checks as needed
                             // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
@@ -400,20 +419,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             final hasLowercase =
                                 RegExp(r'[a-z]').hasMatch(value);
                             if (!hasLowercase) {
-                              return 'Password must contain lowercase letters';
+                              return AppLocalizations.of(context)!
+                                  .lowercase_letters;
                             }
 
                             // Example: Check for uppercase letters
                             final hasUppercase =
                                 RegExp(r'[A-Z]').hasMatch(value);
                             if (!hasUppercase) {
-                              return 'Password must contain uppercase letters';
+                              return AppLocalizations.of(context)!
+                                  .uppercase_letters;
                             }
 
                             // Example: Check for numbers
                             final hasNumber = RegExp(r'[0-9]').hasMatch(value);
                             if (!hasNumber) {
-                              return 'Password must contain numbers';
+                              return AppLocalizations.of(context)!.numbers;
                             }
 
                             // Example: Check for special characters
@@ -421,11 +442,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 RegExp(r'[!@#$%^&*(),.?":{}|<>]')
                                     .hasMatch(value);
                             if (!hasSpecialCharacters) {
-                              return 'Password must contain special characters';
+                              return AppLocalizations.of(context)!
+                                  .special_characters;
                             }
                             if (controller.passwordController.value !=
                                 controller.confirmPasswordController.value) {
-                              return 'Password and Confirm Password must match.';
+                              return AppLocalizations.of(context)!
+                                  .password_match;
                             }
                             // Password meets all criteria, so return null indicating validation passed
                             return null;
@@ -439,7 +462,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ? Icons.visibility_off
                               : Icons.visibility,
                           controller: controller.confirmPasswordController,
-                          hinttext: 'Confirm Password',
+                          hinttext:
+                              AppLocalizations.of(context)!.confirm_password,
                           icon: Icons.lock_outline,
                         )),
                     SizedBox(
@@ -482,8 +506,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               ),
                             )),
                         const SizedBox(width: 10),
-                        const Text(
-                          'Agree to Terms & Conditions',
+                        Text(
+                          AppLocalizations.of(context)!.agree_terms_conditions,
                           style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
                       ],
@@ -500,7 +524,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Color: controller.agreed.value
                                   ? AppColor.teelColor
                                   : AppColor.greyColor,
-                              text: 'Create Account',
+                              text:
+                                  AppLocalizations.of(context)!.create_account,
                               onPressed: controller.agreed.value
                                   ? () {
                                       if (_formKey.currentState!.validate() &&
@@ -528,7 +553,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Do you have an account? ',
+                            '${AppLocalizations.of(context)!.donthaveaccount} ',
                             style: TextStyle(
                               fontSize: 14.sp,
                               color: const Color.fromRGBO(107, 114, 128, 1),
@@ -540,7 +565,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               Get.to(LoginScreen());
                             },
                             child: Text(
-                              'Sign In',
+                              AppLocalizations.of(context)!.signin,
                               style: TextStyle(
                                   fontSize: 14.sp,
                                   color: Colors.blue,

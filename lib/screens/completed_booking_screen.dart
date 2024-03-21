@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class CompletedBookingScreen extends StatelessWidget {
   CompletedBookingScreen({super.key, required this.showbutton});
   bool showbutton = true;
@@ -98,7 +101,7 @@ class CompletedBookingScreen extends StatelessWidget {
                   showbutton
                       ? RoundedButton(
                           Color: AppColor.teelColor,
-                          text: 'Re-book',
+                          text: AppLocalizations.of(context)!.reschedule,
                           onPressed: () {})
                       : const SizedBox.shrink()
                   // Row(

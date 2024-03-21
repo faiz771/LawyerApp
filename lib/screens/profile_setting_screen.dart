@@ -18,6 +18,9 @@ import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ProfileSettingScreen extends StatefulWidget {
   UserModel user;
   ProfileSettingScreen({super.key, required this.user});
@@ -39,7 +42,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
           backgroundColor: AppColor.teelColor,
           centerTitle: true,
           title: Text(
-            'Profile Settings',
+            AppLocalizations.of(context)!.profileSettingsTitle,
             style: TextStyle(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.bold,
@@ -81,7 +84,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   size: 20,
                 ),
                 title: Text(
-                  'Edit Profile',
+                  AppLocalizations.of(context)!.editProfile,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -103,7 +106,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   size: 20,
                 ),
                 title: Text(
-                  'Favorite',
+                  AppLocalizations.of(context)!.favorite,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -121,7 +124,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   size: 20,
                 ),
                 title: Text(
-                  'Settings',
+                  AppLocalizations.of(context)!.settings,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -137,7 +140,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   size: 20,
                 ),
                 title: Text(
-                  'Change Password',
+                  AppLocalizations.of(context)!.changePassword,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -155,7 +158,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   size: 20,
                 ),
                 title: Text(
-                  'Notifications',
+                  AppLocalizations.of(context)!.notifications,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -171,7 +174,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   size: 20,
                 ),
                 title: Text(
-                  'About Us',
+                  AppLocalizations.of(context)!.aboutUs,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -187,7 +190,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   size: 20,
                 ),
                 title: Text(
-                  'Help and Support',
+                  AppLocalizations.of(context)!.helpAndSupport,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -214,7 +217,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
               // ),
               ListTile(
                 title: Text(
-                  'Logout',
+                  AppLocalizations.of(context)!.logout,
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -234,17 +237,17 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const Text(
-                                  'Logout',
+                                Text(
+                                  AppLocalizations.of(context)!.logout,
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 ),
                                 const SizedBox(height: 16),
-                                const Center(
-                                    child: Text(
-                                        'Are you sure you want to logout')),
+                                Center(
+                                    child: Text(AppLocalizations.of(context)!
+                                        .logoutConfirmationMessage)),
                                 const SizedBox(height: 20),
                                 // Row(
                                 //   mainAxisSize: MainAxisSize.min,
@@ -255,7 +258,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                                 // ),
                                 RoundedButton(
                                   Color: AppColor.teelColor,
-                                  text: 'Logout',
+                                  text: AppLocalizations.of(context)!.logout,
                                   onPressed: () {
                                     SharedPreferencesService().clearToken();
                                     Get.offAll(LoginScreen());
@@ -304,7 +307,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
                           child: Text(
-                            'Change Password',
+                            AppLocalizations.of(context)!.changePassword,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -317,10 +320,12 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                                 profileSettingController.passwordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Password cannot be empty';
+                                return AppLocalizations.of(context)!
+                                    .password_empty;
                               }
                               if (value.length < 8) {
-                                return 'Password must be at least 8 characters long';
+                                return AppLocalizations.of(context)!
+                                    .password_length;
                               }
                               // Add additional password strength checks as needed
                               // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
@@ -329,21 +334,23 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                               final hasLowercase =
                                   RegExp(r'[a-z]').hasMatch(value);
                               if (!hasLowercase) {
-                                return 'Password must contain lowercase letters';
+                                return AppLocalizations.of(context)!
+                                    .lowercase_letters;
                               }
 
                               // Example: Check for uppercase letters
                               final hasUppercase =
                                   RegExp(r'[A-Z]').hasMatch(value);
                               if (!hasUppercase) {
-                                return 'Password must contain uppercase letters';
+                                return AppLocalizations.of(context)!
+                                    .uppercase_letters;
                               }
 
                               // Example: Check for numbers
                               final hasNumber =
                                   RegExp(r'[0-9]').hasMatch(value);
                               if (!hasNumber) {
-                                return 'Password must contain numbers';
+                                return AppLocalizations.of(context)!.numbers;
                               }
 
                               // Example: Check for special characters
@@ -351,16 +358,19 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                                   RegExp(r'[!@#$%^&*(),.?":{}|<>]')
                                       .hasMatch(value);
                               if (!hasSpecialCharacters) {
-                                return 'Password must contain special characters';
+                                return AppLocalizations.of(context)!
+                                    .special_characters;
                               }
                               // if (controller.passwordController.value !=
                               //     controller.confirmPasswordController.value) {
-                              //   return 'Password and Confirm Password must match.';
+                              //   return AppLocalizations.of(context)!
+                              //       .password_match;
                               // }
                               // Password meets all criteria, so return null indicating validation passed
                               return null;
                             },
-                            hinttext: 'Enter New Password',
+                            hinttext: AppLocalizations.of(context)!
+                                .enter_new_password,
                             //  controller: newPasswordController,
                             icon: Icons.lock,
                             isicon2: true,
@@ -380,10 +390,12 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                                 .confirmPasswordController,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return 'Password cannot be empty';
+                                return AppLocalizations.of(context)!
+                                    .password_empty;
                               }
                               if (value.length < 8) {
-                                return 'Password must be at least 8 characters long';
+                                return AppLocalizations.of(context)!
+                                    .password_length;
                               }
                               // Add additional password strength checks as needed
                               // For example, you can check for the presence of uppercase letters, lowercase letters, numbers, and special characters
@@ -392,21 +404,23 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                               final hasLowercase =
                                   RegExp(r'[a-z]').hasMatch(value);
                               if (!hasLowercase) {
-                                return 'Password must contain lowercase letters';
+                                return AppLocalizations.of(context)!
+                                    .lowercase_letters;
                               }
 
                               // Example: Check for uppercase letters
                               final hasUppercase =
                                   RegExp(r'[A-Z]').hasMatch(value);
                               if (!hasUppercase) {
-                                return 'Password must contain uppercase letters';
+                                return AppLocalizations.of(context)!
+                                    .uppercase_letters;
                               }
 
                               // Example: Check for numbers
                               final hasNumber =
                                   RegExp(r'[0-9]').hasMatch(value);
                               if (!hasNumber) {
-                                return 'Password must contain numbers';
+                                return AppLocalizations.of(context)!.numbers;
                               }
 
                               // Example: Check for special characters
@@ -414,18 +428,21 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                                   RegExp(r'[!@#$%^&*(),.?":{}|<>]')
                                       .hasMatch(value);
                               if (!hasSpecialCharacters) {
-                                return 'Password must contain special characters';
+                                return AppLocalizations.of(context)!
+                                    .special_characters;
                               }
                               if (profileSettingController
                                       .passwordController.value !=
                                   profileSettingController
                                       .confirmPasswordController.value) {
-                                return 'Password and Confirm Password must match.';
+                                return AppLocalizations.of(context)!
+                                    .password_match;
                               }
                               // Password meets all criteria, so return null indicating validation passed
                               return null;
                             },
-                            hinttext: 'Confrim New Passowrd',
+                            hinttext:
+                                AppLocalizations.of(context)!.confirm_password,
                             // controller: confirmPassowordController,
                             icon: Icons.lock, isicon2: true,
                             icon2: loginController.passToggle.value
@@ -448,7 +465,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                               ),
                             )
                           : RoundedButton(
-                              text: 'Save Changes',
+                              text: AppLocalizations.of(context)!.save_changes,
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   profileSettingController.isLoading.value =

@@ -7,6 +7,9 @@ import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/forgot_password_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ForgetPasswordScreen extends StatelessWidget {
   ForgetPasswordScreen({super.key});
   final ForgotPasswordController controller =
@@ -47,7 +50,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                       // ),
                       Center(
                         child: Text(
-                          'Forget Password?',
+                          AppLocalizations.of(context)!.forgotpassword,
                           style: TextStyle(
                               fontSize: 18.sp, fontWeight: FontWeight.bold),
                         ),
@@ -56,7 +59,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                         padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
                         child: Center(
                           child: Text(
-                            'Enter your Email, we will send you a verification code.',
+                            AppLocalizations.of(context)!.please_enter_email,
                             style: TextStyle(fontSize: 14.sp),
                             textAlign: TextAlign.center,
                           ),
@@ -65,19 +68,20 @@ class ForgetPasswordScreen extends StatelessWidget {
                       MyTextField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Email cannot be empty';
+                            return AppLocalizations.of(context)!.email_empty;
                           }
                           // Regular expression for email validation
                           final emailRegex =
                               RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
                           if (!emailRegex.hasMatch(value)) {
-                            return 'Invalid email format';
+                            return AppLocalizations.of(context)!
+                                .invalid_email_format;
                           }
                           return null; // Return null if the validation passes
                         },
                         isicon2: false,
                         controller: controller.emailController,
-                        hinttext: 'Your Email',
+                        hinttext: AppLocalizations.of(context)!.email,
                         icon: Icons.email_outlined,
                       ),
                       SizedBox(
@@ -91,7 +95,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                             )
                           : RoundedButton(
                               Color: AppColor.teelColor,
-                              text: 'Send Code',
+                              text: AppLocalizations.of(context)!.send_code,
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   controller.isLoading.value = true;
