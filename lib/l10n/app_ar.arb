@@ -106,6 +106,8 @@
    "analytics": "تحليلات",
     "completed_appointments": "المواعيد المكتملة",
   "cancelled_appointments": "المواعيد الملغاة",
-  "total_appointments": "إجمالي المواعيد"
+  "total_appointments": "إجمالي المواعيد",
+  "language": "اللغة",
+  "choose_language": "اختر اللغة"
 
 }

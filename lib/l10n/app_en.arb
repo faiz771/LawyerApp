@@ -105,6 +105,8 @@
   "analytics": "Analytics",
     "completed_appointments": "Completed Appointments",
   "cancelled_appointments": "Cancelled Appointments",
-  "total_appointments": "Total Appointments"
+  "total_appointments": "Total Appointments",
+  "language": "Language",
+   "choose_language": "Choose Language"
 
 }

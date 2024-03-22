@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/auth_screens/change_password_screen.dart';
 import 'package:lawyerapp/auth_screens/verify_otp_screen.dart';
@@ -12,12 +13,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 int onboardingStatus = 0;
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final storage = FlutterSecureStorage();
+  String? selectedLanguage = await storage.read(key: 'language');
+  runApp(MyApp(
+    selectedLanguage: selectedLanguage,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String? selectedLanguage;
+  const MyApp({super.key, this.selectedLanguage});
 
   // This widget is the root of your application.
   @override
@@ -29,7 +36,8 @@ class MyApp extends StatelessWidget {
       }),
       title: 'MOZA AL-SHEHHI LAW FIRM',
       debugShowCheckedModeBanner: false,
-      locale: Locale('ar'),
+      locale:
+          selectedLanguage != null ? Locale(selectedLanguage!) : Locale('en'),
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

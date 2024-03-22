@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
 import 'package:lawyerapp/screens/edit_profile_screen.dart';
 import 'package:lawyerapp/screens/favorite_screen.dart';
+import 'package:lawyerapp/screens/settings.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -132,7 +134,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   Icons.settings_outlined,
                   color: Color.fromRGBO(17, 25, 40, 1),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Get.to(SettingsScreen());
+                },
               ),
               ListTile(
                 trailing: const Icon(
@@ -168,6 +172,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                 ),
                 onTap: () {},
               ),
+
               ListTile(
                 trailing: const Icon(
                   Icons.arrow_forward_ios_sharp,
