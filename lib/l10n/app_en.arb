@@ -85,5 +85,26 @@
   "pick_from_gallery": "Pick from Gallery",
   "take_a_photo": "Take a Photo",
   "accept_privacy_policy": "Accept Privacy Policy",
-  "consultation_booked_successfully": "Consultation Appointment Booked Successfully"
+  "consultation_booked_successfully": "Consultation Appointment Booked Successfully",
+   "country_required": "Country is required",
+  "consultation_type_required": "Consultation type is required",
+  "case_description_required": "Case description is required",
+    "provide_brief_description": "Provide a brief description of your case",
+  "ok": "OK",
+    "lawyer_type": "Lawyer Type",
+  "select_lawyer_type": "Select Lawyer Type",
+  "lawyer_type_required": "Lawyer type is required",
+  "lawyer_experience": "Lawyer Experience",
+  "lawyer_experience_required": "Lawyer experience is required",
+  "lawyer_education": "Lawyer Education",
+  "lawyer_education_required": "Lawyer education is required",
+  "lawyer_about": "Lawyer About",
+  "lawyer_about_required": "Lawyer about is required",
+  "lawyer_fee": "Lawyer Fee",
+  "lawyer_fee_required": "Lawyer fee is required",
+  "analytics": "Analytics",
+    "completed_appointments": "Completed Appointments",
+  "cancelled_appointments": "Cancelled Appointments",
+  "total_appointments": "Total Appointments"
+
 }

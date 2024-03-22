@@ -22,6 +22,9 @@ import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/api_base_url.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 
 class EditProfileScreen extends StatefulWidget {
@@ -115,7 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           backgroundColor: AppColor.teelColor,
           centerTitle: true,
           title: Text(
-            'Edit Profile',
+            AppLocalizations.of(context)!.editProfile,
             style: TextStyle(
                 fontSize: 22.sp,
                 fontWeight: FontWeight.bold,
@@ -172,7 +175,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             ImageSource.gallery,
                                           ); // Pick image from gallery
                                         },
-                                        text: 'Pick from Gallery',
+                                        text: AppLocalizations.of(context)!
+                                            .pick_from_gallery,
                                         Color: AppColor.teelColor,
                                       ),
                                       const SizedBox(height: 16),
@@ -184,7 +188,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             ImageSource.camera,
                                           ); // Pick image from camera
                                         },
-                                        text: 'Take a Photo',
+                                        text: AppLocalizations.of(context)!
+                                            .take_a_photo,
                                         Color: AppColor.teelColor,
                                       ),
                                     ],
@@ -221,7 +226,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 5),
                         child: Text(
-                          'Name',
+                          AppLocalizations.of(context)!.full_name,
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
@@ -229,11 +234,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       MyTextField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please Enter Your Name';
+                            return AppLocalizations.of(context)!.enter_name;
                           }
                           return null; // Return null if the validation passes
                         },
-                        hinttext: 'Name',
+                        hinttext: AppLocalizations.of(context)!.full_name,
                         isicon2: false,
                         icon: Icons.person,
                         controller: editProfileController.nameController,
@@ -242,7 +247,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 5),
                         child: Text(
-                          'Phone',
+                          AppLocalizations.of(context)!.phone,
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
@@ -258,7 +263,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         validator: (phoneNumber) {
                           if (editProfileController
                               .phoneController.text.isEmpty) {
-                            return 'Phone number cannot be empty';
+                            return AppLocalizations.of(context)!.phone_empty;
                           }
                           return null; // Return null if the validation passes
                         },
@@ -272,7 +277,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         decoration: InputDecoration(
                           fillColor: Colors.grey[200],
                           filled: true,
-                          hintText: 'Phone',
+                          hintText: AppLocalizations.of(context)!.phone,
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 10, vertical: 10.h),
                           enabledBorder: OutlineInputBorder(
@@ -324,7 +329,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 5),
                         child: Text(
-                          'Email',
+                          AppLocalizations.of(context)!.email,
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
@@ -351,7 +356,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 5),
                               child: Text(
-                                'Account Type',
+                                AppLocalizations.of(context)!.account_type,
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
@@ -364,7 +369,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 clearOption: false,
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
-                                    return 'Please Select Account Type';
+                                    return AppLocalizations.of(context)!
+                                        .select_account_type;
                                   }
                                   return null;
                                 } // Return null if the validation passes
@@ -374,7 +380,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 textFieldDecoration: InputDecoration(
                                   fillColor: Colors.grey[200],
                                   filled: true,
-                                  hintText: 'Account Type',
+                                  hintText: AppLocalizations.of(context)!
+                                      .account_type,
                                   contentPadding: EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 10.h),
                                   enabledBorder: OutlineInputBorder(
@@ -401,13 +408,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                dropDownList: const [
+                                dropDownList: [
                                   DropDownValueModel(
-                                    name: "Company",
+                                    name: AppLocalizations.of(context)!.company,
                                     value: 0,
                                   ),
                                   DropDownValueModel(
-                                      name: "Personal", value: 1),
+                                      name: AppLocalizations.of(context)!
+                                          .personal,
+                                      value: 1),
                                 ],
                                 onChanged: (selectedValue) {
                                   print("$selectedValue");
@@ -421,7 +430,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 5),
                               child: Text(
-                                'Lawyer Type',
+                                AppLocalizations.of(context)!
+                                    .select_lawyer_type,
                                 style: TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
@@ -460,7 +470,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     borderRadius: BorderRadius.circular(24)),
                                 contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 15, vertical: 15),
-                                hintText: "Select Consultation Type",
+                                hintText: AppLocalizations.of(context)!
+                                    .select_lawyer_type,
                                 fillColor: Colors.grey[200],
                                 filled: true,
                                 errorBorder: OutlineInputBorder(
@@ -480,7 +491,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Consultation type is required';
+                                  return AppLocalizations.of(context)!
+                                      .lawyer_type_required;
                                 }
                                 return null;
                               },
@@ -494,7 +506,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 5),
                                   child: Text(
-                                    'Lawyer Experience',
+                                    AppLocalizations.of(context)!
+                                        .lawyer_experience,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -503,20 +516,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 MyTextField(
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please Enter Company Name';
+                                        return AppLocalizations.of(context)!
+                                            .lawyer_experience_required;
                                       }
                                       return null; // Return null if the validation passes
                                     },
                                     isicon2: false,
                                     controller: editProfileController
                                         .companyNameController,
-                                    hinttext: 'Lawyer Experience',
+                                    hinttext: AppLocalizations.of(context)!
+                                        .lawyer_experience,
                                     icon: Icons.person_2_outlined),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 5),
                                   child: Text(
-                                    'Lawyer Education',
+                                    AppLocalizations.of(context)!
+                                        .lawyer_education,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -525,20 +541,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 MyTextField(
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please Enter Company Profession';
+                                        return AppLocalizations.of(context)!
+                                            .lawyer_education_required;
                                       }
                                       return null; // Return null if the validation passes
                                     },
                                     isicon2: false,
                                     controller: editProfileController
                                         .companyProfessionController,
-                                    hinttext: 'Lawyer Education',
+                                    hinttext: AppLocalizations.of(context)!
+                                        .lawyer_education,
                                     icon: Icons.person_2_outlined),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 5),
                                   child: Text(
-                                    'Lawyer About',
+                                    AppLocalizations.of(context)!.lawyer_about,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -547,20 +565,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 MyTextField(
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please Enter Company Location';
+                                        return AppLocalizations.of(context)!
+                                            .lawyer_about_required;
                                       }
                                       return null; // Return null if the validation passes
                                     },
                                     isicon2: false,
                                     controller: editProfileController
                                         .companyLocationController,
-                                    hinttext: 'Lawyer About',
+                                    hinttext: AppLocalizations.of(context)!
+                                        .lawyer_about,
                                     icon: Icons.person_2_outlined),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 12, vertical: 5),
                                   child: Text(
-                                    'Lawyer Fee',
+                                    AppLocalizations.of(context)!.lawyer_fee,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
@@ -569,14 +589,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 MyTextField(
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please Enter Company Location';
+                                        return AppLocalizations.of(context)!
+                                            .lawyer_fee_required;
                                       }
                                       return null; // Return null if the validation passes
                                     },
                                     isicon2: false,
                                     controller: editProfileController
                                         .companyLocationController,
-                                    hinttext: 'Lawyer Fee',
+                                    hinttext: AppLocalizations.of(context)!
+                                        .lawyer_fee,
                                     icon: Icons.person_2_outlined),
                               ],
                             )
@@ -588,7 +610,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           ? SizedBox()
                           : editProfileController.accounttypeController
                                       .dropDownValue!.name ==
-                                  'Company'
+                                  AppLocalizations.of(context)!.company
                               ? Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -596,7 +618,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12, vertical: 5),
                                       child: Text(
-                                        'Company Name',
+                                        AppLocalizations.of(context)!
+                                            .company_name,
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
@@ -605,20 +628,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     MyTextField(
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return 'Please Enter Company Name';
+                                            return AppLocalizations.of(context)!
+                                                .enter_company_name;
                                           }
                                           return null; // Return null if the validation passes
                                         },
                                         isicon2: false,
                                         controller: editProfileController
                                             .companyNameController,
-                                        hinttext: 'Company Name',
+                                        hinttext: AppLocalizations.of(context)!
+                                            .company_name,
                                         icon: Icons.person_2_outlined),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12, vertical: 5),
                                       child: Text(
-                                        'Company Profession',
+                                        AppLocalizations.of(context)!
+                                            .company_profession,
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
@@ -627,20 +653,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     MyTextField(
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return 'Please Enter Company Profession';
+                                            return AppLocalizations.of(context)!
+                                                .enter_company_profession;
                                           }
                                           return null; // Return null if the validation passes
                                         },
                                         isicon2: false,
                                         controller: editProfileController
                                             .companyProfessionController,
-                                        hinttext: 'Company Profession',
+                                        hinttext: AppLocalizations.of(context)!
+                                            .company_profession,
                                         icon: Icons.person_2_outlined),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12, vertical: 5),
                                       child: Text(
-                                        'Company Location',
+                                        AppLocalizations.of(context)!
+                                            .company_location,
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
@@ -649,14 +678,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     MyTextField(
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return 'Please Enter Company Location';
+                                            return AppLocalizations.of(context)!
+                                                .enter_company_location;
                                           }
                                           return null; // Return null if the validation passes
                                         },
                                         isicon2: false,
                                         controller: editProfileController
                                             .companyLocationController,
-                                        hinttext: 'Company Location',
+                                        hinttext: AppLocalizations.of(context)!
+                                            .company_location,
                                         icon: Icons.person_2_outlined),
                                   ],
                                 )
@@ -671,7 +702,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               ),
                             )
                           : RoundedButton(
-                              text: 'Save',
+                              text: AppLocalizations.of(context)!.save_changes,
                               onPressed: () {
                                 print(countrycode.value);
                                 if (_formKey.currentState!.validate()) {

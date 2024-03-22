@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/analytics_view_template.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lawyerapp/utils/app_colors.dart';
 
 class AnalyticsScreen extends StatelessWidget {
   const AnalyticsScreen({super.key});
@@ -9,11 +12,12 @@ class AnalyticsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColor.teelColor,
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: const Text(
-          'Analytics',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          AppLocalizations.of(context)!.analytics,
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: Padding(
@@ -26,28 +30,31 @@ class AnalyticsScreen extends StatelessWidget {
                   height: 20.h,
                 ),
                 AnalyticsViewTemplate(
-                    heading: 'Upcoming Appointments',
+                    heading:
+                        AppLocalizations.of(context)!.upcoming_appointments,
                     icon: Icons.calendar_month,
                     value: 10),
                 SizedBox(
                   height: 10.h,
                 ),
                 AnalyticsViewTemplate(
-                    heading: 'Completed Appointments',
+                    heading:
+                        AppLocalizations.of(context)!.completed_appointments,
                     icon: Icons.calendar_month,
                     value: 5),
                 SizedBox(
                   height: 10.h,
                 ),
                 AnalyticsViewTemplate(
-                    heading: 'Cancelled Appointments',
+                    heading:
+                        AppLocalizations.of(context)!.cancelled_appointments,
                     icon: Icons.calendar_month,
                     value: 5),
                 SizedBox(
                   height: 10.h,
                 ),
                 AnalyticsViewTemplate(
-                    heading: 'Total Appointments',
+                    heading: AppLocalizations.of(context)!.total_appointments,
                     icon: Icons.calendar_month,
                     value: 20),
                 SizedBox(

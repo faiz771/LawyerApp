@@ -86,6 +86,26 @@
   "pick_from_gallery": "اختر من المعرض",
   "take_a_photo": "أخذ صورة",
   "accept_privacy_policy": "قبول سياسة الخصوصية",
-  "consultation_booked_successfully": "تم حجز موعد الاستشارة بنجاح"
+  "consultation_booked_successfully": "تم حجز موعد الاستشارة بنجاح",
+   "country_required": "البلد مطلوب",
+  "consultation_type_required": "نوع الاستشارة مطلوب",
+  "case_description_required": "وصف الحالة مطلوب",
+  "provide_brief_description": "قدم وصفًا موجزًا لحالتك",
+   "ok": "حسناً",
+    "lawyer_type": "نوع المحامي",
+  "select_lawyer_type": "اختر نوع المحامي",
+  "lawyer_type_required": "نوع المحامي مطلوب",
+  "lawyer_experience": "خبرة المحامي",
+  "lawyer_experience_required": "خبرة المحامي مطلوبة",
+  "lawyer_education": "تعليم المحامي",
+  "lawyer_education_required": "تعليم المحامي مطلوب",
+  "lawyer_about": "نبذة عن المحامي",
+  "lawyer_about_required": "نبذة عن المحامي مطلوبة",
+  "lawyer_fee": "رسوم المحامي",
+  "lawyer_fee_required": "رسوم المحامي مطلوبة",
+   "analytics": "تحليلات",
+    "completed_appointments": "المواعيد المكتملة",
+  "cancelled_appointments": "المواعيد الملغاة",
+  "total_appointments": "إجمالي المواعيد"
 
 }

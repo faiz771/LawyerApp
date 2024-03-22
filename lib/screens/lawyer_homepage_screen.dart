@@ -17,6 +17,9 @@ import 'package:lawyerapp/screens/profile_setting_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class LawyerHomepage extends StatefulWidget {
   UserModel user;
   LawyerHomepage({super.key, required this.user});
@@ -61,15 +64,18 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                             user: widget.user,
                           ));
                         },
-                        child: CircleAvatar(
-                          radius: 30,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        widget.user.profile_path!))),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: CircleAvatar(
+                            radius: 30,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: NetworkImage(
+                                          widget.user.profile_path!))),
+                            ),
                           ),
                         ),
                       ),
@@ -80,7 +86,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Hi, Welcome Back!',
+                                AppLocalizations.of(context)!.welcome_back,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(color: Colors.grey),
                               ),
@@ -126,16 +132,18 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                       child: Column(
                         children: [
                           // Your TabBar widget
-                          const TabBar(
+                          TabBar(
                             indicatorColor: Color.fromRGBO(17, 25, 40, 1),
                             labelColor: Color.fromRGBO(17, 25, 40, 1),
                             unselectedLabelColor: Colors.grey,
                             labelStyle: TextStyle(fontWeight: FontWeight.bold),
                             tabs: [
                               Tab(
-                                text: 'Upcoming',
+                                text: AppLocalizations.of(context)!.upcoming,
                               ),
-                              Tab(text: 'Completed'),
+                              Tab(
+                                  text:
+                                      AppLocalizations.of(context)!.completed),
                             ],
                           ),
                           // The content associated with the tabs
@@ -253,7 +261,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
               Icons.home_filled,
               color: Colors.white,
             ),
-            title: const Text('Home'),
+            title: Text(AppLocalizations.of(context)!.home),
             activeColor: Colors.white,
           ),
           BottomNavyBarItem(
@@ -263,7 +271,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
               Icons.bar_chart_outlined,
               color: Colors.white,
             ),
-            title: const Text('Analytics'),
+            title: Text(AppLocalizations.of(context)!.analytics),
             activeColor: Colors.white,
           ),
           // BottomNavyBarItem(
@@ -281,7 +289,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
               scale: 22,
               color: Colors.white,
             ),
-            title: const Text('Blogs'),
+            title: Text(AppLocalizations.of(context)!.blogs),
             activeColor: Colors.white,
           ),
           BottomNavyBarItem(
@@ -292,7 +300,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
               scale: 20,
               color: Colors.white,
             ),
-            title: const Text('Ai Chat'),
+            title: Text(AppLocalizations.of(context)!.ai_chat),
             activeColor: Colors.white,
           ),
         ],

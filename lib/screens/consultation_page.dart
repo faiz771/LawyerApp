@@ -183,14 +183,15 @@ class _ConsultationFormState extends State<ConsultationForm> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Consultation type is required';
+                            return AppLocalizations.of(context)!
+                                .consultation_type_required;
                           }
                           return null;
                         },
                       ),
                       const SizedBox(height: 20),
-                      const Text(
-                        'Select Country',
+                      Text(
+                        AppLocalizations.of(context)!.select_country,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
@@ -224,7 +225,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               borderRadius: BorderRadius.circular(24)),
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 15),
-                          hintText: "Select Country",
+                          hintText:
+                              AppLocalizations.of(context)!.select_country,
                           fillColor: Colors.grey[200],
                           filled: true,
                           errorBorder: OutlineInputBorder(
@@ -244,7 +246,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Country is required';
+                            return AppLocalizations.of(context)!
+                                .country_required;
                           }
                           return null;
                         },
@@ -252,8 +255,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'Brief Description of Your Case',
+                      Text(
+                        AppLocalizations.of(context)!.brief_description,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
@@ -271,7 +274,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                         },
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Case description is required';
+                            return AppLocalizations.of(context)!
+                                .case_description_required;
                           }
                           return null;
                         },
@@ -286,7 +290,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               borderRadius: BorderRadius.circular(24)),
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 15),
-                          hintText: "Provide a breif description of your case",
+                          hintText: AppLocalizations.of(context)!
+                              .provide_brief_description,
                           fillColor: Colors.grey[200],
                           filled: true,
                           errorBorder: OutlineInputBorder(
@@ -326,7 +331,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                                             context); // Close the bottom sheet
                                         _pickImageFromGallery(); // Pick image from gallery
                                       },
-                                      text: 'Pick from Gallery',
+                                      text: AppLocalizations.of(context)!
+                                          .pick_from_gallery,
                                       Color: AppColor.teelColor,
                                     ),
                                     const SizedBox(height: 16),
@@ -336,7 +342,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                                             context); // Close the bottom sheet
                                         _pickImageFromCamera(); // Pick image from camera
                                       },
-                                      text: 'Take a Photo',
+                                      text: AppLocalizations.of(context)!
+                                          .take_a_photo,
                                       Color: AppColor.teelColor,
                                     ),
                                   ],
@@ -352,7 +359,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                                   20)), // Change the color as needed
                           padding: const EdgeInsets.symmetric(
                               vertical: 15, horizontal: 16),
-                          child: const Row(
+                          child: Row(
                             children: [
                               Icon(
                                 Icons.file_upload,
@@ -360,7 +367,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               ),
                               SizedBox(width: 8),
                               Text(
-                                'Upload Document(Optional)',
+                                AppLocalizations.of(context)!.upload_document,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -408,8 +415,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                                 ),
                               )),
                           const SizedBox(width: 10),
-                          const Text(
-                            'Accept Privacy Policy',
+                          Text(
+                            AppLocalizations.of(context)!.accept_privacy_policy,
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                         ],
@@ -425,16 +432,18 @@ class _ConsultationFormState extends State<ConsultationForm> {
                 () => SizedBox(
                   height: 55,
                   child: RoundedButton(
-                    text: "Book Consultation",
+                    text: AppLocalizations.of(context)!.book_consultation,
                     onPressed: controller.agreed.value
                         ? () {
                             if (_formKey.currentState!.validate()) {
                               print('Consultation booked successfully');
                               Get.dialog(CustomDialog(
-                                  heading: "Consultation Booking",
-                                  text:
-                                      'Consultation Appointment Booked Successfuly',
-                                  buttontext: 'OK'));
+                                heading: AppLocalizations.of(context)!
+                                    .provide_brief_description,
+                                text: AppLocalizations.of(context)!
+                                    .consultation_booked_successfully,
+                                buttontext: AppLocalizations.of(context)!.ok,
+                              ));
                             }
                           }
                         : () {},
