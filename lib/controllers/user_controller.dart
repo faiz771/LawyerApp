@@ -4,11 +4,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
-import 'package:lawyerapp/controllers/signup_controller.dart';
 import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
-import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/api_base_url.dart';
 
@@ -78,6 +76,6 @@ class UserController extends GetxController {
     // Clear preferences logic here
 
     // Navigate to the login screen
-    Get.offAll(LoginScreen()); // Assuming LoginScreen is your login page
+    Get.offAll(const LoginScreen()); // Assuming LoginScreen is your login page
   }
 }

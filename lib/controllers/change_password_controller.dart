@@ -31,7 +31,7 @@ class ChangePasswordController extends GetxController {
         isLoading.value = false;
         // Password updated successfully
         print('Message $message');
-        Get.offAll(LoginScreen());
+        Get.offAll(const LoginScreen());
         showStylishBottomToast(message);
         print('Password updated successfully');
       } else {

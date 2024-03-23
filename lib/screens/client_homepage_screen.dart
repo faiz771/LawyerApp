@@ -3,8 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lawyerapp/components/promotion_slider_view_template.dart';
 import 'package:lawyerapp/controllers/blog_controller.dart';
 import 'package:lawyerapp/controllers/login_controller.dart';
@@ -19,7 +17,6 @@ import 'package:lawyerapp/screens/profile_setting_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClientHomepage extends StatefulWidget {
@@ -119,7 +116,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                                 Text(
                                   AppLocalizations.of(context)!.welcome_back,
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(color: Colors.grey),
+                                  style: const TextStyle(color: Colors.grey),
                                 ),
                                 Text(
                                   widget.user.name,
@@ -196,7 +193,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
                     Text(
                       AppLocalizations.of(context)!.upcoming_appointments,
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -251,9 +248,9 @@ class _ClientHomepageState extends State<ClientHomepage> {
                     Text(
                       AppLocalizations.of(context)!.blogs_podcasts,
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    ArticleCarouselSlider(),
+                    const ArticleCarouselSlider(),
                     const SizedBox(
                       height: 10,
                     )
@@ -265,7 +262,7 @@ class _ClientHomepageState extends State<ClientHomepage> {
           const MyBookingScreen(),
           // const ProfileSettingScreen(),
           const BlogScreen(),
-          ChatPage()
+          const ChatPage()
         ],
       ),
 
@@ -404,7 +401,7 @@ class _BookConsultationButtonState extends State<BookConsultationButton>
                 const SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context)!.book_consultation,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

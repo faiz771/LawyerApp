@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/notification_template.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Notificationscreen extends StatelessWidget {
@@ -13,12 +12,12 @@ class Notificationscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: AppColor.teelColor,
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.notifications,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         actions: [
           Padding(
@@ -27,7 +26,7 @@ class Notificationscreen extends StatelessWidget {
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(6)),
               child: Padding(
-                padding: EdgeInsets.all(7.0),
+                padding: const EdgeInsets.all(7.0),
                 child: Text(
                   '1 New',
                   style: TextStyle(

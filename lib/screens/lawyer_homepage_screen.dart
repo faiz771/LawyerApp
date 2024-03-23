@@ -2,13 +2,9 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/analytics_screen.dart';
-import 'package:lawyerapp/screens/appointment_detail_screen.dart';
 import 'package:lawyerapp/screens/blog_screen.dart';
 import 'package:lawyerapp/screens/chat_bot_screen.dart';
 import 'package:lawyerapp/screens/completed_booking_screen.dart';
@@ -17,7 +13,6 @@ import 'package:lawyerapp/screens/profile_setting_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LawyerHomepage extends StatefulWidget {
@@ -88,7 +83,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                               Text(
                                 AppLocalizations.of(context)!.welcome_back,
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: Colors.grey),
+                                style: const TextStyle(color: Colors.grey),
                               ),
                               Text(
                                 widget.user.name,
@@ -122,7 +117,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                   // SizedBox(
                   //   height: 10.h,
                   // ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   SizedBox(
@@ -133,10 +128,10 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
                         children: [
                           // Your TabBar widget
                           TabBar(
-                            indicatorColor: Color.fromRGBO(17, 25, 40, 1),
-                            labelColor: Color.fromRGBO(17, 25, 40, 1),
+                            indicatorColor: const Color.fromRGBO(17, 25, 40, 1),
+                            labelColor: const Color.fromRGBO(17, 25, 40, 1),
                             unselectedLabelColor: Colors.grey,
-                            labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                             tabs: [
                               Tab(
                                 text: AppLocalizations.of(context)!.upcoming,
@@ -240,7 +235,7 @@ class _LawyerHomepageState extends State<LawyerHomepage> {
           //ClientDashboardScreen(),
           // const ProfileSettingScreen(),
           const BlogScreen(),
-          ChatPage()
+          const ChatPage()
         ],
       ),
 

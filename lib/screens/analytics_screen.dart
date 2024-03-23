@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lawyerapp/components/analytics_view_template.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
@@ -17,7 +16,7 @@ class AnalyticsScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.analytics,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
       body: Padding(

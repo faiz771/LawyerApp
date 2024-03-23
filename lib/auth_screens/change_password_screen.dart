@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lawyerapp/components/custom_dialog.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/change_password_controller.dart';
 import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
@@ -39,7 +37,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         scale: 3,
                       )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     // Padding(

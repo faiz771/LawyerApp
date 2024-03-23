@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/controllers/blog_controller.dart';
-import 'package:lawyerapp/models/article_model.dart';
 import 'package:lawyerapp/screens/articles_screen.dart';
 import 'package:lawyerapp/screens/blog_podcast.dart';
 import 'package:lawyerapp/screens/blog_videos.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BlogScreen extends StatefulWidget {
@@ -40,10 +37,10 @@ class _BlogScreenState extends State<BlogScreen>
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.blogs,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         bottom: TabBar(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           labelStyle:
               const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           indicatorColor: AppColor.teelColor,
@@ -51,13 +48,13 @@ class _BlogScreenState extends State<BlogScreen>
           tabs: [
             Tab(
                 text: AppLocalizations.of(context)!.articles,
-                icon: Icon(Icons.article)),
+                icon: const Icon(Icons.article)),
             Tab(
                 text: AppLocalizations.of(context)!.videos,
-                icon: Icon(Icons.video_library)),
+                icon: const Icon(Icons.video_library)),
             Tab(
                 text: AppLocalizations.of(context)!.podcasts,
-                icon: Icon(Icons.headset)),
+                icon: const Icon(Icons.headset)),
           ],
         ),
       ),
@@ -67,10 +64,10 @@ class _BlogScreenState extends State<BlogScreen>
           ArticleListScreen(
             isFromFavorite: false,
           ),
-          VideoList(
+          const VideoList(
             isFromFavorite: false,
           ),
-          PodcastList(
+          const PodcastList(
             isFromFavorite: false,
           ),
         ],

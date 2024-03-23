@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/controllers/blog_controller.dart';
 import 'package:lawyerapp/screens/articles_screen.dart';
@@ -7,7 +6,6 @@ import 'package:lawyerapp/screens/blog_podcast.dart';
 import 'package:lawyerapp/screens/blog_videos.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -35,12 +33,12 @@ class _FavoriteScreenState extends State<FavoriteScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: AppColor.teelColor,
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.favorite,
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
         ),
         bottom: TabBar(
           labelStyle:
@@ -50,13 +48,13 @@ class _FavoriteScreenState extends State<FavoriteScreen>
           tabs: [
             Tab(
                 text: AppLocalizations.of(context)!.articles,
-                icon: Icon(Icons.article)),
+                icon: const Icon(Icons.article)),
             Tab(
                 text: AppLocalizations.of(context)!.videos,
-                icon: Icon(Icons.video_library)),
+                icon: const Icon(Icons.video_library)),
             Tab(
                 text: AppLocalizations.of(context)!.podcasts,
-                icon: Icon(Icons.headset)),
+                icon: const Icon(Icons.headset)),
           ],
         ),
       ),
@@ -66,10 +64,10 @@ class _FavoriteScreenState extends State<FavoriteScreen>
           ArticleListScreen(
             isFromFavorite: true,
           ),
-          VideoList(
+          const VideoList(
             isFromFavorite: true,
           ),
-          PodcastList(
+          const PodcastList(
             isFromFavorite: true,
           ),
         ],

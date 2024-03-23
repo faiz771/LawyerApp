@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
     if (onboardingStatus == 1) {
       controller.getUserDetails();
     } else if (onboardingStatus == 0) {
-      Get.to(OnboardingScreen());
+      Get.to(const OnboardingScreen());
     }
   }
 

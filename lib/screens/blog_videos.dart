@@ -4,7 +4,6 @@ import 'package:lawyerapp/controllers/blog_controller.dart';
 import 'package:lawyerapp/screens/video_detail_page.dart';
 import 'package:lawyerapp/models/videos_model.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class VideoList extends StatelessWidget {
@@ -37,7 +36,7 @@ class VideoList extends StatelessWidget {
                 isFromFavorite
                     ? AppLocalizations.of(context)!.no_favorite_videos
                     : AppLocalizations.of(context)!.no_available_videos,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -117,11 +116,11 @@ class VideoItemContainer extends StatelessWidget {
                     left: 70,
                     right: 70,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.white,
                         shape: BoxShape.circle,
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.play_arrow,
                         size: 35,
                       ),

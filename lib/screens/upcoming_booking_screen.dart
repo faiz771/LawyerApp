@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lawyerapp/components/rounded_button.dart';
-import 'package:lawyerapp/utils/app_colors.dart';
 
 class UpcomingBookingScreen extends StatelessWidget {
   UpcomingBookingScreen({

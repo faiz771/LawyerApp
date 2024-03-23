@@ -1,10 +1,6 @@
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
@@ -12,15 +8,12 @@ import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/controllers/profile_setting_controller.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/models/user_detail_model.dart';
-import 'package:lawyerapp/screens/blog_screen.dart';
 import 'package:lawyerapp/screens/edit_profile_screen.dart';
 import 'package:lawyerapp/screens/favorite_screen.dart';
 import 'package:lawyerapp/screens/settings.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileSettingScreen extends StatefulWidget {
@@ -40,7 +33,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: AppColor.teelColor,
           centerTitle: true,
           title: Text(
@@ -77,7 +70,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                 padding: EdgeInsets.symmetric(vertical: 10.h),
                 child: Text(
                   widget.user.name,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               ListTile(
@@ -117,7 +110,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                   color: Color.fromRGBO(17, 25, 40, 1),
                 ),
                 onTap: () {
-                  Get.to(FavoriteScreen());
+                  Get.to(const FavoriteScreen());
                 },
               ),
               ListTile(
@@ -244,7 +237,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                               children: [
                                 Text(
                                   AppLocalizations.of(context)!.logout,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
@@ -266,7 +259,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                                   text: AppLocalizations.of(context)!.logout,
                                   onPressed: () {
                                     SharedPreferencesService().clearToken();
-                                    Get.offAll(LoginScreen());
+                                    Get.offAll(const LoginScreen());
                                   },
                                 )
                                 //   ],
@@ -286,7 +279,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   void _showChangePassowrdBottomSheet(BuildContext context) {
     bool isKeyboardVisible = false;
 
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     showModalBottomSheet(
       backgroundColor: Colors.white,
       context: context,
@@ -300,9 +293,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
 
             return SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Form(
-                  key: _formKey,
+                  key: formKey,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -313,7 +306,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                         child: Center(
                           child: Text(
                             AppLocalizations.of(context)!.changePassword,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -387,7 +380,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                                   !loginController.passToggle.value;
                             },
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Obx(() => MyTextField(
@@ -460,9 +453,9 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                           )),
                       Visibility(
                         visible: isKeyboardVisible,
-                        child: SizedBox(height: 230),
+                        child: const SizedBox(height: 230),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Obx(() => profileSettingController.isLoading.value
                           ? Center(
                               child: CircularProgressIndicator(
@@ -472,7 +465,7 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
                           : RoundedButton(
                               text: AppLocalizations.of(context)!.save_changes,
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
+                                if (formKey.currentState!.validate()) {
                                   profileSettingController.isLoading.value =
                                       true;
                                   await profileSettingController

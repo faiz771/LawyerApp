@@ -3,7 +3,6 @@ import 'package:lawyerapp/screens/completed_booking_screen.dart';
 import 'package:lawyerapp/screens/upcoming_booking_screen.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MyBookingScreen extends StatelessWidget {
@@ -20,14 +19,14 @@ class MyBookingScreen extends StatelessWidget {
           centerTitle: true,
           title: Text(
             AppLocalizations.of(context)!.my_bookings,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
           bottom: TabBar(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             indicatorColor: Colors.white,
             labelColor: Colors.white,
             unselectedLabelColor: Colors.grey,
-            labelStyle: TextStyle(fontWeight: FontWeight.bold),
+            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
             tabs: [
               Tab(
                 text: AppLocalizations.of(context)!.upcoming,

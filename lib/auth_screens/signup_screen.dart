@@ -4,15 +4,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/login_controller.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
-import 'package:lawyerapp/main.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -175,7 +172,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           borderRadius: BorderRadius.circular(24),
                         ),
-                        errorStyle: TextStyle(
+                        errorStyle: const TextStyle(
                             color: Colors.red, fontWeight: FontWeight.bold),
                       ),
                       onChanged: (phone) {
@@ -248,7 +245,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             borderRadius: BorderRadius.circular(24),
                           ),
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         dropDownList: [
@@ -269,7 +266,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     //controller.accounttypeController.va
                     controller.accounttypeController.dropDownValue == null
-                        ? SizedBox()
+                        ? const SizedBox()
                         : controller.accounttypeController.dropDownValue!
                                     .name ==
                                 AppLocalizations.of(context)!.company
@@ -319,7 +316,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       icon: Icons.person_2_outlined),
                                 ],
                               )
-                            : SizedBox(),
+                            : const SizedBox(),
 
                     MyTextField(
                         validator: (value) {
@@ -508,7 +505,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(width: 10),
                         Text(
                           AppLocalizations.of(context)!.agree_terms_conditions,
-                          style: TextStyle(color: Colors.black, fontSize: 16),
+                          style: const TextStyle(color: Colors.black, fontSize: 16),
                         ),
                       ],
                     ),
@@ -562,7 +559,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.to(LoginScreen());
+                              Get.to(const LoginScreen());
                             },
                             child: Text(
                               AppLocalizations.of(context)!.signin,

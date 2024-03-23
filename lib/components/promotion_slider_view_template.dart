@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/controllers/blog_controller.dart';
-import 'package:lawyerapp/models/article_model.dart';
 import 'package:lawyerapp/models/podcast_model.dart';
-import 'package:lawyerapp/models/videos_model.dart';
 import 'package:lawyerapp/screens/podcast_view_page.dart';
 
 class ArticleCarouselSlider extends StatefulWidget {
+  const ArticleCarouselSlider({super.key});
+
   @override
   State<ArticleCarouselSlider> createState() => _ArticleCarouselSliderState();
 }
@@ -35,7 +35,7 @@ class _ArticleCarouselSliderState extends State<ArticleCarouselSlider> {
           itemBuilder: (context, index, _) {
             final PodcastItem article = articleController.podcasts[index];
             return Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
@@ -45,7 +45,7 @@ class _ArticleCarouselSliderState extends State<ArticleCarouselSlider> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 3,
                       blurRadius: 7,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -79,11 +79,11 @@ class _ArticleCarouselSliderState extends State<ArticleCarouselSlider> {
                             left: 70,
                             right: 70,
                             child: Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Colors.white,
                                 shape: BoxShape.circle,
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.play_arrow,
                                 size: 35,
                               ),
@@ -92,18 +92,18 @@ class _ArticleCarouselSliderState extends State<ArticleCarouselSlider> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               article.title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
                               article.content,
                               style: TextStyle(

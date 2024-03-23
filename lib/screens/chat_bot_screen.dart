@@ -3,14 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
-import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:lawyerapp/utils/app_constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChatController extends GetxController {
@@ -47,13 +45,13 @@ class ChatController extends GetxController {
         .add({'sender': 'User', 'message': message, 'isUserMessage': "true"});
 
     final String apiKey = chatGptKey.toString();
-    final String url = 'https://api.openai.com/v1/chat/completions';
+    const String url = 'https://api.openai.com/v1/chat/completions';
     final Map<String, dynamic> data = {
       'model': 'gpt-3.5-turbo-0613',
       'messages': [
         {
           'role': 'assistant',
-          'content': "Prompt${AppConstants.GptPrompt} \n Message: ${message}"
+          'content': "Prompt${AppConstants.GptPrompt} \n Message: $message"
         }
       ],
       'max_tokens': 4000,
@@ -91,11 +89,11 @@ class ChatController extends GetxController {
                 'message': reply,
                 'isUserMessage': "false"
               });
-              Future.delayed(Duration(milliseconds: 100), () {
+              Future.delayed(const Duration(milliseconds: 100), () {
                 scrollController
                     .jumpTo(scrollController.position.maxScrollExtent);
               });
-              Future.delayed(Duration(milliseconds: 100), () {
+              Future.delayed(const Duration(milliseconds: 100), () {
                 scrollController
                     .jumpTo(scrollController.position.maxScrollExtent);
               });
@@ -133,6 +131,8 @@ class ChatController extends GetxController {
 }
 
 class ChatPage extends StatefulWidget {
+  const ChatPage({super.key});
+
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
@@ -155,7 +155,7 @@ class _ChatPageState extends State<ChatPage> {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.ai_assistant,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: Obx(
@@ -188,7 +188,7 @@ class _ChatPageState extends State<ChatPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: ListView.builder(
-                        physics: BouncingScrollPhysics(),
+                        physics: const BouncingScrollPhysics(),
                         controller: chatController.scrollController,
                         itemCount: chatController.messages.length,
                         itemBuilder: (context, index) {
@@ -198,17 +198,17 @@ class _ChatPageState extends State<ChatPage> {
                           final CrossAxisAlignment alignment = isUserMessage
                               ? CrossAxisAlignment.end
                               : CrossAxisAlignment.start;
-                          final Color? backgroundColor =
+                          final Color backgroundColor =
                               isUserMessage ? AppColor.teelColor : Colors.white;
 
                           return Padding(
-                            padding: EdgeInsets.symmetric(vertical: 8.0),
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Align(
                               alignment: isUserMessage
                                   ? Alignment.centerRight
                                   : Alignment.centerLeft,
                               child: Container(
-                                padding: EdgeInsets.all(12.0),
+                                padding: const EdgeInsets.all(12.0),
                                 decoration: BoxDecoration(
                                   color: backgroundColor,
                                   borderRadius: BorderRadius.circular(12.0),
@@ -238,17 +238,17 @@ class _ChatPageState extends State<ChatPage> {
                     //     vsync: this,
                     //     duration: const Duration(milliseconds: 1200)),
                   )
-                : SizedBox(),
+                : const SizedBox(),
           ],
         ),
       ),
       bottomNavigationBar: Obx(
         () => chatController.isLoading.value
-            ? SizedBox.shrink()
+            ? const SizedBox.shrink()
             : Container(
                 decoration: BoxDecoration(
                   color: AppColor.teelColor,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(24),
                       topLeft: Radius.circular(24)),
                 ),
@@ -259,7 +259,7 @@ class _ChatPageState extends State<ChatPage> {
                     controller: chatController.textController,
                     decoration: InputDecoration(
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(24),
@@ -279,11 +279,11 @@ class _ChatPageState extends State<ChatPage> {
                         ),
                         borderRadius: BorderRadius.circular(24),
                       ),
-                      errorStyle: TextStyle(
+                      errorStyle: const TextStyle(
                           color: Colors.red, fontWeight: FontWeight.bold),
                       fillColor: Colors.grey[200],
                       filled: true,
-                      hintStyle: TextStyle(color: Colors.black),
+                      hintStyle: const TextStyle(color: Colors.black),
                       hintText: AppLocalizations.of(context)!.message,
                       suffixIcon: Padding(
                         padding: const EdgeInsets.only(right: 5),

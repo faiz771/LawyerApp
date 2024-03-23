@@ -5,25 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
-import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/components/mytextfield.dart';
 import 'package:lawyerapp/components/rounded_button.dart';
 import 'package:lawyerapp/controllers/edit_profile_controller.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/models/user_detail_model.dart';
-import 'package:lawyerapp/screens/blog_screen.dart';
-import 'package:lawyerapp/screens/favorite_screen.dart';
-import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/api_base_url.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
 
@@ -146,7 +137,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.white),
+          iconTheme: const IconThemeData(color: Colors.white),
           backgroundColor: AppColor.teelColor,
           centerTitle: true,
           title: Text(
@@ -259,7 +250,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             horizontal: 12, vertical: 5),
                         child: Text(
                           AppLocalizations.of(context)!.full_name,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -280,7 +271,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             horizontal: 12, vertical: 5),
                         child: Text(
                           AppLocalizations.of(context)!.phone,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -330,7 +321,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             borderRadius: BorderRadius.circular(24),
                           ),
-                          errorStyle: TextStyle(
+                          errorStyle: const TextStyle(
                               color: Colors.red, fontWeight: FontWeight.bold),
                         ),
                         onChanged: (phone) {
@@ -352,7 +343,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         },
                         onCountryChanged: (phone) {
                           setState(() {
-                            countrycode.value = phone.code!;
+                            countrycode.value = phone.code;
                           });
                         },
                       ),
@@ -362,7 +353,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             horizontal: 12, vertical: 5),
                         child: Text(
                           AppLocalizations.of(context)!.email,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -378,23 +369,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               horizontal: 10, vertical: 12),
                           child: Text(
                             email,
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                         ),
                       ),
                       widget.isLawyer
-                          ? SizedBox()
+                          ? const SizedBox()
                           : Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12, vertical: 5),
                               child: Text(
                                 AppLocalizations.of(context)!.account_type,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ),
                       widget.isLawyer
-                          ? SizedBox()
+                          ? const SizedBox()
                           : Padding(
                               padding: const EdgeInsets.only(bottom: 3),
                               child: DropDownTextField(
@@ -436,7 +427,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     ),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
-                                  errorStyle: TextStyle(
+                                  errorStyle: const TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -464,11 +455,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: Text(
                                 AppLocalizations.of(context)!
                                     .select_lawyer_type,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       widget.isLawyer
                           ? DropdownButtonFormField<String>(
                               autovalidateMode:
@@ -549,7 +540,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 return null;
                               },
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       widget.isLawyer
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -560,7 +551,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   child: Text(
                                     AppLocalizations.of(context)!
                                         .lawyer_experience,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -585,7 +576,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   child: Text(
                                     AppLocalizations.of(context)!
                                         .lawyer_education,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -609,7 +600,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       horizontal: 12, vertical: 5),
                                   child: Text(
                                     AppLocalizations.of(context)!.lawyer_about,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -633,7 +624,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       horizontal: 12, vertical: 5),
                                   child: Text(
                                     AppLocalizations.of(context)!.lawyer_fee,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -654,12 +645,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     icon: Icons.person_2_outlined),
                               ],
                             )
-                          : SizedBox(),
+                          : const SizedBox(),
                       //controller.accounttypeController.va
                       editProfileController
                                   .accounttypeController.dropDownValue ==
                               null
-                          ? SizedBox()
+                          ? const SizedBox()
                           : editProfileController.accounttypeController
                                       .dropDownValue!.name ==
                                   AppLocalizations.of(context)!.company
@@ -672,7 +663,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       child: Text(
                                         AppLocalizations.of(context)!
                                             .company_name,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -697,7 +688,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       child: Text(
                                         AppLocalizations.of(context)!
                                             .company_profession,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -722,7 +713,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       child: Text(
                                         AppLocalizations.of(context)!
                                             .company_location,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -743,8 +734,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         icon: Icons.person_2_outlined),
                                   ],
                                 )
-                              : SizedBox(),
-                      SizedBox(
+                              : const SizedBox(),
+                      const SizedBox(
                         height: 20,
                       ),
                       Obx(() => editProfileController.isloading.value

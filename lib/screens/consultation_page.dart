@@ -11,7 +11,6 @@ import 'package:lawyerapp/utils/api_base_url.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ConsultationForm extends StatefulWidget {
@@ -52,7 +51,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         final List<dynamic> countries = jsonData['data'];
-        List<String> names = (countries as List<dynamic>)
+        List<String> names = (countries)
             .map<String>((countries) => countries['contry_name'] as String)
             .toList();
         setState(() {
@@ -74,7 +73,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         final List<dynamic> categories = jsonData['data'];
-        List<String> names = (categories as List<dynamic>)
+        List<String> names = (categories)
             .map<String>((category) => category['category_name'] as String)
             .toList();
         setState(() {
@@ -112,7 +111,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
               title: Text(
                 AppLocalizations.of(context)!.book_consultation,
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                    const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
             body: SingleChildScrollView(
@@ -129,7 +128,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       ),
                       Text(
                         AppLocalizations.of(context)!.select_consultation_type,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       const SizedBox(height: 10),
@@ -192,7 +191,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       const SizedBox(height: 20),
                       Text(
                         AppLocalizations.of(context)!.select_country,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       const SizedBox(height: 10),
@@ -257,7 +256,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                       ),
                       Text(
                         AppLocalizations.of(context)!.brief_description,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       const SizedBox(
@@ -361,14 +360,14 @@ class _ConsultationFormState extends State<ConsultationForm> {
                               vertical: 15, horizontal: 16),
                           child: Row(
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.file_upload,
                                 color: Colors.white,
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 AppLocalizations.of(context)!.upload_document,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -417,7 +416,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           const SizedBox(width: 10),
                           Text(
                             AppLocalizations.of(context)!.accept_privacy_policy,
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                            style: const TextStyle(color: Colors.black, fontSize: 16),
                           ),
                         ],
                       ),

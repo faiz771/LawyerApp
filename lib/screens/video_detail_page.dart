@@ -1,9 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:lawyerapp/controllers/favorite_controller.dart';
-import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoDetailPage extends StatefulWidget {
@@ -53,7 +51,7 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -64,11 +62,11 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                     children: [
                       IconButton(
                         icon: localvalue
-                            ? Icon(
+                            ? const Icon(
                                 Icons.favorite,
                                 color: Colors.red,
                               )
-                            : Icon(
+                            : const Icon(
                                 Icons.favorite_border,
                                 color: Colors.red,
                               ),
@@ -86,14 +84,14 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                   ),
                 ),
                 Text(
-                  "${widget.title}",
-                  style: TextStyle(
+                  widget.title,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                   overflow: TextOverflow.clip,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 AspectRatio(
                   aspectRatio: 16 / 9,
                   child: Chewie(
@@ -131,13 +129,13 @@ class _VideoDetailPageState extends State<VideoDetailPage> {
                 //   // Your video player widget goes here
                 //   // Example: VideoPlayerWidget(),
                 // ),
-                SizedBox(height: 16),
-                Text(
+                const SizedBox(height: 16),
+                const Text(
                   'Description:',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 8),
-                Text(
+                const SizedBox(height: 8),
+                const Text(
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar libero at neque varius, at aliquet purus interdum. Integer eleifend arcu at justo eleifend, at posuere odio maximus. Aenean eu fermentum eros. Duis lacinia nunc id quam elementum, ut dapibus arcu fringilla. Integer eleifend arcu at justo eleifend, at posuere odio maximus. Aenean eu fermentum eros. Duis lacinia nunc id quam elementum, ut dapibus arcu fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar libero at neque varius, at aliquet purus interdum. Integer eleifend arcu at justo eleifend, at posuere odio maximus. Aenean eu fermentum eros. Duis lacinia nunc id quam elementum, ut dapibus arcu fringilla. Integer eleifend arcu at justo eleifend, at posuere odio maximus. Aenean eu fermentum eros. Duis lacinia nunc id quam elementum, ut dapibus arcu fringilla.',
                   style: TextStyle(
                     fontSize: 16,

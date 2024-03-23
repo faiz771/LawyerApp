@@ -38,7 +38,7 @@ class LawyerProfileController extends GetxController {
         print('Lawyer profile created successfully');
         print('Message: ${responseData['message']}');
         showStylishBottomToast(responseData['message'].toString());
-        Get.offAll(LoginScreen());
+        Get.offAll(const LoginScreen());
       } else {
         // Profile creation failed
         print('Lawyer profile creation failed');

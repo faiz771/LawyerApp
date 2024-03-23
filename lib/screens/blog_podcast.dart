@@ -6,7 +6,6 @@ import 'package:lawyerapp/screens/podcast_view_page.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 
 import '../models/podcast_model.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PodcastList extends StatefulWidget {
@@ -136,11 +135,11 @@ class PodcastItemContainer extends StatelessWidget {
                       left: 70,
                       right: 70,
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Colors.white,
                           shape: BoxShape.circle,
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.play_arrow,
                           size: 35,
                         ),

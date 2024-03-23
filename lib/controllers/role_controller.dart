@@ -37,7 +37,7 @@ class RoleController extends GetxController {
             email: email,
           ));
         } else if (role == '2') {
-          Get.offAll(LoginScreen());
+          Get.offAll(const LoginScreen());
         }
       } else {
         // Role update failed

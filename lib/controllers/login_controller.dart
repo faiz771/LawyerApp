@@ -6,7 +6,6 @@ import 'package:lawyerapp/controllers/signup_controller.dart';
 import 'package:lawyerapp/models/user_detail_model.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
 import 'package:lawyerapp/screens/lawyer_homepage_screen.dart';
-import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/shared_preference/shared_preference_services.dart';
 import 'package:lawyerapp/utils/api_base_url.dart';
 

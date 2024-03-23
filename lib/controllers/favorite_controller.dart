@@ -44,7 +44,7 @@ class FavoriteController extends GetxController {
     } catch (error) {
       print('Error: $error');
       showStylishBottomToast('Error please try again');
-      throw error;
+      rethrow;
     }
   }
 

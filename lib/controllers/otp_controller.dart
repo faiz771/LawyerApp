@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:lawyerapp/auth_screens/change_password_screen.dart';
 import 'package:lawyerapp/auth_screens/login_screen.dart';
 import 'package:lawyerapp/controllers/signup_controller.dart';
-import 'package:lawyerapp/screens/select_role_screen.dart';
 import 'package:lawyerapp/utils/api_base_url.dart';
 
 class VerifyOtpController extends GetxController {
@@ -42,7 +41,7 @@ class VerifyOtpController extends GetxController {
         print('Email verification successful');
         print('Message: ${responseData['message']}');
         showStylishBottomToast(message);
-        Get.to(LoginScreen());
+        Get.to(const LoginScreen());
       } else {
         // OTP verification failed
         print('Email verification failed');

@@ -3,8 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
 class LanguageController extends GetxController {
-  RxString _currentLanguage = 'en'.obs; // Default language is English
-  final storage = FlutterSecureStorage();
+  final RxString _currentLanguage = 'en'.obs; // Default language is English
+  final storage = const FlutterSecureStorage();
 
   String get currentLanguage => _currentLanguage.value;
 
