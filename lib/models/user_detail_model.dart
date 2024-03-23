@@ -22,11 +22,13 @@ class UserModel {
   final String? createdAt;
   final String? updatedAt;
   final String? countryCode;
+  final String? lawyer_category;
 
   UserModel({
     required this.id,
     required this.name,
     required this.phone,
+    this.lawyer_category,
     this.profile_path,
     this.company_profession,
     this.countryCode,
@@ -72,6 +74,7 @@ class UserModel {
       role: json['role'],
       otp: json['otp'],
       otpExpireAt: json['otp_expire_at'],
+      lawyer_category: json['category_name'],
       isVerified: json['is_verified'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],

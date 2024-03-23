@@ -12,15 +12,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
-  Future<void> storeLanguage(String language) async {
-    final storage = FlutterSecureStorage();
-    try {
-      await storage.write(key: 'language', value: language);
-      print('language changed');
-    } catch (e) {
-      print('Error writing to secure storage: $e');
-    }
-  }
 
   final LanguageController languageController = Get.put(LanguageController());
   @override
@@ -63,6 +54,8 @@ class SettingsScreen extends StatelessWidget {
   }
 
   void showLanguageDialog(BuildContext context) {
+    String currentLanguage = languageController.currentLanguage;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -75,12 +68,12 @@ class SettingsScreen extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(
-                  top: 20.0,
-                  bottom: 16.0,
-                  left: 16.0,
-                  right: 16.0,
-                ),
+                // padding: EdgeInsets.only(
+                //   top: 20.0,
+                //   bottom: 16.0,
+                //   left: 16.0,
+                //   right: 16.0,
+                // ),
                 margin: EdgeInsets.only(top: 8.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -97,61 +90,101 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(
-                      AppLocalizations.of(context)!.choose_language,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
+                    Container(
+                      width: double.infinity,
+                      // height: 80,
+                      decoration: BoxDecoration(
+                          color: AppColor.teelColor,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12))),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.choose_language,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Positioned(
+                              right: 16.0,
+                              top: 16.0,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(height: 24.0),
-                    InkWell(
+                    SizedBox(height: 10.0),
+                    ListTile(
                       onTap: () async {
-                        // Change language to English
-                        await storeLanguage('en');
+                        await languageController.changeLanguage('en');
                         Navigator.pop(context, 'en');
                       },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          'English',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
+                      title: Text(
+                        'English',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: currentLanguage == 'en'
+                              ? AppColor.teelColor
+                              : Colors.black,
                         ),
                       ),
+                      leading: Radio(
+                        activeColor: AppColor.teelColor,
+                        value: 'en',
+                        groupValue: currentLanguage,
+                        onChanged: (String? value) async {
+                          await languageController.changeLanguage(value!);
+                          Navigator.pop(context, value);
+                        },
+                      ),
                     ),
-                    Divider(),
-                    InkWell(
+                    // Divider(
+                    //   color: AppColor.teelColor,
+                    // ),
+                    ListTile(
                       onTap: () async {
-                        // Change language to Arabic
-                        await storeLanguage('ar');
+                        await languageController.changeLanguage('ar');
                         Navigator.pop(context, 'ar');
                       },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          'العربية',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
+                      title: Text(
+                        'العربية',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: currentLanguage == 'ar'
+                              ? AppColor.teelColor
+                              : Colors.black,
                         ),
                       ),
+                      leading: Radio(
+                        activeColor: AppColor.teelColor,
+                        value: 'ar',
+                        groupValue: currentLanguage,
+                        onChanged: (String? value) async {
+                          await languageController.changeLanguage(value!);
+                          Navigator.pop(context, value);
+                        },
+                      ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    )
                   ],
-                ),
-              ),
-              Positioned(
-                right: 16.0,
-                top: 16.0,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Icon(
-                    Icons.close,
-                    color: AppColor.teelColor,
-                  ),
                 ),
               ),
             ],

@@ -60,13 +60,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         editProfileController.companyProfessionController.text =
             widget.user.company_profession!;
       }
+      if (widget.isLawyer) {
+        editProfileController.lawyerExpController.text =
+            widget.user.lawyerExperience!;
+        editProfileController.lawyerEduController.text =
+            widget.user.lawyerEducation!;
+        editProfileController.lawyerAboutController.text =
+            widget.user.lawyerAbout!;
+        editProfileController.lawyerFeeController.text =
+            widget.user.lawyerFees.toString();
+        categoryID = widget.user.lawyerType!;
+      }
       email = widget.user.email;
 
       countrycode.value = widget.user.countryCode!;
     });
   }
 
-  List<String> categoryNames = [];
+  List<Map<String, dynamic>> categoryData = [];
   Future<void> fetchCategories() async {
     try {
       final response = await http.get(
@@ -75,13 +86,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         final List<dynamic> categories = jsonData['data'];
-        List<String> names = (categories as List<dynamic>)
-            .map<String>((category) => category['category_name'] as String)
+
+        // Modify to store category objects with name and ID
+        categoryData = categories
+            .map((category) => {
+                  'category_name': category['category_name'] as String,
+                  'id': category['id'] as int,
+                })
             .toList();
+        print(categoryData);
+
         setState(() {
-          categoryNames = names;
+          // Update with categoryData (containing both name and ID)
+          categoryData = categoryData; // Assuming you have a variable for it
         });
-      } else {
+      }
+      // if (response.statusCode == 200) {
+      //   final jsonData = json.decode(response.body);
+      //   final List<dynamic> categories = jsonData['data'];
+      //   List<String> names = (categories as List<dynamic>)
+      //       .map<String>((category) => category['category_name'] as String)
+      //       .toList();
+      //   setState(() {
+      //     categoryNames = names;
+      //   });
+      // }
+      else {
         throw Exception('Failed to load categories');
       }
     } catch (error) {
@@ -89,6 +119,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     }
   }
 
+  int categoryID = 0;
   @override
   void initState() {
     // TODO: implement initState
@@ -109,6 +140,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   var caseDescription;
   var country;
   bool isConsultationTypeFilled = false;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -443,21 +475,41 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   AutovalidateMode.onUserInteraction,
                               isExpanded: true,
                               menuMaxHeight: 300,
-                              value: consultationType,
+                              value: widget.user.lawyer_category,
                               onChanged: (newValue) {
                                 setState(() {
                                   consultationType = newValue!;
                                   isConsultationTypeFilled = newValue != null;
+                                  final int selectedCategoryId =
+                                      categoryData.firstWhere(
+                                          (category) =>
+                                              category['category_name'] ==
+                                              newValue,
+                                          orElse: () => <String, Object>{
+                                                'id': -1,
+                                                'category_name': 'NotFound'
+                                              })['id'];
+                                  print(
+                                      "Selected Category ID: $selectedCategoryId");
+                                  setState(() {
+                                    categoryID = selectedCategoryId;
+                                    print(
+                                        'Category ID After Change $categoryID');
+                                  });
                                 });
                               },
-                              items: categoryNames
-                                  .map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
+                              items: categoryData.map<DropdownMenuItem<String>>(
+                                (category) {
+                                  final String categoryName =
+                                      category['category_name'];
+                                  print(
+                                      "Creating DropdownMenuItem for: $categoryName");
+                                  return DropdownMenuItem<String>(
+                                    value: categoryName,
+                                    child: Text(categoryName),
+                                  );
+                                },
+                              ).toList(),
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                   borderSide:
@@ -523,7 +575,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     },
                                     isicon2: false,
                                     controller: editProfileController
-                                        .companyNameController,
+                                        .lawyerExpController,
                                     hinttext: AppLocalizations.of(context)!
                                         .lawyer_experience,
                                     icon: Icons.person_2_outlined),
@@ -548,7 +600,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     },
                                     isicon2: false,
                                     controller: editProfileController
-                                        .companyProfessionController,
+                                        .lawyerEduController,
                                     hinttext: AppLocalizations.of(context)!
                                         .lawyer_education,
                                     icon: Icons.person_2_outlined),
@@ -572,7 +624,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     },
                                     isicon2: false,
                                     controller: editProfileController
-                                        .companyLocationController,
+                                        .lawyerAboutController,
                                     hinttext: AppLocalizations.of(context)!
                                         .lawyer_about,
                                     icon: Icons.person_2_outlined),
@@ -596,7 +648,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     },
                                     isicon2: false,
                                     controller: editProfileController
-                                        .companyLocationController,
+                                        .lawyerFeeController,
                                     hinttext: AppLocalizations.of(context)!
                                         .lawyer_fee,
                                     icon: Icons.person_2_outlined),
@@ -703,17 +755,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             )
                           : RoundedButton(
                               text: AppLocalizations.of(context)!.save_changes,
-                              onPressed: () {
-                                print(countrycode.value);
-                                if (_formKey.currentState!.validate()) {
-                                  editProfileController.isloading.value = true;
-                                  editProfileController.updateProfile(
-                                    editProfileController.imageFile.value,
-                                    countrycode.value,
-                                  );
-                                }
-                                print(countrycode.value);
-                              },
+                              onPressed: widget.isLawyer
+                                  ? () {
+                                      if (_formKey.currentState!.validate()) {
+                                        print('Category ID On Tap $categoryID');
+                                        editProfileController.isloading.value =
+                                            true;
+                                        editProfileController
+                                            .updateLawyerProfile(
+                                                editProfileController
+                                                    .imageFile.value,
+                                                countrycode.value,
+                                                categoryID);
+                                      }
+                                    }
+                                  : () {
+                                      print(countrycode.value);
+                                      if (_formKey.currentState!.validate()) {
+                                        editProfileController.isloading.value =
+                                            true;
+                                        editProfileController.updateProfile(
+                                          editProfileController.imageFile.value,
+                                          countrycode.value,
+                                        );
+                                      }
+                                      print(countrycode.value);
+                                    },
                               Color: AppColor.teelColor))
                     ],
                   ),

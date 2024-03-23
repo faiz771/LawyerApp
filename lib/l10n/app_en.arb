@@ -107,6 +107,14 @@
   "cancelled_appointments": "Cancelled Appointments",
   "total_appointments": "Total Appointments",
   "language": "Language",
-   "choose_language": "Choose Language"
-
+   "choose_language": "Choose Language",
+    "secure_Consultation": "Secure Consultation", 
+ "transparent_Pricing": "Transparent Pricing",
+"appointment_Reminders": "Appointment Reminders",
+ "onboarding1": "Embark on a hassle-free legal journey with Us. Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters.",
+  "onboarding2": "No surprises, just clarity. Explore transparent pricing models before booking appointments, and rest assured that you have a clear understanding of costs, making your legal journey straightforward, predictable, and budget-friendly.",
+  "onboarding3": "Stay on top of your legal agenda effortlessly. Receive timely reminders for upcoming appointments, ensuring you never miss a crucial consultation. Moza Al-Shehhi Law Firm making your legal journey a seamless experience."
+, "skip": "Skip",
+  "next": "Next",
+  "get_started": "Get Started"
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
@@ -18,17 +19,19 @@ class LanguageController extends GetxController {
   Future<void> _loadSavedLanguage() async {
     String? savedLanguage = await storage.read(key: 'language');
     if (savedLanguage != null) {
+      print('Saved Language $savedLanguage');
       _currentLanguage.value = savedLanguage;
     }
   }
 
   Future<void> changeLanguage(String newLanguage) async {
-    _currentLanguage.value = newLanguage;
     // Save selected language to storage
     try {
       await storage.write(key: 'language', value: newLanguage);
+      _currentLanguage.value = newLanguage;
       print('Language Changed');
       print("yeh hai current language $currentLanguage");
+      Get.updateLocale(Locale(newLanguage));
       update();
     } catch (e) {
       print('Failed to change the language');

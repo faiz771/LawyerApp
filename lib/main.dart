@@ -4,6 +4,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/auth_screens/change_password_screen.dart';
 import 'package:lawyerapp/auth_screens/verify_otp_screen.dart';
+import 'package:lawyerapp/controllers/language_controller.dart';
 import 'package:lawyerapp/controllers/lawyer_categories_controller.dart';
 import 'package:lawyerapp/screens/chat_bot_screen.dart';
 import 'package:lawyerapp/screens/client_homepage_screen.dart';
@@ -17,15 +18,21 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final storage = FlutterSecureStorage();
   String? selectedLanguage = await storage.read(key: 'language');
-  runApp(MyApp(
-    selectedLanguage: selectedLanguage,
-  ));
+
+  final languageController = Get.put(LanguageController());
+  if (selectedLanguage != null) {
+    await languageController.changeLanguage(selectedLanguage);
+  }
+  // final storage = FlutterSecureStorage();
+  // String? selectedLanguage = await storage.read(key: 'language');
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String? selectedLanguage;
-  const MyApp({super.key, this.selectedLanguage});
-
+  MyApp({
+    super.key,
+  });
+  final LanguageController controller = Get.put(LanguageController());
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -36,8 +43,7 @@ class MyApp extends StatelessWidget {
       }),
       title: 'MOZA AL-SHEHHI LAW FIRM',
       debugShowCheckedModeBanner: false,
-      locale:
-          selectedLanguage != null ? Locale(selectedLanguage!) : Locale('en'),
+      locale: Locale(controller.currentLanguage),
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -49,7 +55,7 @@ class MyApp extends StatelessWidget {
         Locale('ar'),
       ],
       theme: ThemeData(
-        fontFamily: 'Inter',
+        fontFamily: controller.currentLanguage == 'en' ? 'Inter' : 'Tajawal',
         colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromRGBO(17, 25, 40, 1)),
         useMaterial3: true,

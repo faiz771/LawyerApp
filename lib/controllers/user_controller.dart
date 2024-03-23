@@ -36,7 +36,7 @@ class UserController extends GetxController {
 
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
-        String message = responseData['message'].join('\n');
+        //  String message = responseData['message'].join('\n');
         print('Response Data: $responseData');
         print('status ${responseData['status']}');
         if (responseData['status'] == 1) {
@@ -58,7 +58,7 @@ class UserController extends GetxController {
         } else {
           // Handle error response
           clearPreferencesAndNavigateToLogin();
-          print(responseData['message']);
+          //   print(responseData['message']);
         }
       } else {
         // Handle non-200 status code

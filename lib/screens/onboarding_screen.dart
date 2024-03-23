@@ -3,11 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:lawyerapp/components/onboarding_template.dart';
+import 'package:lawyerapp/controllers/language_controller.dart';
 import 'package:lawyerapp/controllers/user_controller.dart';
 import 'package:lawyerapp/main.dart';
 import 'package:lawyerapp/utils/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -66,11 +70,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 controller: _controller,
                 children: [
                   OnboardingTemplate(
-                    buttonTitle: "Next",
+                    buttonTitle: AppLocalizations.of(context)!.next,
                     onBoardingImage: 'assets/images/onboarding1.jpg',
-                    heading: 'Secure Consultation',
-                    decsription:
-                        'Embark on a hassle-free legal journey with Us. Effortlessly find and connect with skilled attorneys who specialize in your specific needs. Streamline your appointments, receive timely reminders, and take control of your legal matters.',
+                    heading: AppLocalizations.of(context)!.secure_Consultation,
+                    decsription: AppLocalizations.of(context)!.onboarding1,
                     onPressed: () {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 500),
@@ -79,11 +82,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                   ),
                   OnboardingTemplate(
-                    buttonTitle: "Next",
+                    buttonTitle: AppLocalizations.of(context)!.next,
                     onBoardingImage: 'assets/images/onboarding2.jpg',
-                    heading: 'Transparent Pricing',
-                    decsription:
-                        'No surprises, just clarity. Explore transparent pricing models before booking appointments, and rest assured that you have a clear understanding of costs, making your legal journey straightforward, predictable, and budget-friendly',
+                    heading: AppLocalizations.of(context)!.transparent_Pricing,
+                    decsription: AppLocalizations.of(context)!.onboarding2,
                     onPressed: () {
                       _controller.nextPage(
                         duration: const Duration(milliseconds: 500),
@@ -92,11 +94,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     },
                   ),
                   OnboardingTemplate(
-                    buttonTitle: 'Get Started',
+                    buttonTitle: AppLocalizations.of(context)!.get_started,
                     onBoardingImage: 'assets/images/onboarding3.jpg',
-                    heading: 'Appointment Reminders',
-                    decsription:
-                        'Stay on top of your legal agenda effortlessly. Receive timely reminders for upcoming appointments, ensuring you never miss a crucial consultation.Moza Al-Shehhi Law Firm making your legal journey a seamless experience.',
+                    heading:
+                        AppLocalizations.of(context)!.appointment_Reminders,
+                    decsription: AppLocalizations.of(context)!.onboarding3,
                     onPressed: () {
                       _incrementOnboardingStatus();
                       controller.getUserDetails();
@@ -131,10 +133,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           _incrementOnboardingStatus();
                           controller.getUserDetails();
                         },
-                        child: const Row(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Skip'),
+                            Text(
+                              AppLocalizations.of(context)!.skip,
+                            ),
                             SizedBox(
                                 width:
                                     8), // Adjust spacing between label and icon
@@ -157,6 +161,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void showLanguageDialog(BuildContext context) {
+    final LanguageController languageController = Get.put(LanguageController());
+    String currentLanguage = languageController.currentLanguage;
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -169,12 +176,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           child: Stack(
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(
-                  top: 20.0,
-                  bottom: 16.0,
-                  left: 16.0,
-                  right: 16.0,
-                ),
+                // padding: EdgeInsets.only(
+                //   top: 20.0,
+                //   bottom: 16.0,
+                //   left: 16.0,
+                //   right: 16.0,
+                // ),
                 margin: EdgeInsets.only(top: 8.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -191,61 +198,101 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(
-                      AppLocalizations.of(context)!.choose_language,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w700,
+                    Container(
+                      width: double.infinity,
+                      // height: 80,
+                      decoration: BoxDecoration(
+                          color: AppColor.teelColor,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(12),
+                              topRight: Radius.circular(12))),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.choose_language,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Positioned(
+                              right: 16.0,
+                              top: 16.0,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    SizedBox(height: 24.0),
-                    InkWell(
+                    SizedBox(height: 10.0),
+                    ListTile(
                       onTap: () async {
-                        // Change language to English
-                        await storeLanguage('en');
+                        await languageController.changeLanguage('en');
                         Navigator.pop(context, 'en');
                       },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          'English',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
+                      title: Text(
+                        'English',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: currentLanguage == 'en'
+                              ? AppColor.teelColor
+                              : Colors.black,
                         ),
                       ),
+                      leading: Radio(
+                        activeColor: AppColor.teelColor,
+                        value: 'en',
+                        groupValue: currentLanguage,
+                        onChanged: (String? value) async {
+                          await languageController.changeLanguage(value!);
+                          Navigator.pop(context, value);
+                        },
+                      ),
                     ),
-                    Divider(),
-                    InkWell(
+                    // Divider(
+                    //   color: AppColor.teelColor,
+                    // ),
+                    ListTile(
                       onTap: () async {
-                        // Change language to Arabic
-                        await storeLanguage('ar');
+                        await languageController.changeLanguage('ar');
                         Navigator.pop(context, 'ar');
                       },
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          'العربية',
-                          style: TextStyle(
-                            fontSize: 16.0,
-                          ),
+                      title: Text(
+                        'العربية',
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: currentLanguage == 'ar'
+                              ? AppColor.teelColor
+                              : Colors.black,
                         ),
                       ),
+                      leading: Radio(
+                        activeColor: AppColor.teelColor,
+                        value: 'ar',
+                        groupValue: currentLanguage,
+                        onChanged: (String? value) async {
+                          await languageController.changeLanguage(value!);
+                          Navigator.pop(context, value);
+                        },
+                      ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    )
                   ],
-                ),
-              ),
-              Positioned(
-                right: 16.0,
-                top: 16.0,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Icon(
-                    Icons.close,
-                    color: AppColor.teelColor,
-                  ),
                 ),
               ),
             ],
