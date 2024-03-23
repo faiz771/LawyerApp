@@ -238,57 +238,79 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                     ),
                     SizedBox(height: 10.0),
-                    ListTile(
+                    InkWell(
                       onTap: () async {
                         await languageController.changeLanguage('en');
                         Navigator.pop(context, 'en');
                       },
-                      title: Text(
-                        'English',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: currentLanguage == 'en'
-                              ? AppColor.teelColor
-                              : Colors.black,
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Radio(
+                              activeColor: AppColor.teelColor,
+                              value: 'en',
+                              groupValue: currentLanguage,
+                              onChanged: (String? value) async {
+                                await languageController.changeLanguage(value!);
+                                Navigator.pop(context, value);
+                              },
+                            ),
+                            Text(
+                              'English',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: currentLanguage == 'en'
+                                    ? AppColor.teelColor
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      leading: Radio(
-                        activeColor: AppColor.teelColor,
-                        value: 'en',
-                        groupValue: currentLanguage,
-                        onChanged: (String? value) async {
-                          await languageController.changeLanguage(value!);
-                          Navigator.pop(context, value);
-                        },
-                      ),
                     ),
-                    // Divider(
+                    // ListTile(
+
+                    //   title:
+                    //   leading:
+                    // ),
+                    // // Divider(
                     //   color: AppColor.teelColor,
                     // ),
-                    ListTile(
+                    InkWell(
                       onTap: () async {
                         await languageController.changeLanguage('ar');
                         Navigator.pop(context, 'ar');
                       },
-                      title: Text(
-                        'العربية',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          color: currentLanguage == 'ar'
-                              ? AppColor.teelColor
-                              : Colors.black,
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Radio(
+                              activeColor: AppColor.teelColor,
+                              value: 'ar',
+                              groupValue: currentLanguage,
+                              onChanged: (String? value) async {
+                                await languageController.changeLanguage(value!);
+                                Navigator.pop(context, value);
+                              },
+                            ),
+                            Text(
+                              'العربية',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                color: currentLanguage == 'ar'
+                                    ? AppColor.teelColor
+                                    : Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      leading: Radio(
-                        activeColor: AppColor.teelColor,
-                        value: 'ar',
-                        groupValue: currentLanguage,
-                        onChanged: (String? value) async {
-                          await languageController.changeLanguage(value!);
-                          Navigator.pop(context, value);
-                        },
-                      ),
                     ),
+                    // ListTile(
+
+                    //   title:
+                    //   leading:
+                    // ),
                     SizedBox(
                       height: 10,
                     )

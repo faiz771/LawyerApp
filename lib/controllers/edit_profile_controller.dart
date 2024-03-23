@@ -99,6 +99,7 @@ class EditProfileController extends GetxController {
       }
     } catch (e) {
       print('Error updating profile: $e');
+      showStylishBottomToast('Error please try again');
       isloading.value = false;
     }
   }
@@ -155,6 +156,7 @@ class EditProfileController extends GetxController {
         isloading.value = false;
       }
     } catch (e) {
+      showStylishBottomToast('Error please try again');
       print('Error updating profile: $e');
       isloading.value = false;
     }

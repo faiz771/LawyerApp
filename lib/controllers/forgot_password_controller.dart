@@ -37,6 +37,7 @@ class ForgotPasswordController extends GetxController {
       }
     } catch (error) {
       isLoading.value = false;
+      showStylishBottomToast('Error please try again');
       print('Error ${error.toString()}');
       // Error sending request
     }

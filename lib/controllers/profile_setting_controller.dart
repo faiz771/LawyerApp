@@ -48,6 +48,7 @@ class ProfileSettingController extends GetxController {
       }
     } catch (error) {
       isLoading.value = false;
+      showStylishBottomToast('Error please try again');
       print('Error during password update: $error');
     }
   }
