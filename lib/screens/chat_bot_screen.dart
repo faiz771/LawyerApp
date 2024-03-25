@@ -72,7 +72,8 @@ class ChatController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> responseData = jsonDecode(response.body);
+        final Map<String, dynamic> responseData =
+            json.decode(utf8.decode(response.bodyBytes));
         final dynamic choices = responseData['choices'];
 
         if (choices != null && choices is List && choices.isNotEmpty) {
@@ -81,6 +82,7 @@ class ChatController extends GetxController {
 
           if (responseMessage != null) {
             final String? reply = responseMessage['content'] as String?;
+            print('Response From Chat GPT $reply');
             scrollController.jumpTo(scrollController.position.maxScrollExtent);
             if (reply != null) {
               isLoading.value = false;
@@ -155,7 +157,8 @@ class _ChatPageState extends State<ChatPage> {
         centerTitle: true,
         title: Text(
           AppLocalizations.of(context)!.ai_assistant,
-          style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
       body: Obx(
@@ -258,8 +261,8 @@ class _ChatPageState extends State<ChatPage> {
                   child: TextField(
                     controller: chatController.textController,
                     decoration: InputDecoration(
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(24),
