@@ -30,9 +30,6 @@ class _ConsultationFormState extends State<ConsultationForm> {
   bool isCaseDescriptionFilled = false;
   final ConsultationController controller = Get.put(ConsultationController());
 
-  List<String> categoryNames = [];
-  List<String> countryNames = [];
-
   @override
   void initState() {
     super.initState();
@@ -40,6 +37,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
     fetchCountries();
   }
 
+  int countryID = 0;
+  List<Map<String, dynamic>> countryData = [];
   Future<void> fetchCountries() async {
     final SharedPreferencesService prefsService = SharedPreferencesService();
     final String? token = await prefsService.getToken();
@@ -51,11 +50,17 @@ class _ConsultationFormState extends State<ConsultationForm> {
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         final List<dynamic> countries = jsonData['data'];
-        List<String> names = (countries)
-            .map<String>((countries) => countries['contry_name'] as String)
+        countryData = countries
+            .map((category) => {
+                  'contry_name': category['contry_name'] as String,
+                  'id': category['id'] as int,
+                })
             .toList();
+        print(countryData);
+
         setState(() {
-          countryNames = names;
+          // Update with categoryData (containing both name and ID)
+          countryData = countryData; // Assuming you have a variable for it
         });
       } else {
         throw Exception('Failed to load countries');
@@ -65,6 +70,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
     }
   }
 
+  int categoryID = 0;
+  List<Map<String, dynamic>> categoryData = [];
   Future<void> fetchCategories() async {
     try {
       final response = await http.get(
@@ -73,13 +80,32 @@ class _ConsultationFormState extends State<ConsultationForm> {
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         final List<dynamic> categories = jsonData['data'];
-        List<String> names = (categories)
-            .map<String>((category) => category['category_name'] as String)
+
+        // Modify to store category objects with name and ID
+        categoryData = categories
+            .map((category) => {
+                  'category_name': category['category_name'] as String,
+                  'id': category['id'] as int,
+                })
             .toList();
+        print(categoryData);
+
         setState(() {
-          categoryNames = names;
+          // Update with categoryData (containing both name and ID)
+          categoryData = categoryData; // Assuming you have a variable for it
         });
-      } else {
+      }
+      // if (response.statusCode == 200) {
+      //   final jsonData = json.decode(response.body);
+      //   final List<dynamic> categories = jsonData['data'];
+      //   List<String> names = (categories as List<dynamic>)
+      //       .map<String>((category) => category['category_name'] as String)
+      //       .toList();
+      //   setState(() {
+      //     categoryNames = names;
+      //   });
+      // }
+      else {
         throw Exception('Failed to load categories');
       }
     } catch (error) {
@@ -110,8 +136,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
               backgroundColor: AppColor.teelColor,
               title: Text(
                 AppLocalizations.of(context)!.book_consultation,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.white),
               ),
             ),
             body: SingleChildScrollView(
@@ -141,15 +167,33 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           setState(() {
                             consultationType = newValue!;
                             isConsultationTypeFilled = newValue != null;
+                            final int selectedCategoryId =
+                                categoryData.firstWhere(
+                                    (category) =>
+                                        category['category_name'] == newValue,
+                                    orElse: () => <String, Object>{
+                                          'id': -1,
+                                          'category_name': 'NotFound'
+                                        })['id'];
+                            print("Selected Category ID: $selectedCategoryId");
+                            setState(() {
+                              categoryID = selectedCategoryId;
+                              print('Category ID After Change $categoryID');
+                            });
                           });
                         },
-                        items: categoryNames
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                        items: categoryData.map<DropdownMenuItem<String>>(
+                          (category) {
+                            final String categoryName =
+                                category['category_name'];
+                            print(
+                                "Creating DropdownMenuItem for: $categoryName");
+                            return DropdownMenuItem<String>(
+                              value: categoryName,
+                              child: Text(categoryName),
+                            );
+                          },
+                        ).toList(),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.white),
@@ -204,15 +248,32 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           setState(() {
                             country = newValue!;
                             isCountryTypeFilled = newValue != null;
+                            final int selectedCountryId =
+                                countryData.firstWhere(
+                                    (category) =>
+                                        category['contry_name'] == newValue,
+                                    orElse: () => <String, Object>{
+                                          'id': -1,
+                                          'contry_name': 'NotFound'
+                                        })['id'];
+                            print("Selected Category ID: $selectedCountryId");
+                            setState(() {
+                              countryID = selectedCountryId;
+                              print('Country ID After Change $countryID');
+                            });
                           });
                         },
-                        items: countryNames
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
+                        items: countryData.map<DropdownMenuItem<String>>(
+                          (category) {
+                            final String countryName = category['contry_name'];
+                            // print(
+                            //     "Creating DropdownMenuItem for: $countryName");
+                            return DropdownMenuItem<String>(
+                              value: countryName,
+                              child: Text(countryName),
+                            );
+                          },
+                        ).toList(),
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.white),
@@ -263,6 +324,7 @@ class _ConsultationFormState extends State<ConsultationForm> {
                         height: 10,
                       ),
                       TextFormField(
+                        controller: controller.descriptionController,
                         minLines: 1,
                         maxLines: 3,
                         onChanged: (value) {
@@ -328,7 +390,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                                       onPressed: () {
                                         Navigator.pop(
                                             context); // Close the bottom sheet
-                                        _pickImageFromGallery(); // Pick image from gallery
+                                        controller.pickImage(ImageSource
+                                            .gallery); // Pick image from gallery
                                       },
                                       text: AppLocalizations.of(context)!
                                           .pick_from_gallery,
@@ -339,10 +402,23 @@ class _ConsultationFormState extends State<ConsultationForm> {
                                       onPressed: () {
                                         Navigator.pop(
                                             context); // Close the bottom sheet
-                                        _pickImageFromCamera(); // Pick image from camera
+                                        controller.pickImage(ImageSource
+                                            .camera); // Pick image from camera
                                       },
                                       text: AppLocalizations.of(context)!
                                           .take_a_photo,
+                                      Color: AppColor.teelColor,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    RoundedButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the bottom sheet
+                                        // controller.pickImage(ImageSource
+                                        //     .camera); // Pick image from camera
+                                        controller.pickPDF();
+                                      },
+                                      text: AppLocalizations.of(context)!.pdf,
                                       Color: AppColor.teelColor,
                                     ),
                                   ],
@@ -416,7 +492,8 @@ class _ConsultationFormState extends State<ConsultationForm> {
                           const SizedBox(width: 10),
                           Text(
                             AppLocalizations.of(context)!.accept_privacy_policy,
-                            style: const TextStyle(color: Colors.black, fontSize: 16),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 16),
                           ),
                         ],
                       ),
@@ -430,26 +507,39 @@ class _ConsultationFormState extends State<ConsultationForm> {
               child: Obx(
                 () => SizedBox(
                   height: 55,
-                  child: RoundedButton(
-                    text: AppLocalizations.of(context)!.book_consultation,
-                    onPressed: controller.agreed.value
-                        ? () {
-                            if (_formKey.currentState!.validate()) {
-                              print('Consultation booked successfully');
-                              Get.dialog(CustomDialog(
-                                heading: AppLocalizations.of(context)!
-                                    .provide_brief_description,
-                                text: AppLocalizations.of(context)!
-                                    .consultation_booked_successfully,
-                                buttontext: AppLocalizations.of(context)!.ok,
-                              ));
-                            }
-                          }
-                        : () {},
-                    Color: controller.agreed.value
-                        ? AppColor.teelColor
-                        : AppColor.greyColor,
-                  ),
+                  child: controller.isloading.value
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: AppColor.teelColor,
+                          ),
+                        )
+                      : RoundedButton(
+                          text: AppLocalizations.of(context)!.book_consultation,
+                          onPressed: controller.agreed.value
+                              ? () {
+                                  if (_formKey.currentState!.validate()) {
+                                    controller.isloading.value = true;
+                                    controller.bookConsultation(
+                                        consultationType: categoryID,
+                                        countryId: countryID,
+                                        filePath:
+                                            controller.imageFile.value?.path ??
+                                                controller.selectedPDF);
+                                    // print('Consultation booked successfully');
+                                    // Get.dialog(CustomDialog(
+                                    //   heading: AppLocalizations.of(context)!
+                                    //       .provide_brief_description,
+                                    //   text: AppLocalizations.of(context)!
+                                    //       .consultation_booked_successfully,
+                                    //   buttontext: AppLocalizations.of(context)!.ok,
+                                    // ));
+                                  }
+                                }
+                              : () {},
+                          Color: controller.agreed.value
+                              ? AppColor.teelColor
+                              : AppColor.greyColor,
+                        ),
                 ),
               ),
             )));
